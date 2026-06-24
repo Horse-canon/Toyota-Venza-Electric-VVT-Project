@@ -1,0 +1,443 @@
+C51 COMPILER V9.57.0.0   INTERRUPT                                                         06/22/2026 16:13:58 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE INTERRUPT
+OBJECT MODULE PLACED IN .\Output\Interrupt.obj
+COMPILER INVOKED BY: E:\05KeilC51\C51\BIN\C51.EXE ..\User\source\Application\Interrupt.c LARGE OMF2 OPTIMIZE(9,SIZE) BRO
+                    -WSE INCDIR(..\User\include;..\FU68xx_Hardware_Driver\Include;.\Components) DEBUG PRINT(.\Listings\Interrupt.lst) TABS(2)
+                    - OBJECT(.\Output\Interrupt.obj)
+
+line level    source
+
+   1          /**
+   2           * @copyright (C) COPYRIGHT 2022 Fortiortech Shenzhen
+   3           * @file      Interrupt.c
+   4           * @author    Fortiortech  Appliction Team
+   5           * @date      2022-07-13
+   6           * @brief     This file contains interrupt function used for Motor Control.
+   7           */
+   8           
+   9          
+  10          
+  11          #include <MyProject.h>
+  12          
+  13          /* !Comment: 任务计数最大值. */
+  14          #define SYSTICK_TASK_10MS_CNTMAX      (9)
+  15          #define SYSTICK_TASK_50MS_CNTMAX      (49)
+  16          #define SYSTICK_TASK_100MS_CNTMAX     (99)
+  17          #define SYSTICK_TASK_500MS_CNTMAX     (499)
+  18          #define SYSTICK_TASK_1000MS_CNTMAX    (999)
+  19          
+  20          // extern uint8 xdata SYSTICK_u8Task1msFlg = FALSE;
+  21          // extern uint8 xdata SYSTICK_u8Task10msFlg = FALSE;
+  22          // extern uint8 xdata SYSTICK_u8Task50msFlg = FALSE;
+  23          // extern uint8 xdata SYSTICK_u8Task100msFlg = FALSE;
+  24          // extern uint8 xdata SYSTICK_u8Task500msFlg = FALSE;
+  25          // extern uint8 xdata SYSTICK_u8Task1000msFlg = FALSE;
+  26          // extern uint8 xdata SYSTICK_u8Task10msCnt = 0;
+  27          // extern uint8 xdata SYSTICK_u8Task50msCnt = 0;
+  28          // extern uint8 xdata SYSTICK_u8Task100msCnt = 0;
+  29          // extern uint16 xdata SYSTICK_u16Task500msCnt = 0;
+  30          // extern uint16 xdata SYSTICK_u16Task1000msCnt = 0;
+  31          
+  32          extern uint8 data g_1mTick, g_10mTick, g_50mTick, g_100mTick;                   ///< 1ms滴答信号，每
+             -隔1ms在SYSTICK定时器被置1，需在大循环使用处清零
+  33          
+  34          uint16 xdata spidebug[4] = { 0 };             ///< SPI debug 输出通道缓存，SPI调试器会将该变
+             -量值进行输出
+  35          
+  36          code char cg10_caVer[256] _at_ 0x4000;        ///< 此段代码不能删除
+  37          char  User_cg_caVer = 1;
+  38          
+  39          uint8 Err1,Err2;
+  40          
+  41          /** 
+  42           * @brief        低于预警中断与过温中断
+  43           * @brief        开启低压检测中断后,MCU会对输入电压进行监测,当输入电压低于设定
+             -值，则会触发中断
+  44           * @brief        开启过温保护中断后,MCU会对内部结温进行监测,当内部结温高于设定
+             -值，则会触发中断
+  45           * @date         2022-07-14
+  46           */
+  47          void LVW_TSD_INT(void) interrupt 0  //LVW & TSD interrupt
+  48          {
+  49   1         
+C51 COMPILER V9.57.0.0   INTERRUPT                                                         06/22/2026 16:13:58 PAGE 2   
+
+  50   1          if (ReadBit(LVSR, LVWIF))
+  51   1          {
+  52   2              if (ReadBit(LVSR, LVWF))
+  53   2              {
+  54   3                  mcFaultSource = FaultUnderVoltageDC;
+  55   3                  ClrBit(LVSR, LVWF);
+  56   3              }
+  57   2              
+  58   2              ClrBit(LVSR, LVWIF);
+  59   2          }
+  60   1          
+  61   1          if (TSDIF)
+  62   1          {
+  63   2              if (ReadBit(LVSR, TSDF))    
+  64   2              {     
+  65   3                  mcFaultSource              = FaultTSD;
+  66   3                  ClrBit(LVSR, TSDF);
+  67   3              }
+  68   2              
+  69   2              TSDIF = 0;
+  70   2          }
+  71   1      }
+  72          
+  73          /** 
+  74           * @brief        外部中断0
+  75           * @brief        一般用于响应IPM的FO过流信号
+  76           * @date         2022-07-14
+  77           */
+  78          void EXTERN0_INT(void) interrupt 1                  //  外部中断0
+  79          {
+  80   1          if (IF0)
+  81   1          {
+  82   2              IF0 = 0;                                // clear P00 interrupt flag
+  83   2          }
+  84   1      }
+  85          
+  86          
+  87          /** 
+  88           * @brief        FOC中断(Drv中断),每个载波周期执行一次，用于处理响应较高的程序�
+             -�中断优先级第二
+  89           * @date         2022-07-14
+  90           */
+  91          void DRV_ISR(void) interrupt 3
+  92          {
+  93   1          if (ReadBit(DRV_SR, FGIF))
+  94   1          {
+  95   2          //DRV_SR = (SYSTIE | FGIF | DCIM1 | SYSTIF)&(~FGIF);
+  96   2            ClrBit(DRV_SR, FGIF);
+  97   2          }
+  98   1         
+  99   1          if (ReadBit(DRV_SR, DCIF))    // 比较中断
+ 100   1          {
+ 101   2                
+ 102   2            
+ 103   2              HallTimerProcess();//8us
+ 104   2                    
+ 105   2              #if (DBG_SPI_SW ==  DBG_SPI_SW)            //软件调试模式
+ 106   2                  spidebug[0] =  hallPara.HallStatus<<12;//hallPara.RTheStepFlt;//FOC__THETA;
+ 107   2                  spidebug[1] =  hallPara.SectorTheta;//hallPara.ErrorTheta;      
+ 108   2                  spidebug[2] =  FOC__THETA;
+ 109   2                  spidebug[3] =  1000;
+ 110   2      
+C51 COMPILER V9.57.0.0   INTERRUPT                                                         06/22/2026 16:13:58 PAGE 3   
+
+ 111   2              #endif
+ 112   2            
+ 113   2              
+ 114   2          DRV_SR = (DRV_SR | SYSTIF) & (~DCIF);
+ 115   2              //DRV_SR = (DRV_SR) & ((~DCIF) | SYSTIF);
+ 116   2          }
+ 117   1      }
+ 118          
+ 119          /** 
+ 120           * @brief        Timer1中断服务函数
+ 121           * @note         本例程中用于TIM1 PDIF
+ 122           * @date         2022-07-14
+ 123           */
+ 124          void TIM1_INT(void) interrupt 5
+ 125          {    
+ 126   1          if (ReadBit(TIM1_SR, T1BOIF))
+ 127   1          {
+ 128   2              HallOverFlowClear();
+ 129   2              ClrBit(TIM1_SR, T1BOIF);
+ 130   2          }
+ 131   1          
+ 132   1          if (ReadBit(TIM1_SR, T1ROIF))
+ 133   1          {
+ 134   2              ClrBit(TIM1_SR, T1ROIF);
+ 135   2          }
+ 136   1          
+ 137   1          if (ReadBit(TIM1_SR, T1WTIF))
+ 138   1          {
+ 139   2              ClrBit(TIM1_SR, T1WTIF);
+ 140   2          }
+ 141   1          
+ 142   1          if (ReadBit(TIM1_SR, T1PDIF))
+ 143   1          {
+ 144   2              HallTrigProcess();
+ 145   2              ClrBit(TIM1_SR, T1PDIF);
+ 146   2          }
+ 147   1          
+ 148   1          if (ReadBit(TIM1_SR, T1BDIF))
+ 149   1          {
+ 150   2              ClrBit(TIM1_SR, T1BDIF);
+ 151   2          }
+ 152   1      }
+ 153          
+ 154          /** 
+ 155           * @brief        Timer2中断服务函数
+ 156           * @note         本例程中用于RSD顺逆风检测
+ 157           * @date         2022-07-14
+ 158           */
+ 159          void TIM2_INT(void) interrupt 4
+ 160          {
+ 161   1          if (ReadBit(TIM2_CR1, T2IP))
+ 162   1          {
+ 163   2                         
+ 164   2         
+ 165   2              ClrBit(TIM2_CR1, T2IP);
+ 166   2          }
+ 167   1          
+ 168   1          if (ReadBit(TIM2_CR1, T2IF))// 溢出中断,用于判断静止,时间为349ms。
+ 169   1          {
+ 170   2              
+ 171   2               //HallOverFlowClear();
+ 172   2              ClrBit(TIM2_CR1, T2IF);
+C51 COMPILER V9.57.0.0   INTERRUPT                                                         06/22/2026 16:13:58 PAGE 4   
+
+ 173   2          }
+ 174   1          if (ReadBit(TIM2_CR1, T2IR))
+ 175   1          {
+ 176   2              ClrBit(TIM2_CR1, T2IR);
+ 177   2          }
+ 178   1      }
+ 179          
+ 180          
+ 181          
+ 182          
+ 183          /**
+ 184              @brief        Timer2中断服务函数
+ 185              @note         本例程中用于BEMF方式顺逆风检测
+ 186              @date         2022-07-14
+ 187          */
+ 188          #if (TAILWIND_MODE == BEMFMethod)
+              void CMP012_INT(void) interrupt 7
+              {
+                  if (CMP_SR & 0x70)
+                  {
+                     
+                      CMP_SR = CMP_SR & 0x8F;
+                  }
+              }
+              
+              
+              #endif
+ 200          
+ 201          
+ 202          
+ 203          /** 
+ 204           * @brief        定时器3中断服务函数
+ 205           * @note         本例程中用于PWM调速信号捕获
+ 206           * @date         2022-07-14
+ 207           */
+ 208          void TIM3_INT(void) interrupt 9
+ 209          {
+ 210   1          if (ReadBit(TIM3_CR1, T3IR))
+ 211   1          {
+ 212   2              ClrBit(TIM3_CR1, T3IR);
+ 213   2          }
+ 214   1          
+ 215   1          if (ReadBit(TIM3_CR1, T3IP))//周期中断
+ 216   1          {
+ 217   2              if (mcPwmInput.isUpdate == 0) // 空闲状态下  允许更新DR与ARR
+ 218   2              {
+ 219   3                  mcPwmInput.TimerDR            = TIM3__DR;
+ 220   3                  mcPwmInput.TimerARR           = TIM3__ARR;
+ 221   3                  mcPwmInput.isUpdate           = 1;
+ 222   3              }
+ 223   2              
+ 224   2              ClrBit(TIM3_CR1, T3IP);
+ 225   2          }
+ 226   1          
+ 227   1          if (ReadBit(TIM3_CR1, T3IF))
+ 228   1          {
+ 229   2              if (mcPwmInput.isUpdate == 0)   // 空闲状态下  允许更新DR与ARR
+ 230   2              {
+ 231   3                  if (ReadBit(P1, PIN1))      // PWM 100%输出
+ 232   3                  {
+ 233   4                      mcPwmInput.TimerDR       = 4000;
+ 234   4                      mcPwmInput.TimerARR      = 4000;
+C51 COMPILER V9.57.0.0   INTERRUPT                                                         06/22/2026 16:13:58 PAGE 5   
+
+ 235   4                  }
+ 236   3                  else//PWM 为0%
+ 237   3                  {
+ 238   4                      mcPwmInput.TimerDR       = 0;
+ 239   4                      mcPwmInput.TimerARR      = 4000;
+ 240   4                  }
+ 241   3                  
+ 242   3                  mcPwmInput.isUpdate = 1;
+ 243   3              }
+ 244   2              
+ 245   2              ClrBit(TIM3_CR1, T3IF);
+ 246   2          }
+ 247   1      }
+ 248          
+ 249          
+ 250          
+ 251          /** 
+ 252           * @brief        滴答定时器，默认用于产生1ms定时间隔
+ 253           * @date         2022-07-14 
+ 254           */
+ 255          void SYStick_INT(void) interrupt 10
+ 256          { 
+ 257   1          if (ReadBit(DRV_SR, SYSTIF))          // SYS TICK中断
+ 258   1          { 
+ 259   2            
+ 260   2              g_1mTick = 1;
+ 261   2      
+ 262   2              if(g_10mTick)
+ 263   2              {
+ 264   3                  g_10mTick--;
+ 265   3              }
+ 266   2      
+ 267   2              if(g_50mTick)
+ 268   2              {
+ 269   3                  g_50mTick--;
+ 270   3              }
+ 271   2              
+ 272   2              if(g_100mTick)
+ 273   2              {
+ 274   3                  g_100mTick--;
+ 275   3              }
+ 276   2      
+ 277   2              DRV_SR = (DRV_SR | DCIF) & (~SYSTIF);
+ 278   2              // DRV_SR = (DRV_SR) & ((~SYSTIF) | DCIF);
+ 279   2          }
+ 280   1      }
+ 281          
+ 282          
+ 283          
+ 284          /** 
+ 285           * @brief        比较器硬件过流保护，该中断仅提供 故障码 赋值,用于状态机的切�
+             -�。
+ 286           *               需要开启比较器CMP3  发生过流 自动清除MOE功能
+ 287           * @date         2022-07-14  
+ 288           */
+ 289          
+ 290          void CMP3_INT(void)  interrupt 12
+ 291          {
+ 292   1          if (ReadBit(CMP_SR, CMP3IF))
+ 293   1          {
+ 294   2              if (mcState != mcPosiCheck)
+ 295   2              {
+C51 COMPILER V9.57.0.0   INTERRUPT                                                         06/22/2026 16:13:58 PAGE 6   
+
+ 296   3                  mcFaultSource = FaultHardOVCurrent;     // 硬件过流保护
+ 297   3              }
+ 298   2              
+ 299   2              ClrBit(CMP_SR, CMP3IF);
+ 300   2          }
+ 301   1      }
+ 302          
+ 303          /*---------------------------------------------------------------------------*/
+ 304          /* Name     :   void CAN_INT(void) interrupt 8
+ 305          /* Input    :   NO
+ 306          /* Output   :   NO
+ 307          /* Description: CAN接受数据
+ 308          /*---------------------------------------------------------------------------*/
+ 309          /**
+ 310           * @brief        Can通信
+ 311           * @date       
+ 312           */
+ 313          uint8 cc;
+ 314          void Can_INT(void)    interrupt 8
+ 315          {
+ 316   1      
+ 317   1        cc++;
+ 318   1        
+ 319   1        if (ReadBit(CAN_IFR, RXIF)) //接收中断
+ 320   1        {
+ 321   2          CAN_vidReadFrame();
+ 322   2          SetBit(CAN_CR1, BUFRLS);
+ 323   2        }
+ 324   1      
+ 325   1        if (ReadBit(CAN_IFR, TXIF)) //发送成功中断
+ 326   1        {
+ 327   2          ClrBit(CAN_IFR, TXIF);
+ 328   2        }
+ 329   1        if (ReadBit(CAN_IFR, OVIF)) //溢出中断
+ 330   1        {
+ 331   2          ClrBit(CAN_IFR, OVIF);
+ 332   2        }
+ 333   1        if (ReadBit(CAN_IFR, ARBIF)) //仲裁中断
+ 334   1        {
+ 335   2          ClrBit(CAN_IFR, ARBIF);
+ 336   2        }
+ 337   1        if (ReadBit(CAN_IFR, ERRIF)) //错误类型中断
+ 338   1        {
+ 339   2          if (CAN_REC > 128) /* 进入主动错误，复位can */
+ 340   2          {
+ 341   3            Err1 = CAN_ESR;
+ 342   3            Err2 = CAN_REC;
+ 343   3            CAN_vidSetCanError(CAN_ERR_REC_OV);
+ 344   3      
+ 345   3          /* 交给CAN SM状态机处理 */
+ 346   3          #if 0
+                    CAN_vidInit();        //主动错误处理
+                  #endif
+ 349   3          }
+ 350   2          ClrBit(CAN_IFR, ERRIF);
+ 351   2        }
+ 352   1      }
+ 353          
+ 354          // /**
+ 355          //  * @brief        Lin通信
+ 356          //  * @date         2022-08-13
+ 357          //  */
+C51 COMPILER V9.57.0.0   INTERRUPT                                                         06/22/2026 16:13:58 PAGE 7   
+
+ 358          // void Lin_INT(void)    interrupt 14
+ 359          // {
+ 360          //     if (ReadBit(LIN_CR, LINIE))
+ 361          //     {
+ 362          //         if (ReadBit(LIN_SR, LINREQ))
+ 363          //         {
+ 364          //             LIN_list(); //读取ID号并处理信号                                                   
+             -          //读取ID号并处理信号
+ 365          //             SetReg(LIN_SR, LINDONE | LINIDLE | LINREQ, LINIDLE | LINDONE);
+ 366          //         }
+ 367                          
+ 368                  
+ 369          //         if (ReadBit(LIN_CSR, LINWAKEUP))                                               //唤醒信号
+ 370          //         {
+ 371          //             SetReg(LIN_CSR, LINWAKEUP | CLRERR, CLRERR);
+ 372          //         }
+ 373                  
+ 374          //         if (ReadBit(LIN_SR, LINIDLE))                                                   //总线空闲
+ 375          //         {
+ 376          //             SetReg(LIN_SR, LINDONE | LINIDLE | LINREQ,  LINDONE | LINREQ);
+ 377          //         }
+ 378                  
+ 379          //         if (ReadBit(LIN_CSR, CLRERR))                                                   //错误中断
+ 380          //         {
+ 381          //             /*----- 获取错误源 -----*/
+ 382          //             LIN_Error_Handing();
+ 383          //             ClrBit(LIN_CSR, CLRERR);
+ 384          //      SetReg(LIN_SR, LINDONE | LINIDLE | LINREQ, LINIDLE | LINREQ);
+ 385          //         }
+ 386          //    else
+ 387          //    {
+ 388          //      if (ReadBit(LIN_SR, LINDONE))                                                  //数据收发完成
+ 389          //             {
+ 390          //          ReceiveSYS(LIN_ID);
+ 391          //                 SetReg(LIN_SR, LINDONE | LINIDLE | LINREQ, LINIDLE | LINREQ);
+ 392          //             }
+ 393          //    }
+ 394          //     }
+ 395          // }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    664    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =     12    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

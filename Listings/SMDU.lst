@@ -1,0 +1,205 @@
+C51 COMPILER V9.57.0.0   SMDU                                                              06/22/2026 16:14:00 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE SMDU
+OBJECT MODULE PLACED IN .\Output\SMDU.obj
+COMPILER INVOKED BY: E:\05KeilC51\C51\BIN\C51.EXE ..\User\source\Hardware\SMDU.c LARGE OMF2 OPTIMIZE(9,SIZE) BROWSE INCD
+                    -IR(..\User\include;..\FU68xx_Hardware_Driver\Include;.\Components) DEBUG PRINT(.\Listings\SMDU.lst) TABS(2) OBJECT(.\Out
+                    -put\SMDU.obj)
+
+line level    source
+
+   1          /**
+   2           * @copyright (C) COPYRIGHT 2022 Fortiortech Shenzhen
+   3           * @file      xxx.c
+   4           * @author    Fortiortech  Appliction Team
+   5           * @date      2022-07-13
+   6           * @brief     This file contains TSD function used for Motor Control.
+   7           */
+   8          
+   9          #include <SMDU.h>
+  10          #include <EB_HALL.h>
+  11          /********************************************************************************
+  12              Internal Routine Prototypes
+  13          ********************************************************************************/
+  14          
+  15          /*  -------------------------------------------------------------------------------------------------
+  16              Function Name  : HW_One_PI
+  17              Description    : PI
+  18              Date           : 2021-08-08
+  19              Parameter      : Xn1: [输入]
+  20              ------------------------------------------------------------------------------------------------- */
+  21          int16 HW_One_PI(int16 Xn1)
+  22          {
+  23   1          PI1_EK =  Xn1;                                                                               //填入E
+             -K
+  24   1          SMDU_RunBlock(1, PI);
+  25   1          return PI1_UKH;
+  26   1      }
+  27          
+  28          /*  -------------------------------------------------------------------------------------------------
+  29              Function Name  : LPFFunction
+  30              Description    : 低通滤波函数
+  31              Date           : 2021-08-08
+  32              Parameter      : Xn1: [输入]
+  33          **                   Xn0: [输入]
+  34          **                   K: [输入]
+  35              ------------------------------------------------------------------------------------------------- */
+  36          int16 LPFFunction(int16 Xn1, int16 Xn0, int8 K)
+  37          {
+  38   1          LPF0_K = K << 8;
+  39   1          LPF0_X = Xn1;
+  40   1          LPF0_YH = Xn0;
+  41   1          SMDU_RunBlock(0, LPF);
+  42   1          return LPF0_YH;
+  43   1      }
+  44          
+  45          int16 LPFFunction2(int16 Xn1, int16 Xn0, int8 K)
+  46          {
+  47   1          LPF2_K = K << 8;
+  48   1          LPF2_X = Xn1;
+  49   1          LPF2_YH = Xn0;
+  50   1          SMDU_RunBlock(2, LPF);
+  51   1          return LPF2_YH;
+  52   1      }
+C51 COMPILER V9.57.0.0   SMDU                                                              06/22/2026 16:14:00 PAGE 2   
+
+  53          
+  54          
+  55          /*  -------------------------------------------------------------------------------------------------
+  56              Function Name  : Atan_Us_MDU
+  57              Description    : XX-XX-XX
+  58              Date           : 2021-11-06
+  59              Parameter      : Xn1: [输入/出]
+  60          **                 Xn0: [输入/出]
+  61          **                 K: [输入/出]
+  62              ------------------------------------------------------------------------------------------------- */
+  63          int16 Atan_Us_MDU(int16 Xn1, int16 Xn0)
+  64          {
+  65   1          SCAT1_COS = Xn1;
+  66   1          SCAT1_SIN = Xn0;
+  67   1          SCAT1_THE = 0;
+  68   1          SMDU_RunBlock(1, ATAN);
+  69   1          return SCAT1_RES1;
+  70   1      }
+  71          
+  72          /*  -------------------------------------------------------------------------------------------------
+  73              Function Name  : Atan_Us_MDU
+  74              Description    : XX-XX-XX
+  75              Date           : 2021-11-06
+  76              Parameter      : Xn1: [输入/出]
+  77          **                       Xn0: [输入/出]
+  78          **                       Yn:  [输入/出]
+  79              ------------------------------------------------------------------------------------------------- */
+  80          int16 DivQ_L_MDU(uint16 Xn1, uint16 Xn0, uint16 Yn)
+  81          {
+  82   1          DIV0_DAH = Xn1;
+  83   1          DIV0_DAL = Xn0;
+  84   1          DIV0_DB  = Yn;
+  85   1          SMDU_RunBlock(0, DIV);
+  86   1          return DIV0_DQL;
+  87   1      }
+  88          
+  89          uint16  resultA;
+  90          uint16  resultB;
+  91          uint16  resultC;
+  92          /* ??a*b/c */
+  93          /* -------------------------------------------------------------------------------------------------
+  94              Function Name  : MDUCal
+  95              Description    : MDU??
+  96              Date           : 2022-03-16
+  97              Parameter      : TData: [??/?]
+  98          ------------------------------------------------------------------------------------------------- */
+  99          int16 MDUCal(uint16 data * TData)
+ 100          {
+ 101   1          union
+ 102   1          {
+ 103   1              uint32 Value;
+ 104   1              uint16 Val[3];
+ 105   1          } data result;
+ 106   1          result.Val[0] = TData[0];
+ 107   1          result.Val[1] = TData[1];
+ 108   1          result.Val[2] = TData[2];
+ 109   1          
+ 110   1          //    //    /* 计算乘法m=a*b */
+ 111   1          //    MUL1_MA  = c;
+ 112   1          //
+ 113   1          //    MUL1_MB  = TData[1];
+ 114   1          //
+C51 COMPILER V9.57.0.0   SMDU                                                              06/22/2026 16:14:00 PAGE 3   
+
+ 115   1          //    while (MDU_CR & MDUBSY);
+ 116   1          //
+ 117   1          //    MDU_CR = MDUSTA1 | MDUMOD0;
+ 118   1          //
+ 119   1          //    while (MDU_CR & MDUBSY);
+ 120   1          //
+ 121   1          //    result.Val[0] = MUL1_MCH;
+ 122   1          //    result.Val[1] = MUL1_MCL;
+ 123   1          //    DIV1_DAH  = result.Val[0];
+ 124   1          //    DIV1_DAL  = result.Val[1];
+ 125   1          //
+ 126   1          //    DIV1_DB  = TData[2];
+ 127   1          //    while (MDU_CR & MDUBSY);
+ 128   1          //
+ 129   1          //    MDU_CR = MDUSTA1 | MDUMOD0 | MDUMOD1;
+ 130   1          //
+ 131   1          //    while (MDU_CR & MDUBSY);
+ 132   1          //
+ 133   1          //    result.Val[2] = DIV1_DQL;
+ 134   1          //    return result.Val[2];
+ 135   1          MUL1_MA  =  hallPara.Fre_TIMtoFOC;
+ 136   1          
+ 137   1          if (hallPara.HallCount <= 50)
+ 138   1          {
+ 139   2              MUL1_MB  =  hallPara.ErrorTheta;
+ 140   2          }
+ 141   1          else
+ 142   1          {
+ 143   2              MUL1_MB  = (21845 + (hallPara.ErrorTheta));
+ 144   2          }
+ 145   1          
+ 146   1          MDU_CR = MDUSTA1 | MDUMOD1;
+ 147   1          
+ 148   1          while (MDU_CR & MDUBSY);
+ 149   1          
+ 150   1          DIV1_DAH  = MUL1_MCH;
+ 151   1          DIV1_DAL  = MUL1_MCL;
+ 152   1          
+ 153   1          if (hallPara.HallCount <= 50)
+ 154   1          {
+ 155   2              DIV1_DB  = hallPara.PeriodTimeReal;
+ 156   2          }
+ 157   1          else
+ 158   1          {
+ 159   2              DIV1_DB  = hallPara.HallTime;
+ 160   2          }
+ 161   1          
+ 162   1          MDU_CR = MDUSTA1 | MDUMOD0 | MDUMOD1;
+ 163   1          
+ 164   1          while (MDU_CR & MDUBSY);
+ 165   1          
+ 166   1          hallPara.RTheStepResult = DIV1_DQL;
+ 167   1          return hallPara.RTheStepResult;
+ 168   1      }
+ 169          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    361    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =      6       4
+   PDATA SIZE       =   ----    ----
+C51 COMPILER V9.57.0.0   SMDU                                                              06/22/2026 16:14:00 PAGE 4   
+
+   DATA SIZE        =   ----       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

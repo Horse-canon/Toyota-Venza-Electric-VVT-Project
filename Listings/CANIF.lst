@@ -1,0 +1,340 @@
+C51 COMPILER V9.57.0.0   CANIF                                                             06/22/2026 16:14:01 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE CANIF
+OBJECT MODULE PLACED IN .\Output\CANIF.obj
+COMPILER INVOKED BY: E:\05KeilC51\C51\BIN\C51.EXE Components\CANIF.c LARGE OMF2 OPTIMIZE(9,SIZE) BROWSE INCDIR(..\User\i
+                    -nclude;..\FU68xx_Hardware_Driver\Include;.\Components) DEBUG PRINT(.\Listings\CANIF.lst) TABS(2) OBJECT(.\Output\CANIF.o
+                    -bj)
+
+line level    source
+
+   1          /**
+   2           * @copyright (C) COPYRIGHT 2024 Fortiortech Shenzhen
+   3           * @file      CANIF.c
+   4           * @author    Brad Yang, R&D
+   5           * @since     2024-08-27 15:24:44
+   6           * @date      2024-09-10 15:31:23
+   7           * @note      Last modify author is Brad Yang, R&D
+   8           * @version
+   9           * <table>
+  10           * <tr><th>Date <th>Version <th>Author <th>Description </tr>
+  11           * </table>
+  12           * @brief
+  13           */
+  14          
+  15          /************************************Including Header Files***********************************/
+  16          #include <MyProject.h>
+  17          
+  18          
+  19          /************************************Define Macro*********************************************/
+  20          /************************************Define Global Symbols************************************/
+  21          
+  22          /* 发送PDU头信息定义 */
+  23          CAN_tstrSendHeadInfo xdata CANIF_strS31Mcu1Head;
+  24          CAN_tstrSendHeadInfo xdata CANIF_strS31Mcu2Head;
+  25          CAN_tstrSendHeadInfo xdata CANIF_strS31Mcu3Head;
+  26          
+  27          /* CAN发送数据缓冲区 */
+  28          uint8 xdata CAN_data_TX_1[8];
+  29          uint8 xdata CAN_data_TX_2[8];
+  30          uint8 xdata CAN_data_TX_3[8];
+  31          
+  32          /* 接收PDU头信息定义 */
+  33          CANIF_tstrRxHeadInfo xdata CANIF_strS31Pdcu1Head;
+  34          CANIF_tstrRxHeadInfo xdata CANIF_strS31Pdcu2Head;
+  35          CANIF_tstrRxHeadInfo xdata CANIF_strS31Pdcu3Head;
+  36          
+  37          /* CAN接收数据缓冲区 */
+  38          uint8 xdata CAN_data_RX_1[8];
+  39          uint8 xdata CAN_data_RX_2[8];
+  40          uint8 xdata CAN_data_RX_3[8];
+  41          
+  42          
+  43          #if (UDS_COMSTACK_ENABLE == STD_ON)
+              uint8 xdata CANIF_au8UdsPhyRxData[8];
+              uint8 xdata CANIF_au8UdsRespData[8];
+              #endif
+  47          
+  48          /* CAN发送周期计数器 */
+  49          uint16 xdata CANIF_u16TxPeriodCnt = 0;
+  50          
+  51          /***************************Function Subject***************************************************/
+  52          
+  53          /******************************************************************************/
+C51 COMPILER V9.57.0.0   CANIF                                                             06/22/2026 16:14:01 PAGE 2   
+
+  54          /*                                                                            */
+  55          /* !Description : CAN报文初始化                                                    */
+  56          /* !Reference   :                                                             */
+  57          /* !Trace_To    :                                                             */
+  58          /* !LastAuthor  :                                                             */
+  59          /******************************************************************************/
+  60          /* !Comment:                                                                  */
+  61          /* !Range   :                                                                 */
+  62          /******************************************************************************/
+  63          void CANIF_vidDataInit(void)
+  64          {
+  65   1          CANIF_u16TxPeriodCnt = 0;
+  66   1      
+  67   1          /* !Comment: 发送帧头信息初始化. */
+  68   1        CANIF_strS31Mcu1Head.u32CanId = 0xE1;               // CAN报文ID - 发送
+  69   1        CANIF_strS31Mcu1Head.u8CanFrameCfg = IDE_STD | RTR_DAT | DLC_8;
+  70   1      
+  71   1        CANIF_strS31Mcu2Head.u32CanId = 0xE2;               // CAN报文ID - 发送
+  72   1        CANIF_strS31Mcu2Head.u8CanFrameCfg = IDE_STD | RTR_DAT | DLC_8;
+  73   1      
+  74   1        CANIF_strS31Mcu3Head.u32CanId = 0xE3;               // CAN报文ID - 发送
+  75   1        CANIF_strS31Mcu3Head.u8CanFrameCfg = IDE_STD | RTR_DAT | DLC_8;
+  76   1      
+  77   1          /* !Comment: 接收帧头信息初始化. */
+  78   1        CANIF_strS31Pdcu1Head.RxAckFlg    = FALSE;
+  79   1        CANIF_strS31Pdcu1Head.RxTimoutFlg = FALSE;
+  80   1        CANIF_strS31Pdcu1Head.RxTimoutCnt = CANIF_COM_FIRST_TIMOUT;
+  81   1        
+  82   1        CANIF_strS31Pdcu2Head.RxAckFlg    = FALSE;
+  83   1        CANIF_strS31Pdcu2Head.RxTimoutFlg = FALSE;
+  84   1        CANIF_strS31Pdcu2Head.RxTimoutCnt = CANIF_COM_FIRST_TIMOUT;
+  85   1      
+  86   1        CANIF_strS31Pdcu3Head.RxAckFlg    = FALSE;
+  87   1        CANIF_strS31Pdcu3Head.RxTimoutFlg = FALSE;
+  88   1        CANIF_strS31Pdcu3Head.RxTimoutCnt = CANIF_COM_FIRST_TIMOUT;
+  89   1      }
+  90          
+  91          
+  92          /******************************************************************************/
+  93          /*                                                                            */
+  94          /* !Description : CAN接收处理函数                                                   */
+  95          /* !Reference   :                                                             */
+  96          /* !Trace_To    :                                                             */
+  97          /* !LastAuthor  :                                                             */
+  98          /******************************************************************************/
+  99          /* !Comment:                                                                  */
+ 100          /* !Range   :                                                                 */
+ 101          /******************************************************************************/
+ 102          void CANIF_vidReceiveProcess(uint32 u32CanId, uint8 u8CanDlc, uint8* pu8CanData)
+ 103          {    
+ 104   1          uint8 u8LocIdx;
+ 105   1          
+ 106   1          // CAN报文ID - 接收
+ 107   1          switch (u32CanId)
+ 108   1          {
+ 109   2              case 0XBD:
+ 110   2              {
+ 111   3                  memcpy(CAN_data_RX_1, pu8CanData, sizeof(CAN_data_RX_1));
+ 112   3                  CANIF_strS31Pdcu1Head.RxAckFlg = STD_TRUE;
+ 113   3                  memcpy(CAN_data_TX_1, pu8CanData, 8);
+ 114   3              }
+ 115   2              break;
+C51 COMPILER V9.57.0.0   CANIF                                                             06/22/2026 16:14:01 PAGE 3   
+
+ 116   2      
+ 117   2              case 0XBE:
+ 118   2              {
+ 119   3                  memcpy(CAN_data_RX_2, pu8CanData, sizeof(CAN_data_RX_2));
+ 120   3                  CANIF_strS31Pdcu2Head.RxAckFlg = STD_TRUE;
+ 121   3              }
+ 122   2              break;
+ 123   2      
+ 124   2              case 0XBF:
+ 125   2              {
+ 126   3                  memcpy(CAN_data_RX_3, pu8CanData, sizeof(CAN_data_RX_3));
+ 127   3                  CANIF_strS31Pdcu3Head.RxAckFlg = STD_TRUE;
+ 128   3              }
+ 129   2              break;
+ 130   2      
+ 131   2      #if (UDS_COMSTACK_ENABLE == STD_ON)
+                      case CANIF_UDS_PHYRX_ID:
+                          {
+                              pu8Dest = (uint8*)&CANIF_au8UdsPhyRxData;
+                              for (u8LocIdx = 0; u8LocIdx < 8; u8LocIdx++)
+                              {
+                                  pu8Dest[u8LocIdx] = pu8CanData[u8LocIdx];
+                              }
+                              
+                              CANIF_vidUdsRxIndication(CANIF_UDS_PHYRX_ID, 8, &CANIF_au8UdsPhyRxData);
+                          }
+                          break;
+              #endif
+ 144   2      
+ 145   2              default:
+ 146   2                  break;
+ 147   2          }
+ 148   1      
+ 149   1      }
+*** WARNING C280 IN LINE 102 OF Components\CANIF.c: 'u8CanDlc': unreferenced local variable
+*** WARNING C280 IN LINE 104 OF Components\CANIF.c: 'u8LocIdx': unreferenced local variable
+ 150          
+ 151          
+ 152          /******************************************************************************/
+ 153          /*                                                                            */
+ 154          /* !Description : CAN应用报文发送处理函数                                               */
+ 155          /* !Reference   :                                                             */
+ 156          /* !Trace_To    :                                                             */
+ 157          /* !LastAuthor  :                                                             */
+ 158          /******************************************************************************/
+ 159          /* !Comment:                                                                  */
+ 160          /* !Range   :                                                                 */
+ 161          /******************************************************************************/
+ 162          void CANIF_vidTransProcess(void)
+ 163          {
+ 164   1          if (CANIF_u16TxPeriodCnt < 10)
+ 165   1          {
+ 166   2             CANIF_u16TxPeriodCnt++;
+ 167   2          }
+ 168   1          else
+ 169   1          {
+ 170   2             CANIF_u16TxPeriodCnt = 0;
+ 171   2          }
+ 172   1      
+ 173   1          switch (CANIF_u16TxPeriodCnt)
+ 174   1          {
+ 175   2              case 0:
+C51 COMPILER V9.57.0.0   CANIF                                                             06/22/2026 16:14:01 PAGE 4   
+
+ 176   2                  CAN_vidSendMsg(&CAN_data_TX_1, &CANIF_strS31Mcu1Head);
+ 177   2                  break;
+ 178   2                 
+ 179   2              case 2:
+ 180   2                  CAN_vidSendMsg(&CAN_data_TX_2, &CANIF_strS31Mcu2Head);
+ 181   2                  break;
+ 182   2             
+ 183   2              case 4:
+ 184   2                  CAN_vidSendMsg(&CAN_data_TX_3, &CANIF_strS31Mcu3Head);
+ 185   2                  break;
+ 186   2      
+ 187   2              case 6:
+ 188   2                  // CAN_vidSendMsg(&CAN_data_TX_4, &CANIF_strS31Mcu4Head);
+ 189   2                  break;
+ 190   2                 
+ 191   2              case 8:
+ 192   2                  // CAN_vidSendMsg(&CAN_data_TX_5, &CANIF_strS31Mcu5Head);
+ 193   2                  break;
+ 194   2      
+ 195   2              default:
+ 196   2                  break;
+ 197   2          }
+ 198   1      
+ 199   1      }
+ 200          
+ 201          /******************************************************************************/
+ 202          /*                                                                            */
+ 203          /* !Description : CAN应用报文超时处理函数                                               */
+ 204          /* !Reference   :                                                             */
+ 205          /* !Trace_To    :                                                             */
+ 206          /* !LastAuthor  :                                                             */
+ 207          /******************************************************************************/
+ 208          /* !Comment: 调度周期50ms                                                         */
+ 209          /* !Range   :                                                                 */
+ 210          /******************************************************************************/
+ 211          void CANIF_vidComLostDiag(void)
+ 212          {
+ 213   1          if (CANIF_strS31Pdcu1Head.RxAckFlg)
+ 214   1          {
+ 215   2              CANIF_strS31Pdcu1Head.RxAckFlg    = FALSE;
+ 216   2              CANIF_strS31Pdcu1Head.RxTimoutFlg = FALSE;
+ 217   2              CANIF_strS31Pdcu1Head.RxTimoutCnt = CANIF_COM_PDCU1_TIMOUT;
+ 218   2          }
+ 219   1          else
+ 220   1          {
+ 221   2              if (CANIF_strS31Pdcu1Head.RxTimoutCnt > 0)
+ 222   2              {
+ 223   3                  CANIF_strS31Pdcu1Head.RxTimoutCnt--;
+ 224   3              }
+ 225   2              else
+ 226   2              {
+ 227   3                  CANIF_strS31Pdcu1Head.RxTimoutFlg = TRUE;
+ 228   3              }
+ 229   2          }
+ 230   1      
+ 231   1          if (CANIF_strS31Pdcu2Head.RxAckFlg)
+ 232   1          {
+ 233   2              CANIF_strS31Pdcu2Head.RxAckFlg    = FALSE;
+ 234   2              CANIF_strS31Pdcu2Head.RxTimoutFlg = FALSE;
+ 235   2              CANIF_strS31Pdcu2Head.RxTimoutCnt = CANIF_COM_PDCU2_TIMOUT;
+ 236   2          }
+ 237   1          else
+C51 COMPILER V9.57.0.0   CANIF                                                             06/22/2026 16:14:01 PAGE 5   
+
+ 238   1          {
+ 239   2              if (CANIF_strS31Pdcu2Head.RxTimoutCnt > 0)
+ 240   2              {
+ 241   3                  CANIF_strS31Pdcu2Head.RxTimoutCnt--;
+ 242   3              }
+ 243   2              else
+ 244   2              {
+ 245   3                  CANIF_strS31Pdcu2Head.RxTimoutFlg = TRUE;
+ 246   3              }
+ 247   2          }
+ 248   1      
+ 249   1          if (CANIF_strS31Pdcu3Head.RxAckFlg)
+ 250   1          {
+ 251   2              CANIF_strS31Pdcu3Head.RxAckFlg    = FALSE;
+ 252   2              CANIF_strS31Pdcu3Head.RxTimoutFlg = FALSE;
+ 253   2              CANIF_strS31Pdcu3Head.RxTimoutCnt = CANIF_COM_PDCU3_TIMOUT;
+ 254   2          }
+ 255   1          else
+ 256   1          {
+ 257   2              if (CANIF_strS31Pdcu3Head.RxTimoutCnt > 0)
+ 258   2              {
+ 259   3                  CANIF_strS31Pdcu3Head.RxTimoutCnt--;
+ 260   3              }
+ 261   2              else
+ 262   2              {
+ 263   3                  CANIF_strS31Pdcu3Head.RxTimoutFlg = TRUE;
+ 264   3              }
+ 265   2          }
+ 266   1      
+ 267   1          if ( (TRUE == CANIF_strS31Pdcu1Head.RxTimoutFlg) || 
+ 268   1               (TRUE == CANIF_strS31Pdcu2Head.RxTimoutFlg) ||
+ 269   1               (TRUE == CANIF_strS31Pdcu3Head.RxTimoutFlg) )
+ 270   1          {
+ 271   2              if (mcRun == mcState)
+ 272   2              {
+ 273   3              /* 若需要采取报文超时保护，可以在这里添加保护代码。 */
+ 274   3              #if 0
+                          mcFaultSource = FaultCANTimout;
+                          mcState = mcFault;
+                          FaultProcess();
+                      #endif
+ 279   3              }
+ 280   2          }
+ 281   1      }
+ 282          
+ 283          
+ 284          /**
+ 285           * @brief      CAN测试函数
+ 286           *
+ 287           * @param[in]  MCU_Data_Number  The mcu data number
+ 288           */
+ 289          void CANIF_vidTestCanSend(void)
+ 290          {
+ 291   1          CAN_data_TX_1[0] = 0X11;
+ 292   1          CAN_data_TX_1[1] = 0X22;
+ 293   1          CAN_data_TX_1[2] = 0X33;
+ 294   1          CAN_data_TX_1[3] = 0X44;
+ 295   1          CAN_data_TX_1[4] = 0X55;
+ 296   1          CAN_data_TX_1[5] = 0X66;
+ 297   1          CAN_data_TX_1[6] = 0X77;
+ 298   1          CAN_data_TX_1[7] = 0X88;
+ 299   1      }
+C51 COMPILER V9.57.0.0   CANIF                                                             06/22/2026 16:14:01 PAGE 6   
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    455    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =     77       9
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)

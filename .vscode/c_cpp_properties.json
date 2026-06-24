@@ -1,0 +1,44 @@
+{
+    "configurations": [
+        {
+            "name": "Fortior_FOC_FU68x6",
+            "includePath": [
+                "e:\\项目\\10VTT项目\\CAN\\FU6816_电动铰链_251208_CAN移植\\Software\\User\\include",
+                "e:\\项目\\10VTT项目\\CAN\\FU6816_电动铰链_251208_CAN移植\\Software\\FU68xx_Hardware_Driver\\Include",
+                "e:\\项目\\10VTT项目\\CAN\\FU6816_电动铰链_251208_CAN移植\\Software\\KeilC51\\Components",
+                "E:\\05KeilC51\\C51\\INC",
+                "e:\\项目\\10VTT项目\\CAN\\FU6816_电动铰链_251208_CAN移植\\Software\\User\\source\\Application",
+                "e:\\项目\\10VTT项目\\CAN\\FU6816_电动铰链_251208_CAN移植\\Software\\User\\source\\Function",
+                "e:\\项目\\10VTT项目\\CAN\\FU6816_电动铰链_251208_CAN移植\\Software\\User\\source\\Hardware",
+                "e:\\项目\\10VTT项目\\CAN\\FU6816_电动铰链_251208_CAN移植\\Software\\FU68xx_Hardware_Driver\\Source",
+                "e:\\项目\\10VTT项目\\CAN\\FU6816_电动铰链_251208_CAN移植\\Software"
+            ],
+            "defines": [
+                "__C51__",
+                "__VSCODE_C51__",
+                "reentrant=",
+                "compact=",
+                "small=",
+                "large=",
+                "data=",
+                "idata=",
+                "pdata=",
+                "bdata=",
+                "xdata=",
+                "code=",
+                "bit=char",
+                "sbit=char",
+                "sfr=char",
+                "sfr16=int",
+                "sfr32=int",
+                "interrupt=",
+                "using=",
+                "_at_=",
+                "_priority_=",
+                "_task_="
+            ],
+            "intelliSenseMode": "${default}"
+        }
+    ],
+    "version": 4
+}

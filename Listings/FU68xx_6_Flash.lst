@@ -1,0 +1,662 @@
+C51 COMPILER V9.57.0.0   FU68XX_6_FLASH                                                    06/22/2026 16:14:00 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE FU68XX_6_FLASH
+OBJECT MODULE PLACED IN .\Output\FU68xx_6_Flash.obj
+COMPILER INVOKED BY: E:\05KeilC51\C51\BIN\C51.EXE ..\User\source\Hardware\FU68xx_6_Flash.c LARGE OMF2 OPTIMIZE(9,SIZE) B
+                    -ROWSE INCDIR(..\User\include;..\FU68xx_Hardware_Driver\Include;.\Components) DEBUG PRINT(.\Listings\FU68xx_6_Flash.lst) 
+                    -TABS(2) OBJECT(.\Output\FU68xx_6_Flash.obj)
+
+line level    source
+
+   1          /**
+   2           *                          @copyright (C) COPYRIGHT 2022 Fortiortech Shenzhen
+   3           * @file      FU68xx_6_Flash.c
+   4           * @author    leo.li
+   5           * @since     2022-10-01 22:24:50
+   6           * @date      2022-10-09 17:46:47
+   7           * @version
+   8           * <table>
+   9           * <tr><th>Date <th>Version <th>Author <th>Description </tr>
+  10           * </table>
+  11           * @brief
+  12           */
+  13          
+  14          
+  15          /******************************************************************************/// Including Header Files
+  16          #include <MyProject.h>
+  17          
+  18          MCUFlash xdata FlashTest;                 //flash测试
+  19          uint8 FlashWriteStatus;
+  20          
+  21          /******************************************************************************/// Define Macro
+  22          #define SEC_LEN_LOG  (8)
+  23          #define PAGE_LEN_LOG (3 + SEC_LEN_LOG)
+  24          #define FLASH_LEN    (32768)
+  25          
+  26          #define __SEC_LAST   ((FLASH_LEN >> SEC_LEN_LOG) - 1)
+  27          #define __PAGE_LAST  ((FLASH_LEN >> PAGE_LEN_LOG) - 1)
+  28          /******************************************************************************/// Define Global Symbols
+  29          /******************************************************************************/// Function Subject
+  30          /**
+  31           * @brief      Flash操作函数
+  32           *
+  33           * @param[in]  eCmd   操作命令
+  34           * @param[in]  wAddr  编程地址
+  35           * @param[in]  ucDat  编程内容
+  36           *
+  37           * @return     Flash操作结果, @see ETypeFlashStatu
+  38           */
+  39          ETypeFlashStatu Flash_Ctrl(ETypeFlashCmd eCmd, unsigned short wAddr, unsigned char ucDat)
+  40          {
+  41   1          unsigned char data   ucCmd    = (unsigned char)eCmd;
+  42   1          unsigned short data  wAddrTmp = wAddr;
+  43   1          unsigned char data   ucDatTmp = ucDat;
+  44   1          unsigned char data   ucKey1   = 0x5a;
+  45   1          unsigned char data   ucKey2   = 0x1f;
+  46   1          bool                 bEA;
+  47   1          unsigned char data   ucCfg;
+  48   1          ETypeFlashStatu data eStatu = FLASH_UNKNOW;
+  49   1          
+  50   1          if ((ucCmd & FLAEN) == 0)
+  51   1          {
+  52   2              return FLASH_ERR_CMD;
+  53   2          }
+C51 COMPILER V9.57.0.0   FU68XX_6_FLASH                                                    06/22/2026 16:14:00 PAGE 2   
+
+  54   1          else if ((ucCmd & (FLAERS | FLAPRE)) == (FLAERS | FLAPRE))
+  55   1          {
+  56   2              return FLASH_ERR_CMD;
+  57   2          }
+  58   1          else if ((ucCmd & (FLAERS | FLAPRE | PAGE_EN)) == PAGE_EN)
+  59   1          {
+  60   2              return FLASH_ERR_CMD;
+  61   2          }
+  62   1          
+  63   1          if ((ucCmd & PAGE_EN) != 0 && (wAddr >> PAGE_LEN_LOG) >= __PAGE_LAST)
+  64   1          {
+  65   2              return FLASH_ERR_ADDR;
+  66   2          }
+  67   1          else if ((ucCmd & PAGE_EN) == 0 && (wAddr >> SEC_LEN_LOG) >= __SEC_LAST)
+  68   1          {
+  69   2              return FLASH_ERR_ADDR;
+  70   2          }
+  71   1          
+  72   1          if (FLA_KEY == 0x06)
+  73   1          {
+  74   2              return FLASH_FORZEN;
+  75   2          }
+  76   1          
+  77   1          bEA = EA;
+  78   1          EA  = 0;
+  79   1          ucCfg = CCFG1 & (WDT_EN | 0x08);
+  80   1          CCFG1 &= ~(WDT_EN | 0x08);
+  81   1          FLA_CR = ucCmd;
+  82   1          FLA_KEY = ucKey1;
+  83   1          FLA_KEY = ucKey2;
+  84   1          
+  85   1          if (FLA_KEY != 0x03)
+  86   1          {
+  87   2              eStatu = FLASH_ERR_UNLOCK;
+  88   2              goto exit;
+  89   2          }
+  90   1          
+  91   1          *(unsigned char xdata *)wAddrTmp = ucDatTmp;
+  92   1          FLA_CR = 0x08;
+  93   1          
+  94   1          if ((FLA_CR & FLAERR) != 0)
+  95   1          {
+  96   2              eStatu = FLASH_ERROR;
+  97   2              goto exit;
+  98   2          }
+  99   1          
+ 100   1          eStatu = FLASH_SUCCESS;
+ 101   1      exit:
+ 102   1          EA    = bEA;
+ 103   1          CCFG1 |= ucCfg;
+ 104   1          return eStatu;
+ 105   1      }
+ 106          
+ 107          
+ 108          /**
+ 109           * @brief      Flash页擦除函数
+ 110           *
+ 111           * @param[in]  wAddr  编程地址
+ 112           *
+ 113           * @return     Flash操作结果, @see ETypeFlashStatu
+ 114           */
+ 115          ETypeFlashStatu Flash_PageErase(unsigned short wAddr)
+C51 COMPILER V9.57.0.0   FU68XX_6_FLASH                                                    06/22/2026 16:14:00 PAGE 3   
+
+ 116          {
+ 117   1          ETypeFlashStatu eStatu;
+ 118   1          eStatu = Flash_Ctrl(FLASH_PAGE_PP, wAddr, 0xff);
+ 119   1          
+ 120   1          if (eStatu != FLASH_SUCCESS)
+ 121   1          {
+ 122   2              goto exit;
+ 123   2          }
+ 124   1          
+ 125   1          eStatu = Flash_Ctrl(FLASH_PAGE_ERS, wAddr, 0xff);
+ 126   1      exit:
+ 127   1          return eStatu;
+ 128   1      }
+ 129          
+ 130          /**
+ 131           * @brief      Flash扇区擦除函数
+ 132           *
+ 133           * @param[in]  wAddr  编程地址
+ 134           *
+ 135           * @return     Flash操作结果, @see ETypeFlashStatu
+ 136           */
+ 137          ETypeFlashStatu Flash_SectorErase(unsigned short wAddr)
+ 138          {
+ 139   1          ETypeFlashStatu eStatu;
+ 140   1          eStatu = Flash_Ctrl(FLASH_SEC_PP, wAddr, 0xff);
+ 141   1          
+ 142   1          if (eStatu != FLASH_SUCCESS)
+ 143   1          {
+ 144   2              goto exit;
+ 145   2          }
+ 146   1          
+ 147   1          eStatu = Flash_Ctrl(FLASH_SEC_ERS, wAddr, 0xff);
+ 148   1      exit:
+ 149   1          return eStatu;
+ 150   1      }
+ 151          
+ 152          
+ 153          /**
+ 154           * @brief        写入1个字节到FLASH，
+ 155           * @Input        unsigned short FlashAddress：目标FLASH地址
+ 156           * @Input        uint8 FlashData：被写入数据
+ 157           */
+ 158          void Flash_byte_Write(unsigned short FlashAddress, unsigned char FlashData)
+ 159          {
+ 160   1          unsigned char Write_status = 0;
+ 161   1          Write_status = (uint8)Flash_Ctrl(FLASH_PROGARM, FlashAddress, FlashData);
+ 162   1          
+ 163   1          if (Write_status)
+ 164   1          {
+ 165   2              ;
+ 166   2          }
+ 167   1      }
+ 168          
+ 169          /**
+ 170           * @brief        Flash 校验CRC
+ 171           * @brief        CRC_BEG: 扇区起始
+ 172           * @brief        CRC_CNT: 校验扇区数
+ 173           */
+ 174          void Flash_CRC_APP(void)
+ 175          {
+ 176   1          uint8 CRCL = 0;
+ 177   1          uint8 CRCH = 0;
+C51 COMPILER V9.57.0.0   FU68XX_6_FLASH                                                    06/22/2026 16:14:00 PAGE 4   
+
+ 178   1          ClrBit(CRC_CR, AUTOINT); /* 停止计算 */
+ 179   1          SetBit(CRC_CR, CRCVAL);  /* 将 CRC 结果初始化为 0xFFFF */
+ 180   1          SetBit(CRC_CR, CRCDINI); /* 初始化有效 */
+ 181   1          CRC_BEG = 0;
+ 182   1          CRC_CNT = 127;
+ 183   1          SetBit(CRC_CR, AUTOINT); /* 开始计算 */
+ 184   1          
+ 185   1          while (ReadBit(CRC_CR, CRCDONE) == 0)
+ 186   1          {
+ 187   2              ;
+ 188   2          }
+ 189   1          
+ 190   1          SetBit(CRC_CR, CRCPNT); /* 取crc高位 */
+ 191   1          CRCH = CRC_DR;
+ 192   1          FlashTest.FlashCRC = CRCH;
+ 193   1          FlashTest.FlashCRC = FlashTest.FlashCRC << 8;
+ 194   1          ClrBit(CRC_CR, CRCPNT); /* 取crc低位 */
+ 195   1          CRCL = CRC_DR;
+ 196   1          FlashTest.FlashCRC = FlashTest.FlashCRC + CRCL;
+ 197   1      }
+ 198          
+ 199          
+ 200          /**
+ 201          * @brief        获取写入地址，必须保证写入的地址中数值全部为0
+ 202          * @brief        unsigned short FlashAddress：目标FLASH首地址
+ 203          * @brief        uint8 Write_Length：写入数值长度
+ 204          */
+ 205          uint16 GetWrite_Black_Addr(unsigned short FlashAddress, uint8 Write_Length)
+ 206          {
+ 207   1          uint16 TempFlashAddress = 0;
+ 208   1          uint16 TempFirstAddress = 0;             //用来保存保存首地址
+ 209   1          uint8  tempFlashData = 0xFF;
+ 210   1          uint8  Length = 0;
+ 211   1          TempFlashAddress = FlashAddress;
+ 212   1          TempFirstAddress = FlashAddress;
+ 213   1          
+ 214   1          while ((Length != Write_Length) && (TempFlashAddress < (TempFirstAddress + Write_Length))) //限定读
+             -取地址为当前页
+ 215   1          {
+ 216   2              tempFlashData = *(uint8 code *)(TempFlashAddress);  //读取目标地址中数值是否为0
+ 217   2              
+ 218   2              if (tempFlashData == 0)
+ 219   2              {
+ 220   3                  Length ++;
+ 221   3                  TempFlashAddress += 1;
+ 222   3              }
+ 223   2              else
+ 224   2              {
+ 225   3                  TempFirstAddress += Write_Length;        //首地址跳转Write_Length字节
+ 226   3                  TempFlashAddress  = TempFirstAddress;
+ 227   3                  Length = 0;
+ 228   3              }
+ 229   2          }
+ 230   1          
+ 231   1          return TempFirstAddress;
+ 232   1      }
+ 233          
+ 234          /**
+ 235           * @brief        写入Length字节到FLASH，
+ 236           * @Input        unsigned short FlashAddress：写入目标FLASH首地址
+ 237           * @Input        uint8 *str：被写入数据
+ 238           * @ruturn       1:扇区未满,写入完成  0:扇区已满,写入失败
+C51 COMPILER V9.57.0.0   FU68XX_6_FLASH                                                    06/22/2026 16:14:00 PAGE 5   
+
+ 239           * @note
+ 240           */
+ 241          uint8 Write_LengthByte(unsigned short FlashAddress, uint8 Length, uint8 * str)
+ 242          {
+ 243   1          uint8 tempFlashData = 0;
+ 244   1          uint8 i = 0;
+ 245   1          uint16 tempNewFlashAddress = FlashAddress;
+ 246   1          
+ 247   1          for (i = 0; i < Length; i++)
+ 248   1          {
+ 249   2              Flash_byte_Write((tempNewFlashAddress + i), str[i]);
+ 250   2              tempFlashData = *(uint8 code *)(tempNewFlashAddress + i);
+ 251   2              
+ 252   2              if (tempFlashData != str[i])
+ 253   2              {
+ 254   3                  return 0;
+ 255   3              }
+ 256   2          }
+ 257   1          
+ 258   1          return 1;
+ 259   1      }
+ 260          
+ 261          
+ 262          /**
+ 263           * @brief        读取两个字节数据，
+ 264           * @Input        unsigned short BlockStartAddr：目标FLASH首地址
+ 265           * @Input        uint8 Length：数值长度
+ 266           * @Input        uint8 * str ：读回数值写入数组
+ 267           * @ruturn       Flash数据
+ 268           */
+ 269          void ReadFromFlash(unsigned short BlockStartAddr, uint8 Length, uint8 * str)
+ 270          {
+ 271   1          uint8 i = 0;
+ 272   1          
+ 273   1          for (i = 0; i < Length; i++)
+ 274   1          {
+ 275   2              str[i] = *(uint8 code *)(BlockStartAddr + i);
+ 276   2          }
+ 277   1      }
+ 278          
+ 279          
+ 280          /**
+ 281           * @brief        读取X字节数据，
+ 282           * @Input        unsigned short BlockStartAddr：目标FLASH首地址
+ 283           * @ruturn       Flash数据
+ 284           */
+ 285          void GetXByteFromFlash(unsigned short BlockStartAddr, uint16 * NewData2Flash,  uint8 XByte)
+ 286          {
+ 287   1          uint8 i;
+ 288   1          
+ 289   1          if (BlockStartAddr > USERCODEADDRESS)
+ 290   1          {
+ 291   2              BlockStartAddr = FlashTest.FlashWriteAddr - 8;
+ 292   2          }
+ 293   1          
+ 294   1          for (i = 0; i < XByte; i++)
+ 295   1          {
+ 296   2              NewData2Flash[i] = *(uint16 code *)(BlockStartAddr + i * 2);
+ 297   2          }
+ 298   1      }
+ 299          
+ 300          /**
+C51 COMPILER V9.57.0.0   FU68XX_6_FLASH                                                    06/22/2026 16:14:00 PAGE 6   
+
+ 301           * @brief        写入2个字节到FLASH，
+ 302           * @Input        unsigned short FlashAddress：目标FLASH地址
+ 303           * @Input        uint16 NewData2Flash：被写入数据
+ 304           * @ruturn       1:扇区未满,写入完成  0:扇区已满,写入失败
+ 305           * @note         部分地址可能没法写入，需要自动转移到下一个地址，程序中没做�
+             -�理
+ 306           */
+ 307          
+ 308          
+ 309          uint8 WriteXByte2Flash(unsigned short FlashAddress, uint16 * NewData2Flash)
+ 310          {
+ 311   1          uint16  j;
+ 312   1          uint16 tempofFlashData = 0;
+ 313   1          uint16 tempofNewFlashData = 0;
+ 314   1          uint16 tempNewFlashAddress = FlashAddress;
+ 315   1          //tempofNewFlashData = NewData2Flash;
+ 316   1          tempofFlashData = *(uint16 code *)(tempNewFlashAddress);
+ 317   1          
+ 318   1          //    if (tempofFlashData == 0)
+ 319   1          //    {
+ 320   1          for (j = 0; j < 4; j++)
+ 321   1          {
+ 322   2              tempofNewFlashData = NewData2Flash[j] >> 8;
+ 323   2              Flash_byte_Write((tempNewFlashAddress + 2 * j), (uint8)tempofNewFlashData);
+ 324   2              tempofNewFlashData = NewData2Flash[j] & 0x00ff;
+ 325   2              Flash_byte_Write((tempNewFlashAddress + 2 * j + 1), (uint8)tempofNewFlashData);
+ 326   2          }
+ 327   1          
+ 328   1          //}
+ 329   1          //    tempofFlashData = *(uint16 code *)(FlashAddress);
+ 330   1          //
+ 331   1          //    if (tempofFlashData == tempofNewFlashData)
+ 332   1          //    {
+ 333   1          return 1;
+ 334   1          //    }
+ 335   1          //    else
+ 336   1          //    {
+ 337   1          //        return 0;
+ 338   1          //    }
+ 339   1      }
+ 340          
+ 341          /**
+ 342          * @brief        写数值到一个扇区，一个扇区有256个字节，一页有8个扇区
+ 343          * @brief        uint8 xdata *BlockStartAddr：目标FLASH地址
+ 344          * @brief        uint16 NewData2Flash：被写入数据
+ 345          */
+ 346          //uint8 Write_Sector_Flash(unsigned short FlashAddress, uint16 * NewData2Flash)
+ 347          //{
+ 348          //    uint16 tempofFlashData = 0;
+ 349          //    uint16 tempofNewFlashData = 0;
+ 350          //    uint8 i;
+ 351          //    
+ 352          //    //tempofNewFlashData = NewData2Flash;
+ 353          //    for (i = 0; i < 256; i++)
+ 354          //    {
+ 355          //        tempofFlashData = *(uint16 code *)(FlashAddress + 8 * i);
+ 356          //        
+ 357          //        if (tempofFlashData == 0)
+ 358          //        {
+ 359          //            WriteXByte2Flash((FlashAddress + 8 * i), &Memorytic_Data);
+ 360          //            break;
+ 361          //        }
+C51 COMPILER V9.57.0.0   FU68XX_6_FLASH                                                    06/22/2026 16:14:00 PAGE 7   
+
+ 362          //        else
+ 363          //        {
+ 364          //            if (i == 255)
+ 365          //            {
+ 366          //                FlashTest.ReturnStatus = Flash_PageErase(USERCODEADDRESS);
+ 367          //                _nop_();
+ 368          //                WriteXByte2Flash(FlashAddress, &Memorytic_Data);
+ 369          //            }
+ 370          //        }
+ 371          //    }
+ 372          //    
+ 373          //    return 1;
+ 374          //}
+ 375          
+ 376          
+ 377          
+ 378          /**
+ 379          * @brief        获取掉电之前的错误数据，数值初始化
+ 380          * @brief
+ 381          * @brief
+ 382          */
+ 383          void Flash_DataInit(void)
+ 384          {
+ 385   1          uint16 ReadInfor_Addr = 0;                 //读取信息地址
+ 386   1          uint8 Check_code = 0;
+ 387   1          uint8 i = 0;
+ 388   1          memset(&FlashTest, 0, sizeof(MCUFlash));        // 变量清零
+ 389   1          /*确认写入对应长度地址内数值全为0 */
+ 390   1          FlashTest.FlashWriteAddr = GetWrite_Black_Addr(USERCODEADDRESS, Flash_DATA_Length);
+ 391   1          
+ 392   1          /* 获取上次的保存数值
+ 393   1          FlashTest.FlashWriteAddr：写入数值首地址 ，Flash_DATA_Length：读取字节数，读取值放
+             -入FlashTest.Flash_Read_Data数组中 */
+ 394   1          if (FlashTest.FlashWriteAddr > USERCODEADDRESS)
+ 395   1          {
+ 396   2              /*读取数值首地址*/
+ 397   2              FlashTest.FlashReadAddr  = FlashTest.FlashWriteAddr - Flash_DATA_Length;
+ 398   2              
+ 399   2              /*获取最新一次正确写入的数值*/
+ 400   2              while ((FlashTest.FlashReadAddr > USERCODEADDRESS) && (Check_code != 0x55))
+ 401   2              {
+ 402   3                  /*读取数值校验位，确认当前数值在写入时为正确写入*/
+ 403   3                  ReadInfor_Addr = FlashTest.FlashReadAddr + Verify_Bit;
+ 404   3                  Check_code = *(uint8 code *)(ReadInfor_Addr + i);
+ 405   3                  
+ 406   3                  if (Check_code == 0x55)
+ 407   3                  {
+ 408   4                      ReadFromFlash(FlashTest.FlashReadAddr, Flash_DATA_Length, FlashTest.Flash_Read_Data);
+ 409   4                  }
+ 410   3                  else
+ 411   3                  {
+ 412   4                      FlashTest.FlashReadAddr  = FlashTest.FlashWriteAddr - Flash_DATA_Length;
+ 413   4                  }
+ 414   3              }
+ 415   2          }
+ 416   1          else
+ 417   1          {
+ 418   2              FlashTest.FlashReadAddr  = FlashTest.FlashWriteAddr;
+ 419   2          }
+ 420   1          
+ 421   1          /*错误信息从Flash读取到APP*/
+ 422   1          ReadInfor_Addr = FlashTest.FlashReadAddr + ((uint8)FaultHardOVCurrent - 1) * 2;
+C51 COMPILER V9.57.0.0   FU68XX_6_FLASH                                                    06/22/2026 16:14:00 PAGE 8   
+
+ 423   1          FlashTest.FaultHardOVCurrentCount = *(uint16 code *)(ReadInfor_Addr);
+ 424   1          ReadInfor_Addr = FlashTest.FlashReadAddr + ((uint8)FaultSoftOVCurrent - 1) * 2;
+ 425   1          FlashTest.FaultSoftOVCurrentCount = *(uint16 code *)(ReadInfor_Addr);
+ 426   1          ReadInfor_Addr = FlashTest.FlashReadAddr + ((uint8)FaultOverVoltageDC - 1) * 2;
+ 427   1          FlashTest.FaultUnderVoltageCount = *(uint16 code *)(ReadInfor_Addr);
+ 428   1          ReadInfor_Addr = FlashTest.FlashReadAddr + ((uint8)FaultUnderVoltageDC - 1) * 2;
+ 429   1          FlashTest.FaultOverVoltageCount = *(uint16 code *)(ReadInfor_Addr);
+ 430   1          ReadInfor_Addr = FlashTest.FlashReadAddr + ((uint8)FaultPhaseLost - 1) * 2;
+ 431   1          FlashTest.FaultLossPhaseCount = *(uint16 code *)(ReadInfor_Addr);
+ 432   1          ReadInfor_Addr = FlashTest.FlashReadAddr + ((uint8)FaultStall - 1) * 2;
+ 433   1          FlashTest.FaultStartCount = *(uint16 code *)(ReadInfor_Addr);
+ 434   1          ReadInfor_Addr = FlashTest.FlashReadAddr + ((uint8)FaultNtcOTErr - 1) * 2;
+ 435   1          FlashTest.FaultStartCount = *(uint16 code *)(ReadInfor_Addr);
+ 436   1          ReadInfor_Addr = FlashTest.FlashReadAddr + ((uint8)FaultTSD - 1) * 2;
+ 437   1          FlashTest.FaultTSDCount = *(uint16 code *)(ReadInfor_Addr);
+ 438   1          
+ 439   1          /*Flash如果准备写满，擦写标志位置1.准备芯片温度在低于105°进行擦写*/
+ 440   1          if (FlashTest.FlashWriteAddr >= USERCODEADDRESS + 0x0FB0)                //擦写为2页（一共4K的
+             -数值）到最后一个写入64字节尝试擦写
+ 441   1          {
+ 442   2              for (i = 0; i < Flash_DATA_Length; i++)
+ 443   2              {
+ 444   3                  FlashTest.Flash_Write_Data[i] = FlashTest.Flash_Read_Data[i];
+ 445   3              }
+ 446   2              
+ 447   2              FlashTest.Flag_FlashErase = 1;
+ 448   2          }
+ 449   1      }
+ 450          
+ 451          /**
+ 452          * @brief        Flash的擦写
+ 453          * @brief        FlashTest.Flag_FlashErase确认是否进行
+ 454          * @brief
+ 455          */
+ 456          void Flash_Erase(void)
+ 457          {
+ 458   1          uint8 FlashWriteStatus = 0;
+ 459   1          
+ 460   1          if ((((FlashTest.Flag_FlashErase == 1) && (mcFocCtrl.MCU_TEMP < 105)) || (FlashTest.Flag_FlashErase ==
+             - 2))
+ 461   1              && (mcFocCtrl.mcDcbusFlt > Fault.Voltage.UnderVoltageVal))
+ 462   1          {
+ 463   2              FlashTest.Flag_FlashErase = 0;
+ 464   2              FlashTest.ReturnEraseStatus   = (uint8)Flash_PageErase(USERCODEADDRESS);            // 目标页�
+             -�满，清除目标页
+ 465   2              FlashTest.FlashWriteAddr      = USERCODEADDRESS;                             // 重新给写入首
+             -地址
+ 466   2              
+ 467   2              while (!FlashWriteStatus)                                               // 初始写入或者写�
+             -�异常、换到下个地址写入
+ 468   2              {
+ 469   3                  /* FlashTest.FlashWriteAddr：指定地址 FlashTest.Flash_Write_Data:需要写入的数值
+ 470   3                  FlashWriteStatus：返回数值 1：写入正确  0：写入错误 */
+ 471   3                  
+ 472   3                  /* 写入正确时最后一位写入校验位 */
+ 473   3                  if (FlashWriteStatus == 0)   //当前数值写入错误
+ 474   3                  {
+ 475   4                      Flash_byte_Write((FlashTest.FlashWriteAddr + Verify_Bit), Verify_Error);
+ 476   4                  }
+ 477   3                  else if (FlashWriteStatus)    //当前数值写入正确
+ 478   3                  {
+ 479   4                      Flash_byte_Write((FlashTest.FlashWriteAddr + Verify_Bit), Verify_Ture);
+C51 COMPILER V9.57.0.0   FU68XX_6_FLASH                                                    06/22/2026 16:14:00 PAGE 9   
+
+ 480   4                  }
+ 481   3                  
+ 482   3                  //更新读写首地址
+ 483   3                  FlashTest.FlashReadAddr = FlashTest.FlashWriteAddr;
+ 484   3                  FlashTest.FlashWriteAddr = FlashTest.FlashWriteAddr + Flash_DATA_Length;
+ 485   3                  
+ 486   3                  if (FlashTest.FlashWriteAddr >= USERCODEADDRESS + 0x0800)
+ 487   3                  {
+ 488   4                      FlashWriteStatus = 1;     //全部页损坏，强行跳转
+ 489   4                  }
+ 490   3              }
+ 491   2              
+ 492   2              FlashTest.ReturnEraseStatus   = (uint8)Flash_PageErase(USERCODEADDRESS + 0x0800);         //目标
+             -页写满，清除目标页
+ 493   2          }
+ 494   1      }
+ 495          
+ 496          /**
+ 497          * @brief        保存错误
+ 498          * @brief
+ 499          * @brief
+ 500          */
+ 501          void SaveFault_Flash(void)
+ 502          {
+ 503   1          uint16 Array_Loca = 0;
+ 504   1          uint8 FlashWriteStatus = 0;
+ 505   1          
+ 506   1          if (FlashTest.Flash_FaultSource_Updat)
+ 507   1          {
+ 508   2              FlashTest.Flash_FaultSource_Updat = 0;
+ 509   2              
+ 510   2              switch (mcFaultSource)
+ 511   2              {
+ 512   3                  case FaultHardOVCurrent:
+ 513   3                      FlashTest.FaultHardOVCurrentCount++;
+ 514   3                      Array_Loca = ((uint8)FaultHardOVCurrent - 1) * 2;
+ 515   3                      FlashTest.Flash_Write_Data[Array_Loca] = FlashTest.FaultHardOVCurrentCount >> 8;
+ 516   3                      FlashTest.Flash_Write_Data[Array_Loca + 1] = FlashTest.FaultHardOVCurrentCount;
+ 517   3                      break;
+ 518   3                      
+ 519   3                  case FaultSoftOVCurrent:
+ 520   3                      FlashTest.FaultSoftOVCurrentCount++;
+ 521   3                      Array_Loca = ((uint8)FaultSoftOVCurrent - 1) * 2;
+ 522   3                      FlashTest.Flash_Write_Data[Array_Loca] = FlashTest.FaultSoftOVCurrentCount >> 8;
+ 523   3                      FlashTest.Flash_Write_Data[Array_Loca + 1] = FlashTest.FaultSoftOVCurrentCount;
+ 524   3                      break;
+ 525   3                      
+ 526   3                  case FaultOverVoltageDC:
+ 527   3                      FlashTest.FaultUnderVoltageCount++;
+ 528   3                      Array_Loca = ((uint8)FaultOverVoltageDC - 1) * 2;
+ 529   3                      FlashTest.Flash_Write_Data[Array_Loca] = FlashTest.FaultUnderVoltageCount >> 8;
+ 530   3                      FlashTest.Flash_Write_Data[Array_Loca + 1] = FlashTest.FaultUnderVoltageCount;
+ 531   3                      break;
+ 532   3                      
+ 533   3                  case FaultUnderVoltageDC:
+ 534   3                      FlashTest.FaultOverVoltageCount++;
+ 535   3                      Array_Loca = ((uint8)FaultUnderVoltageDC - 1) * 2;
+ 536   3                      FlashTest.Flash_Write_Data[Array_Loca] = FlashTest.FaultOverVoltageCount >> 8;
+ 537   3                      FlashTest.Flash_Write_Data[Array_Loca + 1] = FlashTest.FaultOverVoltageCount;
+ 538   3                      break;
+ 539   3                      
+ 540   3                  case FaultPhaseLost:
+C51 COMPILER V9.57.0.0   FU68XX_6_FLASH                                                    06/22/2026 16:14:00 PAGE 10  
+
+ 541   3                      FlashTest.FaultLossPhaseCount++;
+ 542   3                      Array_Loca = ((uint8)FaultPhaseLost - 1) * 2;
+ 543   3                      FlashTest.Flash_Write_Data[Array_Loca] = FlashTest.FaultLossPhaseCount >> 8;
+ 544   3                      FlashTest.Flash_Write_Data[Array_Loca + 1] = FlashTest.FaultLossPhaseCount;
+ 545   3                      break;
+ 546   3                      
+ 547   3                  case FaultStall:
+ 548   3                      FlashTest.FaultStallCount++;
+ 549   3                      Array_Loca = ((uint8)FaultStall - 1) * 2;
+ 550   3                      FlashTest.Flash_Write_Data[Array_Loca] = FlashTest.FaultStallCount >> 8;
+ 551   3                      FlashTest.Flash_Write_Data[Array_Loca + 1] = FlashTest.FaultStallCount;
+ 552   3                      break;
+ 553   3                      
+ 554   3                  case FaultNtcOTErr:
+ 555   3                      FlashTest.FaultStartCount++;
+ 556   3                      Array_Loca = ((uint8)FaultNtcOTErr - 1) * 2;
+ 557   3                      FlashTest.Flash_Write_Data[Array_Loca]     = FlashTest.FaultStartCount >> 8;
+ 558   3                      FlashTest.Flash_Write_Data[Array_Loca + 1] = FlashTest.FaultStartCount;
+ 559   3                      break;
+ 560   3                      
+ 561   3                  case FaultTSD:
+ 562   3                      FlashTest.FaultTSDCount++;
+ 563   3                      Array_Loca = ((uint8)FaultTSD - 1) * 2;
+ 564   3                      FlashTest.Flash_Write_Data[Array_Loca] = FlashTest.FaultTSDCount >> 8;
+ 565   3                      FlashTest.Flash_Write_Data[Array_Loca + 1] = FlashTest.FaultTSDCount;
+ 566   3                      break;
+ 567   3                      
+ 568   3                  default:
+ 569   3                      break;
+ 570   3              }
+ 571   2              
+ 572   2              FlashTest.ReturnEraseStatus = 0;
+ 573   2              
+ 574   2              while (!FlashWriteStatus)   //写入异常，换到下个地址写入
+ 575   2              {
+ 576   3                  /* FlashTest.FlashWriteAddr：指定地址 FlashTest.Flash_Write_Data:需要写入的数值
+ 577   3                  FlashWriteStatus：返回数值 1：写入正确  0：写入错误 */
+ 578   3                  FlashWriteStatus = Write_LengthByte(FlashTest.FlashWriteAddr, Flash_DATA_Length, FlashTest.Fla
+             -sh_Write_Data);
+ 579   3                  
+ 580   3                  /* 写入正确时最后一位写入校验位 */
+ 581   3                  if (FlashWriteStatus == 0)   //当前数值写入错误
+ 582   3                  {
+ 583   4                      Flash_byte_Write((FlashTest.FlashWriteAddr + Verify_Bit), Verify_Error);
+ 584   4                  }
+ 585   3                  else   //当前数值写入正确
+ 586   3                  {
+ 587   4                      Flash_byte_Write((FlashTest.FlashWriteAddr + Verify_Bit), Verify_Ture);
+ 588   4                  }
+ 589   3                  
+ 590   3                  //更新读写首地址
+ 591   3                  FlashTest.FlashReadAddr = FlashTest.FlashWriteAddr;
+ 592   3                  FlashTest.FlashWriteAddr = FlashTest.FlashWriteAddr + Flash_DATA_Length;
+ 593   3                  
+ 594   3                  /*写到相应的空间，不管之前写入是否准确，直接进行相关的擦除
+ 595   3                    擦除后会当即写入Flash*/
+ 596   3                  if (FlashTest.FlashWriteAddr >= USERCODEADDRESS + 0x0FD0) //&& (FlashWriteStatus == 0))
+ 597   3                  {
+ 598   4                      FlashTest.Flag_FlashErase = 1;    // 置擦除标志位
+ 599   4                      FlashWriteStatus = 1;             // 没有空间，强行跳转
+ 600   4                  }
+ 601   3              }
+C51 COMPILER V9.57.0.0   FU68XX_6_FLASH                                                    06/22/2026 16:14:00 PAGE 11  
+
+ 602   2          }
+ 603   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1827    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =    158      47
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       8
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       1
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

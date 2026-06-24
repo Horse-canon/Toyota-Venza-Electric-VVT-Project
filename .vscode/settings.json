@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "myproject.h": "c",
+        "sanitycheck.h": "c",
+        "eb_hall.h": "c",
+        "onchipflash.h": "c"
+    }
+}

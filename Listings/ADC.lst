@@ -1,0 +1,82 @@
+C51 COMPILER V9.57.0.0   ADC                                                               06/22/2026 16:13:59 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE ADC
+OBJECT MODULE PLACED IN .\Output\ADC.obj
+COMPILER INVOKED BY: E:\05KeilC51\C51\BIN\C51.EXE ..\User\source\Hardware\ADC.c LARGE OMF2 OPTIMIZE(9,SIZE) BROWSE INCDI
+                    -R(..\User\include;..\FU68xx_Hardware_Driver\Include;.\Components) DEBUG PRINT(.\Listings\ADC.lst) TABS(2) OBJECT(.\Outpu
+                    -t\ADC.obj)
+
+line level    source
+
+   1          /**
+   2           * @copyright (C) COPYRIGHT 2022 Fortiortech Shenzhen
+   3           * @file      xxx.c
+   4           * @author    Fortiortech  Appliction Team
+   5           * @since     Create:2022-08-05
+   6           * @date      Last modify:2022-08-05
+   7           * @note      Last modify author is Leo.li
+   8           * @brief
+   9           */
+  10          #include <MyProject.h>
+  11          
+  12          #include <ADC.h>
+  13          
+  14          /**
+  15           * @brief        ADC初始化
+  16           * @date         2022-09-13
+  17           */
+  18          void ADC_Init(void)
+  19          {
+  20   1          /********************ADC 端口模拟功能设置************************/
+  21   1          //SetBit(P2_AN, PIN0);    //AD0 P20 CH open--IU--固定
+  22   1      //    SetBit(P2_AN, PIN3);    //AD1 P23 CH open--IV--固定
+  23   1      //    SetBit(P2_AN, PIN4);    //AD2 P24 CH open--IV--固定
+  24   1      //    SetBit(P2_AN, PIN5);    //AD3 P25 CH open
+  25   1          SetBit(P2_AN, PIN6);    //Tmos
+  26   1          SetBit(P2_AN, PIN7);    //AD4 P27 CH open--IBUS/IW--固定   AMP0O
+  27   1          //  SetBit(P3_AN , PIN2);   //AD5 P32 CH open
+  28   1          //  SetBit(P3_AN , PIN3);   //AD6 P33 CH open
+  29   1          SetBit(P3_AN, PIN4);    //AD7 P34 CH open   IBUS
+  30   1          //  SetBit(P2_AN , PIN1);   //AD8 P21 CH open
+  31   1          //  SetBit(P1_AN , PIN6);   //AD9 P16 CH open
+  32   1          //  SetBit(P1_AN , PIN4);   //AD10 P14 CH open
+  33   1          //  SetBit(P2_AN , PIN6);   //AD11 P26 CH open
+  34   1          //  SetBit(P1_AN , PIN3);   //AD12 P13 CH open
+  35   1          //  SetBit(P1_AN , PIN5);   //AD13 P15 CH open
+  36   1          /****************************************************************/
+  37   1          SetBit(ADC_MASK,   CH4EN | CH7EN | CH11EN  | CH15EN);   //通道使能
+  38   1          #if (VOLTAGE_MODE == INTERNAL)
+  39   1          {
+  40   2              #if (VOLTAGE_SCALE == Ratio_6_5)
+  41   2              SetBit(ADC_CR, ADCRATIO);           //
+  42   2              #else
+                      ClrBit(ADC_CR, ADCRATIO);
+                      #endif
+  45   2          }
+  46   1          #endif
+  47   1          SetBit(ADC_CR, ADCALIGN);       //ADC数据次高位对齐使能0-->Disable 1-->Enable
+  48   1          ClrBit(ADC_CR, ADCIE);          //ADC中断使能
+  49   1          SetBit(ADC_CR, ADCEN);          //Enable ADC0
+  50   1      }
+  51          
+
+
+C51 COMPILER V9.57.0.0   ADC                                                               06/22/2026 16:13:59 PAGE 2   
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     60    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

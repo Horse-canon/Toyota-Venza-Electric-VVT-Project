@@ -1,0 +1,102 @@
+C51 COMPILER V9.57.0.0   ANTIPINCH                                                         06/22/2026 16:13:59 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE ANTIPINCH
+OBJECT MODULE PLACED IN .\Output\AntiPinch.obj
+COMPILER INVOKED BY: E:\05KeilC51\C51\BIN\C51.EXE ..\User\source\Function\AntiPinch.c LARGE OMF2 OPTIMIZE(9,SIZE) BROWSE
+                    - INCDIR(..\User\include;..\FU68xx_Hardware_Driver\Include;.\Components) DEBUG PRINT(.\Listings\AntiPinch.lst) TABS(2) OB
+                    -JECT(.\Output\AntiPinch.obj)
+
+line level    source
+
+   1          #include <Myproject.h>
+   2          
+   3          #define SUM_SIZE_IQ  30
+   4          #define SUM_SIZE_Time 40
+   5          
+   6          int16 HistoryIQ[SUM_SIZE_IQ] = {0};
+   7          int16 HistoryTime[SUM_SIZE_Time] = {0};
+   8          
+   9          uint8 CntIq = 0;
+  10          uint8 CntTime = 0;
+  11          uint8 i = 0;
+  12          uint8 j = 0;
+  13          int32 Sum_IQ = 0;
+  14          int32 SumPre_IQ = 0;
+  15          int32 Sum_IQ_Compare = 0;
+  16          int32 Sum_Time = 0;
+  17          int32 SumPre_Time = 0;
+  18          int32 Sum_Time_Compare = 0;
+  19          uint8 AntiFlag = 0;
+  20          
+  21          void AntiPinchFunction(void)
+  22          {
+  23   1          // int16 temp_IQ;
+  24   1        //   int16 temp_Time;
+  25   1          // temp_IQ = abs(FOC__IQ); 
+  26   1          // temp_Time = hallPara.HallTime; 
+  27   1          // HistoryIQ[CntIq] = temp_IQ;
+  28   1        //   HistoryTime[CntTime] = temp_Time;
+  29   1          // CntIq++;
+  30   1        //   CntTime++;
+  31   1          
+  32   1          // if (CntIq >= (SUM_SIZE_IQ))   
+  33   1        //  {
+  34   1        //      SumPre_IQ = Sum_IQ;   
+  35   1        //       Sum_IQ = 0;
+  36   1          //     CntIq = 0;
+  37   1              
+  38   1          //     for (i = 0; i < SUM_SIZE_IQ; i++)
+  39   1          //     {
+  40   1          //         Sum_IQ += HistoryIQ[i];
+  41   1          //     }
+  42   1          //     Sum_IQ_Compare = SumPre_IQ+(SumPre_IQ>>1);
+  43   1          //     if((Sum_IQ > Sum_IQ_Compare)&&(SumPre_IQ>5000) &&(mcFocCtrl.MotorSpeedAbs > S_Value(200.0)))
+  44   1          //     {
+  45   1        //        AntiFlag = 1;
+  46   1        //        //mcFaultSource |=FaultAntiPinch;
+  47   1          //     }
+  48   1          // }
+  49   1        //  if (CntTime >= (SUM_SIZE_IQ))   
+  50   1        //  {
+  51   1        //      SumPre_Time = Sum_Time;   
+  52   1        //       Sum_Time = 0;
+  53   1          //     CntTime = 0;
+C51 COMPILER V9.57.0.0   ANTIPINCH                                                         06/22/2026 16:13:59 PAGE 2   
+
+  54   1              
+  55   1          //     for (j = 0; j < SUM_SIZE_Time; j++)
+  56   1          //     {
+  57   1          //         Sum_Time += HistoryTime[j];
+  58   1          //     }
+  59   1          //     Sum_Time_Compare = SumPre_Time+(SumPre_Time>>1);
+  60   1          //     if((Sum_Time > Sum_Time_Compare)&&(SumPre_Time>5000) &&(mcFocCtrl.MotorSpeedAbs > S_Value(200.0
+             -)))
+  61   1          //     {
+  62   1        //        AntiFlag = 1;
+  63   1        //        //mcFaultSource |=FaultAntiPinch;
+  64   1          //     }
+  65   1          // }
+  66   1          
+  67   1          
+  68   1          
+  69   1          
+  70   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =      1    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =    169    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

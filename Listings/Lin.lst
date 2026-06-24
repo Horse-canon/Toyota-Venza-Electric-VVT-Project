@@ -1,0 +1,778 @@
+C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE LIN
+OBJECT MODULE PLACED IN .\Output\Lin.obj
+COMPILER INVOKED BY: E:\05KeilC51\C51\BIN\C51.EXE ..\User\source\Hardware\Lin.c LARGE OMF2 OPTIMIZE(9,SIZE) BROWSE INCDI
+                    -R(..\User\include;..\FU68xx_Hardware_Driver\Include;.\Components) DEBUG PRINT(.\Listings\Lin.lst) TABS(2) OBJECT(.\Outpu
+                    -t\Lin.obj)
+
+line level    source
+
+   1          /**
+   2           * @copyright (C) COPYRIGHT 2022 Fortiortech Shenzhen
+   3           * @file      main.c
+   4           * @author    Fortiortech  Appliction Team
+   5           * @since     Create:2021-08-13
+   6           * @date      Last modify:2022-08-13
+   7           * @note      Last modify author is Leo.li
+   8           * @brief     包含Lin初始化，数据处理
+   9           */
+  10          
+  11          #include <Myproject.h>
+  12          
+  13          uint8 xdata ucaLinBuff[9] =
+  14          {
+  15              0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+  16          };
+  17          
+  18          uint8 Erase_Flage = 0;
+  19          
+  20          /**
+  21          * @brief     Lin初始化
+  22          * @date      2022-08-13
+  23          */
+  24          void LIN_Init(void)
+  25          {
+  26   1          DMA0_BA  = 0;//带有Boot的先清零再赋值
+  27   1          DMA0_CR0 = 0;
+  28   1          LIN_CR = 0;
+  29   1          /*-------------------------------------------------------------------------------------------------
+  30   1           DMA通道配置
+  31   1           DMASEL=1:配置为DMA1  DMASEL=0:配置为DMA0  从 UART2 到 XRAM
+  32   1          -------------------------------------------------------------------------------------------------*/
+  33   1          SetBit(DMA0_CR0, DMAEN | DMACFG2 | DMACFG1);
+  34   1          ClrBit(LIN_CR, DMASEL);
+  35   1          DMA0_BA = ucaLinBuff; /* 使用dma0，spi使用dma1 */
+  36   1          /*-------------------------------------------------------------------------------------------------
+  37   1          LIN通道配置
+  38   1          00:配置为TXD：P00 RXD：p01;    ！！！！！6816的demo连接的时P36,37 需要飞线
+  39   1          10:配置为TXD：P10 RXD：p11;
+  40   1          11:单线lin P11
+  41   1          注意：6806的P10P11没有内部上拉，端口转移时，P10需配置外部上拉
+  42   1          注意：6806的P10P11没有内部上拉，端口转移时，P10需配置外部上拉
+  43   1          注意：6806的P10P11没有内部上拉，端口转移时，P10需配置外部上拉
+  44   1          ------------------------------------------------------------------------------------------------*/
+  45   1      //    SetBit(LIN_CR, CHSEL1); /* 端口转移 */
+  46   1      //    ClrBit(LIN_CR, CHSEL0); /* 端口转移 */
+  47   1      //    ClrBit(P1_PU, P11HV_EN); /* 端口转移 */
+  48   1          SetBit(P1_PU, P10HV_EN); /* 端口转移 */
+  49   1          SetBit(LIN_CR, CHSEL1); /* 端口转移 */
+  50   1          SetBit(LIN_CR, CHSEL0); /* 端口转移 *
+  51   1          SetBit(IP3, PSPI_UT21);
+  52   1          ClrBit(IP3, PSPI_UT20);
+  53   1          ClrBit(LIN_CR, AUTOSIZE); /* 自动长度设定（ID[4][5]决定） */
+C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 2   
+
+  54   1          //LIN_BAUD = 0x04E1;
+  55   1          SetBit(LIN_CR, LINIE);    /* 中断设置 */
+  56   1          SetBit(LIN_CSR, LINEN);   /* LIN模块使能 */
+  57   1      }
+  58          
+  59          
+  60          /* -------------------------------------------------------------------------------------------------
+  61              Function Name  : Sync_Error_Check
+  62              Description    : 检验是否发生同步错误
+  63              Date           : 2020-07-30
+  64              Parameter      : None
+  65          ------------------------------------------------------------------------------------------------- */
+  66          ebool Sync_Error_Check(void)
+  67          {
+  68   1          return ReadBit(LIN_SR, ERRSYNC);
+  69   1      }
+  70          
+  71          /* -------------------------------------------------------------------------------------------------
+  72              Function Name  : Data_Error_Check
+  73              Description    : 检验是否发生数据检验错误
+  74              Date           : 2020-07-30
+  75              Parameter      : None
+  76          ------------------------------------------------------------------------------------------------- */
+  77          ebool Data_Error_Check(void)
+  78          {
+  79   1          return ReadBit(LIN_SR, ERRCHK);
+  80   1      }
+  81          
+  82          /**
+  83           * @brief        检验是否发生ID校验错误
+  84           * @return       错误源信号
+  85           * @date         2022-08-14
+  86           */
+  87          ebool ID_Error_Check(void)
+  88          {
+  89   1          return ReadBit(LIN_SR, ERRPRTY);
+  90   1      }
+  91          
+  92          /* -------------------------------------------------------------------------------------------------
+  93              Function Name  : LIN_Error_Handing
+  94              Description    : 处理错误的函数
+  95              Date           : 2020-07-30
+  96              Parameter      : None
+  97          ------------------------------------------------------------------------------------------------- */
+  98          /**
+  99           * @brief        Lin通信错误源
+ 100           * @date         2022-08-14
+ 101           */
+ 102          void LIN_Error_Handing(void)
+ 103          {
+ 104   1          if (Sync_Error_Check())                 //同步校验错误执行语句
+ 105   1          {
+ 106   2              ;
+ 107   2          }
+ 108   1          else if (Data_Error_Check())            //数据校验错误执行语句
+ 109   1          {
+ 110   2             
+ 111   2          }
+ 112   1          else if (ID_Error_Check())              //ID校验错误执行语句
+ 113   1          {
+ 114   2              ;
+ 115   2          }
+C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 3   
+
+ 116   1      }
+ 117          
+ 118          /*-------------------------------------------------------------------------------------------------
+ 119              Function Name : void LIN_list(uint8 PID)
+ 120              Description   : 总线收发列表 ，对接收的数据设置长度和检验类型 。对发送的数
+             -据设置
+ 121              Input         : 要发送的字符串的地址
+ 122              Output        : 无
+ 123          -------------------------------------------------------------------------------------------------*/
+ 124          uint8 LIN_ID1 = 0;
+ 125          void LIN_list(void)
+ 126          {
+ 127   1         
+ 128   1          uint8 i = 0;
+ 129   1          LIN_ID1 = LIN_ID;
+ 130   1      
+ 131   1          switch (LIN_ID1)
+ 132   1          {
+ 133   2              case 0x10://DR_MSM_MotorCtlMsg
+ 134   2                  LIN_SETSIZE(8);
+ 135   2                  CheckEnhanced;
+ 136   2                  LIN_MODE_Receive;
+ 137   2                  LIN_ACK;
+ 138   2                  break;
+ 139   2                  
+ 140   2              case 0x20://PA_MSM_MotorCtlMsg
+ 141   2                  LIN_SETSIZE(8);
+ 142   2                  CheckEnhanced;
+ 143   2                  LIN_MODE_Receive;
+ 144   2                  LIN_ACK;
+ 145   2                  break;
+ 146   2                  
+ 147   2              case 0x30://Rear_MSM_MotorCtlMsg
+ 148   2                  LIN_SETSIZE(8);
+ 149   2                  CheckEnhanced;
+ 150   2                  LIN_MODE_Receive;
+ 151   2                  LIN_ACK;
+ 152   2                  break;
+ 153   2                  
+ 154   2              case 0x12://主驾高调状态反馈
+ 155   2                  #if (MotorMode == DR_RearVertical)
+                          {
+                              LIN_SETSIZE(3);
+                              
+                              for (i = 0; i < 3; i++)
+                              {
+                                  ucaLinBuff[i] = 0XFF; /* 设置发送的数据 */
+                              }
+                              
+                              ucaLinBuff[0] = SeatLinData.Position_Percent;//VerticalPos
+                              ucaLinBuff[1] = SeatLinData.RunSts;
+                              ucaLinBuff[2] = SeatLinData.ErrSts;
+                              CheckEnhanced;
+                              LIN_MODE_Send;
+                              LIN_ACK;
+                          }
+                          
+                          #else
+ 173   2                  {
+ 174   3                      ClrBit(LIN_SR, LINDONE); /* 清除传输完成产生中断的标志位 */
+ 175   3                      LIN_MODE_Receive; /* 接收数据模式 */
+ 176   3                      //LIN_ACK;
+C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 4   
+
+ 177   3                  }
+ 178   2                  #endif
+ 179   2                  break;
+ 180   2                  
+ 181   2              case 0x13://主驾靠背状态反馈
+ 182   2                  #if (MotorMode == DR_Recline)
+                          {
+                              LIN_SETSIZE(3);
+                              
+                              for (i = 0; i < 3; i++)
+                              {
+                                  ucaLinBuff[i] = 0XFF; /* 设置发送的数据 */
+                              }
+                              
+                              ucaLinBuff[0] = SeatLinData.Position_Percent;//VerticalPos
+                              ucaLinBuff[1] = SeatLinData.RunSts;
+                              ucaLinBuff[2] = SeatLinData.ErrSts;
+                              CheckEnhanced;
+                              LIN_MODE_Send;
+                              LIN_ACK;
+                          }
+                          
+                          #else
+ 200   2                  {
+ 201   3                      ClrBit(LIN_SR, LINDONE); /* 清除传输完成产生中断的标志位 */
+ 202   3                      LIN_MODE_Receive; /* 接收数据模式 */
+ 203   3                      //LIN_ACK;
+ 204   3                  }
+ 205   2                  #endif
+ 206   2                  break;
+ 207   2                  
+ 208   2              case 0x14://主驾肩部状态反馈
+ 209   2                  #if (MotorMode == DR_Shoulder)
+                          {
+                              LIN_SETSIZE(3);
+                              
+                              for (i = 0; i < 3; i++)
+                              {
+                                  ucaLinBuff[i] = 0XFF; /* 设置发送的数据 */
+                              }
+                              
+                              ucaLinBuff[0] = SeatLinData.Position_Percent;//VerticalPos
+                              ucaLinBuff[1] = SeatLinData.RunSts;
+                              ucaLinBuff[2] = SeatLinData.ErrSts;
+                              CheckEnhanced;
+                              LIN_MODE_Send;
+                              LIN_ACK;
+                          }
+                          
+                          #else
+ 227   2                  {
+ 228   3                      ClrBit(LIN_SR, LINDONE); /* 清除传输完成产生中断的标志位 */
+ 229   3                      LIN_MODE_Receive; /* 接收数据模式 */
+ 230   3                      //LIN_ACK;
+ 231   3                  }
+ 232   2                  #endif
+ 233   2                  break;
+ 234   2                  
+ 235   2              case 0x15://主驾旋转腿托状态反馈
+ 236   2                  #if (MotorMode == DR_LegrestRotate)
+                          {
+                              LIN_SETSIZE(3);
+C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 5   
+
+                              
+                              for (i = 0; i < 3; i++)
+                              {
+                                  ucaLinBuff[i] = 0XFF; /* 设置发送的数据 */
+                              }
+                              
+                              ucaLinBuff[0] = SeatLinData.Position_Percent;//VerticalPos
+                              ucaLinBuff[1] = SeatLinData.RunSts;
+                              ucaLinBuff[2] = SeatLinData.ErrSts;
+                              CheckEnhanced;
+                              LIN_MODE_Send;
+                              LIN_ACK;
+                          }
+                          
+                          #else
+ 254   2                  {
+ 255   3                      ClrBit(LIN_SR, LINDONE); /* 清除传输完成产生中断的标志位 */
+ 256   3                      LIN_MODE_Receive; /* 接收数据模式 */
+ 257   3                      //LIN_ACK;
+ 258   3                  }
+ 259   2                  #endif
+ 260   2                  break;
+ 261   2                  
+ 262   2              case 0x22://PA_Tilt
+ 263   2                  #if (MotorMode == PA_Tilt)
+                          {
+                              LIN_SETSIZE(3);
+                              
+                              for (i = 0; i < 3; i++)
+                              {
+                                  ucaLinBuff[i] = 0XFF; /* 设置发送的数据 */
+                              }
+                              
+                              ucaLinBuff[0] = SeatLinData.Position_Percent;//VerticalPos
+                              ucaLinBuff[1] = SeatLinData.RunSts;
+                              ucaLinBuff[2] = SeatLinData.ErrSts;
+                              CheckEnhanced;
+                              LIN_MODE_Send;
+                              LIN_ACK;
+                          }
+                          
+                          #else
+ 281   2                  {
+ 282   3                      ClrBit(LIN_SR, LINDONE); /* 清除传输完成产生中断的标志位 */
+ 283   3                      LIN_MODE_Receive; /* 接收数据模式 */
+ 284   3                      //LIN_ACK;
+ 285   3                  }
+ 286   2                  #endif
+ 287   2                  break;
+ 288   2                  
+ 289   2              case 0x23:
+ 290   2                  #if (MotorMode == PA_ReclineCtrl)
+                          {
+                              LIN_SETSIZE(3);
+                              
+                              for (i = 0; i < 3; i++)
+                              {
+                                  ucaLinBuff[i] = 0XFF; /* 设置发送的数据 */
+                              }
+                              
+                              ucaLinBuff[0] = SeatLinData.Position_Percent;//VerticalPos
+                              ucaLinBuff[1] = SeatLinData.RunSts;
+C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 6   
+
+                              ucaLinBuff[2] = SeatLinData.ErrSts;
+                              CheckEnhanced;
+                              LIN_MODE_Send;
+                              LIN_ACK;
+                          }
+                          
+                          #else
+ 308   2                  {
+ 309   3                      ClrBit(LIN_SR, LINDONE); /* 清除传输完成产生中断的标志位 */
+ 310   3                      LIN_MODE_Receive; /* 接收数据模式 */
+ 311   3                      //LIN_ACK;
+ 312   3                  }
+ 313   2                  #endif
+ 314   2                  break;
+ 315   2                  
+ 316   2              case 0x24:
+ 317   2                  #if (MotorMode == PA_Shoulder)
+                          {
+                              LIN_SETSIZE(3);
+                              
+                              for (i = 0; i < 3; i++)
+                              {
+                                  ucaLinBuff[i] = 0XFF; /* 设置发送的数据 */
+                              }
+                              
+                              ucaLinBuff[0] = SeatLinData.Position_Percent;//VerticalPos
+                              ucaLinBuff[1] = SeatLinData.RunSts;
+                              ucaLinBuff[2] = SeatLinData.ErrSts;
+                              CheckEnhanced;
+                              LIN_MODE_Send;
+                              LIN_ACK;
+                          }
+                          
+                          #else
+ 335   2                  {
+ 336   3                      ClrBit(LIN_SR, LINDONE); /* 清除传输完成产生中断的标志位 */
+ 337   3                      LIN_MODE_Receive; /* 接收数据模式 */
+ 338   3                      //LIN_ACK;
+ 339   3                  }
+ 340   2                  #endif
+ 341   2                  break;
+ 342   2                  
+ 343   2              case 0x25:
+ 344   2                  #if (MotorMode == PA_LegrestRotate)
+ 345   2                  {
+ 346   3                      LIN_SETSIZE(3);
+ 347   3                      
+ 348   3                      for (i = 0; i < 3; i++)
+ 349   3                      {
+ 350   4                          ucaLinBuff[i] = 0XFF; /* 设置发送的数据 */
+ 351   4                      }
+ 352   3                      
+ 353   3                      ucaLinBuff[0] = SeatLinData.Position_Percent;//VerticalPos
+ 354   3                      ucaLinBuff[1] = SeatLinData.RunSts;
+ 355   3                      ucaLinBuff[2] = SeatLinData.ErrSts;
+ 356   3                      CheckEnhanced;
+ 357   3                      LIN_MODE_Send;
+ 358   3                      LIN_ACK;
+ 359   3                  }
+ 360   2                  
+ 361   2                  #else
+                          {
+C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 7   
+
+                              ClrBit(LIN_SR, LINDONE); /* 清除传输完成产生中断的标志位 */
+                              LIN_MODE_Receive; /* 接收数据模式 */
+                              //LIN_ACK;
+                          }
+                          #endif
+ 368   2                  break;
+ 369   2                  
+ 370   2              case 0x27:
+ 371   2                  #if (MotorMode == PA_SwivelChassis)
+                          {
+                              LIN_SETSIZE(3);
+                              
+                              for (i = 0; i < 3; i++)
+                              {
+                                  ucaLinBuff[i] = 0XFF; /* 设置发送的数据 */
+                              }
+                              
+                              ucaLinBuff[0] = SeatLinData.Position_Percent;//VerticalPos
+                              ucaLinBuff[1] = SeatLinData.RunSts;
+                              ucaLinBuff[2] = SeatLinData.ErrSts;
+                              CheckEnhanced;
+                              LIN_MODE_Send;
+                              LIN_ACK;
+                          }
+                          
+                          #else
+ 389   2                  {
+ 390   3                      ClrBit(LIN_SR, LINDONE); /* 清除传输完成产生中断的标志位 */
+ 391   3                      LIN_MODE_Receive; /* 接收数据模式 */
+ 392   3                      //LIN_ACK;
+ 393   3                  }
+ 394   2                  #endif
+ 395   2                  break;
+ 396   2                  
+ 397   2              case 0x33:
+ 398   2                  #if (MotorMode == Rear_LSLegrestHeight)
+                          {
+                              LIN_SETSIZE(3);
+                              
+                              for (i = 0; i < 3; i++)
+                              {
+                                  ucaLinBuff[i] = 0XFF; /* 设置发送的数据 */
+                              }
+                              
+                              ucaLinBuff[0] = SeatLinData.Position_Percent;//VerticalPos
+                              ucaLinBuff[1] = SeatLinData.RunSts;
+                              ucaLinBuff[2] = SeatLinData.ErrSts;
+                              CheckEnhanced;
+                              LIN_MODE_Send;
+                              LIN_ACK;
+                          }
+                          
+                          #else
+ 416   2                  {
+ 417   3                      ClrBit(LIN_SR, LINDONE); /* 清除传输完成产生中断的标志位 */
+ 418   3                      LIN_MODE_Receive; /* 接收数据模式 */
+ 419   3                      //LIN_ACK;
+ 420   3                  }
+ 421   2                  #endif
+ 422   2                  break;
+ 423   2                  
+ 424   2              case 0x35:
+C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 8   
+
+ 425   2                  #if (MotorMode == Rear_LSLegrestAngle)
+                          {
+                              LIN_SETSIZE(3);
+                              
+                              for (i = 0; i < 3; i++)
+                              {
+                                  ucaLinBuff[i] = 0XFF; /* 设置发送的数据 */
+                              }
+                              
+                              ucaLinBuff[0] = SeatLinData.Position_Percent;//VerticalPos
+                              ucaLinBuff[1] = SeatLinData.RunSts;
+                              ucaLinBuff[2] = SeatLinData.ErrSts;
+                              CheckEnhanced;
+                              LIN_MODE_Send;
+                              LIN_ACK;
+                          }
+                          
+                          #else
+ 443   2                  {
+ 444   3                      ClrBit(LIN_SR, LINDONE); /* 清除传输完成产生中断的标志位 */
+ 445   3                      LIN_MODE_Receive; /* 接收数据模式 */
+ 446   3                      //LIN_ACK;
+ 447   3                  }
+ 448   2                  #endif
+ 449   2                  break;
+ 450   2                  
+ 451   2              case 0x36:
+ 452   2                  #if (MotorMode == Rear_RSLegrestHeight)
+                          {
+                              LIN_SETSIZE(3);
+                              
+                              for (i = 0; i < 3; i++)
+                              {
+                                  ucaLinBuff[i] = 0XFF; /* 设置发送的数据 */
+                              }
+                              
+                              ucaLinBuff[0] = SeatLinData.Position_Percent;//VerticalPos
+                              ucaLinBuff[1] = SeatLinData.RunSts;
+                              ucaLinBuff[2] = SeatLinData.ErrSts;
+                              CheckEnhanced;
+                              LIN_MODE_Send;
+                              LIN_ACK;
+                          }
+                          
+                          #else
+ 470   2                  {
+ 471   3                      ClrBit(LIN_SR, LINDONE); /* 清除传输完成产生中断的标志位 */
+ 472   3                      LIN_MODE_Receive; /* 接收数据模式 */
+ 473   3                      //LIN_ACK;
+ 474   3                  }
+ 475   2                  #endif
+ 476   2                  break;
+ 477   2                  
+ 478   2              case 0x2F:
+ 479   2                   #if (MotorMode == Rear_RSLegrestAngle)
+                          {
+                              LIN_SETSIZE(3);
+                              
+                              for (i = 0; i < 3; i++)
+                              {
+                                  ucaLinBuff[i] = 0XFF; /* 设置发送的数据 */
+                              }
+C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 9   
+
+                              
+                              ucaLinBuff[0] = SeatLinData.Position_Percent;//VerticalPos
+                              ucaLinBuff[1] = SeatLinData.RunSts;
+                              ucaLinBuff[2] = SeatLinData.ErrSts;
+                              CheckEnhanced;
+                              LIN_MODE_Send;
+                              LIN_ACK;
+                          }
+                          
+                          #else
+ 497   2                  {
+ 498   3                      ClrBit(LIN_SR, LINDONE); /* 清除传输完成产生中断的标志位 */
+ 499   3                      LIN_MODE_Receive; /* 接收数据模式 */
+ 500   3                      //LIN_ACK;
+ 501   3                  }
+ 502   2                  #endif
+ 503   2                  break;
+ 504   2                  
+ 505   2              case 0x1B://DR_MSM_MotorSettingMsg
+ 506   2                  LIN_SETSIZE(2);
+ 507   2                  CheckEnhanced;
+ 508   2                  LIN_MODE_Receive;
+ 509   2                  LIN_ACK;
+ 510   2                  break;
+ 511   2                  
+ 512   2              case 0x2C://PA_MSM_MotorSetting
+ 513   2                  LIN_SETSIZE(2);
+ 514   2                  CheckEnhanced;
+ 515   2                  LIN_MODE_Receive;
+ 516   2                  LIN_ACK;
+ 517   2                  break;
+ 518   2                  
+ 519   2              case 0x3B://Rear_MSM_MotorSetting
+ 520   2                  LIN_SETSIZE(2);
+ 521   2                  CheckEnhanced;
+ 522   2                  LIN_MODE_Receive;
+ 523   2                  LIN_ACK;
+ 524   2                  break;
+ 525   2                  
+ 526   2              /*********诊断数据************/
+ 527   2              
+ 528   2              case 0x3c:            /* 接收诊断数据 */
+ 529   2                  LIN_SETSIZE(8);   /* 接收数据长度 */
+ 530   2                  CheckClass;       /* 设置为标准校验模式 */
+ 531   2                  LIN_MODE_Receive; /* 接收数据模式 */
+ 532   2                  LIN_ACK;          /* 响应帧头 */
+ 533   2                  break;
+ 534   2                  
+ 535   2              case 0x3d:
+ 536   2                  LIN_SETSIZE(8); /* 发送数据长度 */
+ 537   2                  
+ 538   2                  for (i = 0; i < 8; i++)
+ 539   2                  {
+ 540   3                      ucaLinBuff[i] = 0XFF; /* 设置发送的数据 */
+ 541   3                  }
+ 542   2                  
+ 543   2                  if (Erase_Flage == 1)
+ 544   2                  {
+ 545   3                      ucaLinBuff[0] = NAD;
+ 546   3                      ucaLinBuff[1] = 0x02;
+ 547   3                      ucaLinBuff[2] = 0x50;
+ 548   3                      ucaLinBuff[3] = 0x03;
+C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 10  
+
+ 549   3                  }
+ 550   2                  else if (Erase_Flage == 2) //进入编程模式
+ 551   2                  {
+ 552   3                      ucaLinBuff[0] = NAD;
+ 553   3                      ucaLinBuff[1] = 0x02;
+ 554   3                      ucaLinBuff[2] = 0x50; //0x10;
+ 555   3                      ucaLinBuff[3] = 0x02;
+ 556   3                      Erase_Flage = 3;
+ 557   3                  }
+ 558   2                  
+ 559   2                  CheckClass;    /* 设置为标准校验模式 */
+ 560   2                  LIN_MODE_Send; /* 发送数据 */
+ 561   2                  LIN_ACK;       /* 响应帧头 */
+ 562   2                  break;
+ 563   2                  
+ 564   2              /*****************************/
+ 565   2              /*********打印flash数据*******/
+ 566   2              /*****************************/
+ 567   2              
+ 568   2              default:
+ 569   2                  ClrBit(LIN_SR, LINDONE); /* 清除传输完成产生中断的标志位 */
+ 570   2                  LIN_MODE_Receive; /* 接收数据模式 */
+ 571   2                  //LIN_ACK;
+ 572   2                  break;
+ 573   2          }
+ 574   1      }
+ 575          
+ 576          /*  -------------------------------------------------------------------------------------------------
+ 577              Function Name  : ReceiveSYS
+ 578              Description    : 总线接收数据处理
+ 579              Date           :
+ 580                             : [输入]
+ 581              ------------------------------------------------------------------------------------------------- */
+ 582          uint16 err = 0;
+ 583          uint16 LinReceiveLen = 0;
+ 584          void ReceiveSYS(uint8 PID)
+ 585          {
+ 586   1          uint8 i = 0;
+ 587   1          LinReceiveLen = LIN_SIZE;
+ 588   1          switch (PID)
+ 589   1          {
+ 590   2              case 0x10://DR_MSM_MotorCtlMsg
+ 591   2                  #if (MotorMode == DR_RearVertical)
+                          {
+                              SeatLinData.MoveModeCtrl = ucaLinBuff[0];
+                              SeatLinData.SpeedMode    = ucaLinBuff[6] & 0x02;
+                          }
+                          
+                          #elif (MotorMode == DR_Recline)
+                          {
+                              SeatLinData.MoveModeCtrl = ucaLinBuff[2];
+                              SeatLinData.SpeedMode    = ucaLinBuff[6] & 0x04;
+                          }
+                          #elif (MotorMode == DR_Shoulder)
+                          {
+                              SeatLinData.MoveModeCtrl = ucaLinBuff[3];
+                              SeatLinData.SpeedMode    = ucaLinBuff[6] & 0x08;
+                          }
+                          #elif (MotorMode == DR_LegrestRotate)
+                          {
+                              SeatLinData.MoveModeCtrl = ucaLinBuff[4];
+                              SeatLinData.SpeedMode    = ucaLinBuff[6] & 0x10;
+C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 11  
+
+                          }
+                          #endif
+ 613   2                  SeatLinData.DR_ReceiveFlag = 1;
+ 614   2                  break;
+ 615   2                  
+ 616   2              case 0x1B:
+ 617   2                  SeatLinData.MotorSetNum = ucaLinBuff[0];
+ 618   2                  SeatLinData.MotorResetCtl = ucaLinBuff[1];
+ 619   2                  break;
+ 620   2                  
+ 621   2              case 0x20://PA_MSM_MotorCtlMsg
+ 622   2              if (LinReceiveLen == 8)
+ 623   2              {
+ 624   3                  #if (MotorMode == PA_Tilt)
+                          {
+                              SeatLinData.MoveModeCtrl = ucaLinBuff[1];
+                              SeatLinData.SpeedMode    = ucaLinBuff[7] & 0x02;
+                          }
+                          
+                          #elif (MotorMode == PA_ReclineCtrl)
+                          {
+                              SeatLinData.MoveModeCtrl = ucaLinBuff[2];
+                              SeatLinData.SpeedMode    = ucaLinBuff[7] & 0x04;
+                          }
+                          #elif (MotorMode == PA_Shoulder)
+                          {
+                              SeatLinData.MoveModeCtrl = ucaLinBuff[3];
+                              SeatLinData.SpeedMode    = ucaLinBuff[7] & 0x08;
+                          }
+                          #elif (MotorMode == PA_LegrestRotate)
+ 641   3                  {
+ 642   4                      SeatLinData.MoveModeCtrl = ucaLinBuff[4];
+ 643   4                      SeatLinData.SpeedMode    = ucaLinBuff[7] & 0x10;
+ 644   4                  }
+ 645   3                  #elif (MotorMode == PA_SwivelChassis)
+                          {
+                              SeatLinData.MoveModeCtrl = ucaLinBuff[6];
+                              SeatLinData.SpeedMode    = ucaLinBuff[7] & 0x20;
+                          }
+                          #endif
+ 651   3                  SeatLinData.PA_ReceiveFlag = 1;
+ 652   3            }
+ 653   2                  break;
+ 654   2                  
+ 655   2              case 0x2C:
+ 656   2            if (LinReceiveLen == 2)
+ 657   2            {
+ 658   3                  SeatLinData.MotorSetNum   =  ucaLinBuff[0];
+ 659   3                  SeatLinData.MotorResetCtl = ucaLinBuff[1];
+ 660   3            }
+ 661   2                  break;
+ 662   2            
+ 663   2                  
+ 664   2              case 0x30://Rear_MSM_MotorCtlMsg
+ 665   2                  #if (MotorMode == Rear_LSLegrestHeight)
+                          {
+                              SeatLinData.MoveModeCtrl = ucaLinBuff[2];
+                              SeatLinData.SpeedMode    = ucaLinBuff[1] & 0x02;
+                          }
+                          
+                          #elif (MotorMode == Rear_LSLegrestAngle)
+                          {
+C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 12  
+
+                              SeatLinData.MoveModeCtrl = ucaLinBuff[4];
+                              SeatLinData.SpeedMode    = ucaLinBuff[1] & 0x08;
+                          }
+                          #elif (MotorMode == Rear_RSLegrestHeight)
+                          {
+                              SeatLinData.MoveModeCtrl = ucaLinBuff[5];
+                              SeatLinData.SpeedMode    = ucaLinBuff[1] & 0x10;
+                          }
+                          #elif (MotorMode == Rear_RSLegrestAngle)
+                          {
+                              SeatLinData.MoveModeCtrl = ucaLinBuff[7];
+                              SeatLinData.SpeedMode    = ucaLinBuff[1] & 0x40;
+                          }
+                          #endif
+ 687   2                  SeatLinData.REAR_ReceiveFlag = 1;
+ 688   2                  break;
+ 689   2                  
+ 690   2              case 0x3B:
+ 691   2                  SeatLinData.MotorSetNum   =  ucaLinBuff[0];
+ 692   2                  SeatLinData.MotorResetCtl = ucaLinBuff[1];
+ 693   2                  break;
+ 694   2                  
+ 695   2              case 0x3c:
+ 696   2                  if ((ucaLinBuff[0] == NAD) && (ucaLinBuff[1] == 0x02) &&//进入扩展模式
+ 697   2                      (ucaLinBuff[2] == 0x10) && (ucaLinBuff[3] == 0x03) &&
+ 698   2                      (ucaLinBuff[4] == 0xff) && (ucaLinBuff[5] == 0xff) &&
+ 699   2                      (ucaLinBuff[6] == 0xff) && (ucaLinBuff[7] == 0xff))
+ 700   2                  {
+ 701   3                      Erase_Flage = 1;
+ 702   3                      _nop_();
+ 703   3                  }
+ 704   2                  
+ 705   2                  if ((ucaLinBuff[0] == NAD) && (ucaLinBuff[1] == 0x02) &&//进入编程模式
+ 706   2                      (ucaLinBuff[2] == 0x10) && (ucaLinBuff[3] == 0x02) &&
+ 707   2                      (ucaLinBuff[4] == 0xff) && (ucaLinBuff[5] == 0xff) &&
+ 708   2                      (ucaLinBuff[6] == 0xff) && (ucaLinBuff[7] == 0xff))
+ 709   2                  {
+ 710   3                      //if(Erase_Flage==1)
+ 711   3                      Erase_Flage = 2;
+ 712   3                      _nop_();
+ 713   3                  }
+ 714   2                  
+ 715   2                  break;
+ 716   2                  
+ 717   2              default:
+ 718   2                  break;
+ 719   2          }
+ 720   1      }
+ 721          
+ 722          
+ 723          
+ 724          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    581    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =     15       1
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 13  
+
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,197 @@
+C51 COMPILER V9.57.0.0   HALLPROCESS                                                       06/22/2026 16:13:59 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE HALLPROCESS
+OBJECT MODULE PLACED IN .\Output\HallProcess.obj
+COMPILER INVOKED BY: E:\05KeilC51\C51\BIN\C51.EXE ..\User\source\Function\HallProcess.c LARGE OMF2 OPTIMIZE(9,SIZE) BROW
+                    -SE INCDIR(..\User\include;..\FU68xx_Hardware_Driver\Include;.\Components) DEBUG PRINT(.\Listings\HallProcess.lst) TABS(2
+                    -) OBJECT(.\Output\HallProcess.obj)
+
+line level    source
+
+   1          /* Includes -------------------------------------------------------------------------------------*/
+   2          #include <Myproject.h>
+   3          #include <EB_HALL.h>
+   4          
+   5          // 5 1 3 2 6 4
+   6          int16 xdata Hall_Angle_Arr[6] = {_Q15(60.0 / 180.0), _Q15(180.0 / 180.0), _Q15(120.0 / 180.0), _Q15(300.0 
+             -/ 180.0), _Q15(0.0 / 180.0), _Q15(240.0 / 180.0)};
+   7          
+   8          extern int16 Hall_delta_acc;     ///< 里程计，霍尔传感器跳变次数
+   9          
+  10          /* Hall触发处理，放在Hall触发中断里 */
+  11          void HallTrigProcess(void)
+  12          {
+  13   1          /* Hall状态更新 */
+  14   1          if (HallUpdateDetect(H_A, H_B, H_C))
+  15   1          {
+  16   2              /* 读取Hall持续时间 */
+  17   2              uint16 data CNTRTemp = HALLTIME;
+  18   2              /* 当前角度值 */
+  19   2              int16 data Theta = FOC__THETA;
+  20   2              /* Hall更新处理 */
+  21   2              uint16 data * MDUCalData = HallUpdateProcess(CNTRTemp, Theta);
+  22   2              /* Hall上一次状态 */
+  23   2              static uint8 HallStatus_last = 0;
+  24   2      
+  25   2              /* 清零定时器计数 */
+  26   2              if (hallPara.TIMCNTRClearStatus)
+  27   2              {
+  28   3                  /* 确保定时器计数值被清零 */
+  29   3                  while (CNTRTemp != 0)
+  30   3                  {
+  31   4                      HALLTIME = 0;
+  32   4                      CNTRTemp = HALLTIME;
+  33   4                  }
+  34   3                  
+  35   3                  hallPara.TIMCNTRClearStatus = 0x00;
+  36   3              }
+  37   2      
+  38   2              /* 当除数不为0时才计算，若为0则不需要计算 */
+  39   2              if (MDUCalData[2] != 0)
+  40   2              {
+  41   3                  /* Hall角度计算 */
+  42   3                  HallCalculation(MDUCal(MDUCalData)); // 17us
+  43   3              }
+  44   2      
+  45   2              if (hallPara.UpdateStatus & 0x01) /* 角度超限或低速运行时候会一直更新 角度值和
+             - 爬坡速度 */
+  46   2              {
+  47   3                  /* 角度更新 */
+  48   3                  if (mcState != mcAlign)
+  49   3                  {
+  50   4                      FOC__THETA = hallPara.ThetaReal; /* 重新赋值角度值 */
+  51   4                  }
+C51 COMPILER V9.57.0.0   HALLPROCESS                                                       06/22/2026 16:13:59 PAGE 2   
+
+  52   3                  
+  53   3                  hallPara.UpdateStatus &= (~0x01);
+  54   3              }
+  55   2              
+  56   2              if (hallPara.UpdateStatus & 0x02)
+  57   2              {
+  58   3                  /* 角速度更新 */
+  59   3                  if (mcState != mcAlign)
+  60   3                  {
+  61   4                      FOC__RTHESTEP = hallPara.RTheStepReal; /* 重新赋爬坡速度 */
+  62   4                  }
+  63   3                  
+  64   3                  hallPara.UpdateStatus &= (~0x02);
+  65   3              }
+  66   2      
+  67   2              if ((hallPara.XORHallStatus == 0x01) )
+  68   2              {
+  69   3                  /* Hall A 跳变 */
+  70   3                  Fault.HALock.TimeCnt = 0;
+  71   3      
+  72   3                  if(mcFocCtrl.FR == 1)
+  73   3                  {
+  74   4                      Hall_delta_acc ++;
+  75   4                  }
+  76   3                  else
+  77   3                  {
+  78   4                      Hall_delta_acc --;
+  79   4                  }
+  80   3              }
+  81   2              else if ((hallPara.XORHallStatus == 0x02))
+  82   2              {
+  83   3                  /* Hall B 跳变 */
+  84   3                  Fault.HBLock.TimeCnt = 0;
+  85   3      
+  86   3                  if(mcFocCtrl.FR == 1)
+  87   3                  {
+  88   4                      Hall_delta_acc ++;
+  89   4                  }
+  90   3                  else
+  91   3                  {
+  92   4                      Hall_delta_acc --;
+  93   4                  }
+  94   3              }
+  95   2              else if ((hallPara.XORHallStatus == 0x04) )
+  96   2              {
+  97   3                  /* Hall C 跳变 */
+  98   3                  Fault.HCLock.TimeCnt = 0;
+  99   3      
+ 100   3                  if(mcFocCtrl.FR == 1)
+ 101   3                  {
+ 102   4                      Hall_delta_acc ++;
+ 103   4                  }
+ 104   3                  else
+ 105   3                  {
+ 106   4                      Hall_delta_acc --;
+ 107   4                  }
+ 108   3              }
+ 109   2      
+ 110   2              if ((MotorControl.Study_flag == 1))
+ 111   2              {
+ 112   3                  MotorControl.HallTimesForISDN ++;    
+ 113   3              }
+C51 COMPILER V9.57.0.0   HALLPROCESS                                                       06/22/2026 16:13:59 PAGE 3   
+
+ 114   2              else
+ 115   2              {
+ 116   3                  
+ 117   3              }
+ 118   2              
+ 119   2              if (mcFocCtrl.FR == 1)
+ 120   2              {
+ 121   3                  if (MotorControl.HallTimesForPosition < MotorControl.CycleTotal)
+ 122   3                  { MotorControl.HallTimesForPosition ++ ; }
+ 123   3              }
+ 124   2              else  if (mcFocCtrl.FR == 0)
+ 125   2              {
+ 126   3                  if (MotorControl.HallTimesForPosition > 3 )
+ 127   3                  { MotorControl.HallTimesForPosition -- ; }
+ 128   3              }
+ 129   2      
+ 130   2              if(HallStatus_last != hallPara.HallStatus)
+ 131   2              {
+ 132   3                  // Hall跳变，检测旋转方向
+ 133   3                  
+ 134   3              }
+ 135   2              HallStatus_last = hallPara.HallStatus;
+ 136   2          }
+ 137   1      }
+ 138          
+ 139          /* Hall定时处理，放在载波中断里 */
+ 140          void HallTimerProcess(void)
+ 141          {
+ 142   1          /* 读取Hall持续时间 */
+ 143   1          int16 data CNTRTemp = HALLTIME;
+ 144   1          /* 当前角度值 */
+ 145   1          int16 data Theta = FOC__THETA;
+ 146   1          HallTimerUpdate(CNTRTemp, FOC__THETA);
+ 147   1          
+ 148   1          if (hallPara.UpdateStatus & 0x01)
+ 149   1          {
+ 150   2              FOC__THETA = hallPara.ThetaReal;
+ 151   2              hallPara.UpdateStatus &= (~0x01);
+ 152   2          }
+ 153   1          
+ 154   1          if (hallPara.UpdateStatus & 0x02)
+ 155   1          {
+ 156   2              /* 角速度更新 */
+ 157   2              FOC__RTHESTEP = hallPara.RTheStepReal;
+ 158   2              hallPara.UpdateStatus &= (~0x02);
+ 159   2          }
+ 160   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    382    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =     13       1
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       8
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+C51 COMPILER V9.57.0.0   HALLPROCESS                                                       06/22/2026 16:13:59 PAGE 4   
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
