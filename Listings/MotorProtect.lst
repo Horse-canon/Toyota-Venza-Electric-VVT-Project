@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   MOTORPROTECT                                                      06/22/2026 16:13:59 PAGE 1   
+C51 COMPILER V9.57.0.0   MOTORPROTECT                                                      06/25/2026 14:57:18 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE MOTORPROTECT
@@ -62,7 +62,7 @@ line level    source
   51          
   52          
   53          
-C51 COMPILER V9.57.0.0   MOTORPROTECT                                                      06/22/2026 16:13:59 PAGE 2   
+C51 COMPILER V9.57.0.0   MOTORPROTECT                                                      06/25/2026 14:57:18 PAGE 2   
 
   54          /**
   55              @brief     过欠压检测
@@ -126,7 +126,7 @@ line level    source
  113          */
  114          void Fault_Stall(void)
  115          {
-C51 COMPILER V9.57.0.0   MOTORPROTECT                                                      06/22/2026 16:13:59 PAGE 3   
+C51 COMPILER V9.57.0.0   MOTORPROTECT                                                      06/25/2026 14:57:18 PAGE 3   
 
  116   1          if ((isCtrlPowOn == false) && (mcFaultSource == FaultStall)) //关机且堵转时允许清错误
  117   1          {
@@ -190,7 +190,7 @@ line level    source
  172   2              
  173   2              
  174   2      //        else if ((Fault.HALock.TimeCnt > 20) || (Fault.HBLock.TimeCnt > 20) || (Fault.HCLock.TimeCnt > 2
-C51 COMPILER V9.57.0.0   MOTORPROTECT                                                      06/22/2026 16:13:59 PAGE 4   
+C51 COMPILER V9.57.0.0   MOTORPROTECT                                                      06/25/2026 14:57:18 PAGE 4   
 
              -0))
  175   2      //        {
@@ -254,7 +254,7 @@ line level    source
                               
                               if (mcCurVarible.OverCurACnt > 20 || mcCurVarible.OverCurBCnt > 20 || mcCurVarible.OverCur
              -CCnt > 20)
-C51 COMPILER V9.57.0.0   MOTORPROTECT                                                      06/22/2026 16:13:59 PAGE 5   
+C51 COMPILER V9.57.0.0   MOTORPROTECT                                                      06/25/2026 14:57:18 PAGE 5   
 
                               {
                                   mcFaultSource = FaultSoftOVCurrent; //软件过流
@@ -318,7 +318,7 @@ line level    source
  290   5                      }
  291   4                  }
  292   3              }
-C51 COMPILER V9.57.0.0   MOTORPROTECT                                                      06/22/2026 16:13:59 PAGE 6   
+C51 COMPILER V9.57.0.0   MOTORPROTECT                                                      06/25/2026 14:57:18 PAGE 6   
 
  293   2          }
  294   1      }
@@ -382,7 +382,7 @@ line level    source
  351   3                  {
  352   4                      Restart.DC_DelayTcnt              = 0;
  353   4                      
-C51 COMPILER V9.57.0.0   MOTORPROTECT                                                      06/22/2026 16:13:59 PAGE 7   
+C51 COMPILER V9.57.0.0   MOTORPROTECT                                                      06/25/2026 14:57:18 PAGE 7   
 
  354   4                     //if (isCtrlPowOn == false)
  355   4                     {
@@ -446,7 +446,7 @@ line level    source
  413   4                      Restart.Stall_Times++;
  414   4      
  415   4                      if (Restart.Stall_Times <= 3)
-C51 COMPILER V9.57.0.0   MOTORPROTECT                                                      06/22/2026 16:13:59 PAGE 8   
+C51 COMPILER V9.57.0.0   MOTORPROTECT                                                      06/25/2026 14:57:18 PAGE 8   
 
  416   4                      {
  417   5                          //Restart.Stall_Times = 0;
@@ -510,7 +510,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    HDATA SIZE       =   ----    ----
    XDATA CONST SIZE =   ----    ----
    FAR CONST SIZE   =   ----    ----
-C51 COMPILER V9.57.0.0   MOTORPROTECT                                                      06/22/2026 16:13:59 PAGE 9   
+C51 COMPILER V9.57.0.0   MOTORPROTECT                                                      06/25/2026 14:57:18 PAGE 9   
 
 END OF MODULE INFORMATION.
 

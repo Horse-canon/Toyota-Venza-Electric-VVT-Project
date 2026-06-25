@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   CAN                                                               06/22/2026 16:14:01 PAGE 1   
+C51 COMPILER V9.57.0.0   CAN                                                               06/25/2026 14:57:20 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE CAN
@@ -62,7 +62,7 @@ line level    source
   51   1          /*****配置外部Can收发器使能引脚 *****/
   52   1         SetBit(P0_OE, PIN7);
   53   1         /*  收发器休眠管脚不上拉。     */
-C51 COMPILER V9.57.0.0   CAN                                                               06/22/2026 16:14:01 PAGE 2   
+C51 COMPILER V9.57.0.0   CAN                                                               06/25/2026 14:57:20 PAGE 2   
 
   54   1         ClrBit(P0_PU, PIN7); 
   55   1         /*  输出低有效，使能外部CAN收发器   */
@@ -126,7 +126,7 @@ line level    source
                       {
                           STDID1 = 0x7FF;                                                  //0-0x7FF
                           CAN_IDE = 1;                                                     //过滤扩展帧
-C51 COMPILER V9.57.0.0   CAN                                                               06/22/2026 16:14:01 PAGE 3   
+C51 COMPILER V9.57.0.0   CAN                                                               06/25/2026 14:57:20 PAGE 3   
 
                           CAN_RTR = 1;                                                     //过滤远程帧
                           Data0   = 0xFF;                                                  //过滤第一字节
@@ -190,7 +190,7 @@ line level    source
  167   1          /*当检测到总线活动后，硬件自动对CAN_CR1[SLEEP]清0来唤醒CAN*/
  168   1          ClrBit(CAN_CR0, WAKMOD);      
  169   1      
-C51 COMPILER V9.57.0.0   CAN                                                               06/22/2026 16:14:01 PAGE 4   
+C51 COMPILER V9.57.0.0   CAN                                                               06/25/2026 14:57:20 PAGE 4   
 
  170   1          /*----------------LISTEN置1 监听模式使能--------------*/
  171   1          /*----------------SELFTST置1 自测模式使能--------------*/
@@ -254,7 +254,7 @@ line level    source
  225   3                      CAN_strRxPduTemp.u32CanId |= (uint32)CAN_RX0ID1 << 13;
  226   3                      CAN_strRxPduTemp.u32CanId |= (uint32)CAN_RX0ID2 << 5 ;
  227   3                      CAN_strRxPduTemp.u32CanId |= (uint32)CAN_RX0ID3 >> 4 ;
-C51 COMPILER V9.57.0.0   CAN                                                               06/22/2026 16:14:01 PAGE 5   
+C51 COMPILER V9.57.0.0   CAN                                                               06/25/2026 14:57:20 PAGE 5   
 
  228   3                  }
  229   2                  else
@@ -318,7 +318,7 @@ line level    source
  287   3                      CAN_strRxPduTemp.u32CanId |= (uint32)CAN_RX2ID2 << 5 ;
  288   3                      CAN_strRxPduTemp.u32CanId |= (uint32)CAN_RX2ID3 >> 4 ;
  289   3                  }
-C51 COMPILER V9.57.0.0   CAN                                                               06/22/2026 16:14:01 PAGE 6   
+C51 COMPILER V9.57.0.0   CAN                                                               06/25/2026 14:57:20 PAGE 6   
 
  290   2                  else
  291   2                  {
@@ -382,7 +382,7 @@ line level    source
  348   2          }
  349   1          else
  350   1          {
-C51 COMPILER V9.57.0.0   CAN                                                               06/22/2026 16:14:01 PAGE 7   
+C51 COMPILER V9.57.0.0   CAN                                                               06/25/2026 14:57:20 PAGE 7   
 
  351   2              CAN_TXID0 = pstrCanSendHead->u32CanId >> 3;
  352   2              CAN_TXID1 = pstrCanSendHead->u32CanId << 5;
@@ -446,7 +446,7 @@ line level    source
  410   3               if (0 != ReadBit(CAN_ESR, BOFF) )
  411   3               {
  412   4                  CAN_u8DrvState = CAN_SM_ERROR;
-C51 COMPILER V9.57.0.0   CAN                                                               06/22/2026 16:14:01 PAGE 8   
+C51 COMPILER V9.57.0.0   CAN                                                               06/25/2026 14:57:20 PAGE 8   
 
  413   4               }
  414   3               else if (0 != CAN_u8SoftErrorType)
@@ -510,7 +510,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
-C51 COMPILER V9.57.0.0   CAN                                                               06/22/2026 16:14:01 PAGE 9   
+C51 COMPILER V9.57.0.0   CAN                                                               06/25/2026 14:57:20 PAGE 9   
 
    EDATA SIZE       =   ----    ----
    HDATA SIZE       =   ----    ----

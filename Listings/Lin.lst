@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 1   
+C51 COMPILER V9.57.0.0   LIN                                                               06/25/2026 14:57:20 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE LIN
@@ -62,7 +62,7 @@ line level    source
   51   1          SetBit(IP3, PSPI_UT21);
   52   1          ClrBit(IP3, PSPI_UT20);
   53   1          ClrBit(LIN_CR, AUTOSIZE); /* 自动长度设定（ID[4][5]决定） */
-C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 2   
+C51 COMPILER V9.57.0.0   LIN                                                               06/25/2026 14:57:20 PAGE 2   
 
   54   1          //LIN_BAUD = 0x04E1;
   55   1          SetBit(LIN_CR, LINIE);    /* 中断设置 */
@@ -126,7 +126,7 @@ line level    source
  113   1          {
  114   2              ;
  115   2          }
-C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 3   
+C51 COMPILER V9.57.0.0   LIN                                                               06/25/2026 14:57:20 PAGE 3   
 
  116   1      }
  117          
@@ -190,7 +190,7 @@ line level    source
  174   3                      ClrBit(LIN_SR, LINDONE); /* 清除传输完成产生中断的标志位 */
  175   3                      LIN_MODE_Receive; /* 接收数据模式 */
  176   3                      //LIN_ACK;
-C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 4   
+C51 COMPILER V9.57.0.0   LIN                                                               06/25/2026 14:57:20 PAGE 4   
 
  177   3                  }
  178   2                  #endif
@@ -254,7 +254,7 @@ line level    source
  236   2                  #if (MotorMode == DR_LegrestRotate)
                           {
                               LIN_SETSIZE(3);
-C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 5   
+C51 COMPILER V9.57.0.0   LIN                                                               06/25/2026 14:57:20 PAGE 5   
 
                               
                               for (i = 0; i < 3; i++)
@@ -318,7 +318,7 @@ line level    source
                               
                               ucaLinBuff[0] = SeatLinData.Position_Percent;//VerticalPos
                               ucaLinBuff[1] = SeatLinData.RunSts;
-C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 6   
+C51 COMPILER V9.57.0.0   LIN                                                               06/25/2026 14:57:20 PAGE 6   
 
                               ucaLinBuff[2] = SeatLinData.ErrSts;
                               CheckEnhanced;
@@ -382,7 +382,7 @@ line level    source
  360   2                  
  361   2                  #else
                           {
-C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 7   
+C51 COMPILER V9.57.0.0   LIN                                                               06/25/2026 14:57:20 PAGE 7   
 
                               ClrBit(LIN_SR, LINDONE); /* 清除传输完成产生中断的标志位 */
                               LIN_MODE_Receive; /* 接收数据模式 */
@@ -446,7 +446,7 @@ line level    source
  422   2                  break;
  423   2                  
  424   2              case 0x35:
-C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 8   
+C51 COMPILER V9.57.0.0   LIN                                                               06/25/2026 14:57:20 PAGE 8   
 
  425   2                  #if (MotorMode == Rear_LSLegrestAngle)
                           {
@@ -510,7 +510,7 @@ line level    source
                               {
                                   ucaLinBuff[i] = 0XFF; /* 设置发送的数据 */
                               }
-C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 9   
+C51 COMPILER V9.57.0.0   LIN                                                               06/25/2026 14:57:20 PAGE 9   
 
                               
                               ucaLinBuff[0] = SeatLinData.Position_Percent;//VerticalPos
@@ -574,7 +574,7 @@ line level    source
  546   3                      ucaLinBuff[1] = 0x02;
  547   3                      ucaLinBuff[2] = 0x50;
  548   3                      ucaLinBuff[3] = 0x03;
-C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 10  
+C51 COMPILER V9.57.0.0   LIN                                                               06/25/2026 14:57:20 PAGE 10  
 
  549   3                  }
  550   2                  else if (Erase_Flage == 2) //进入编程模式
@@ -638,7 +638,7 @@ line level    source
                           {
                               SeatLinData.MoveModeCtrl = ucaLinBuff[4];
                               SeatLinData.SpeedMode    = ucaLinBuff[6] & 0x10;
-C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 11  
+C51 COMPILER V9.57.0.0   LIN                                                               06/25/2026 14:57:20 PAGE 11  
 
                           }
                           #endif
@@ -702,7 +702,7 @@ line level    source
                           
                           #elif (MotorMode == Rear_LSLegrestAngle)
                           {
-C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 12  
+C51 COMPILER V9.57.0.0   LIN                                                               06/25/2026 14:57:20 PAGE 12  
 
                               SeatLinData.MoveModeCtrl = ucaLinBuff[4];
                               SeatLinData.SpeedMode    = ucaLinBuff[1] & 0x08;
@@ -766,7 +766,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
-C51 COMPILER V9.57.0.0   LIN                                                               06/22/2026 16:14:00 PAGE 13  
+C51 COMPILER V9.57.0.0   LIN                                                               06/25/2026 14:57:20 PAGE 13  
 
    EDATA SIZE       =   ----    ----
    HDATA SIZE       =   ----    ----

@@ -1,0 +1,1 @@
+"..\User\source\Hardware\FU68xx_6_Flash.c" LARGE OMF2 OPTIMIZE (9,SIZE) BROWSE INCDIR(..\User\include;..\FU68xx_Hardware_Driver\Include;.\Components) DEBUG PRINT(.\Listings\FU68xx_6_Flash.lst) TABS (2) OBJECT(.\Output\FU68xx_6_Flash.obj)

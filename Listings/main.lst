@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   MAIN                                                              06/22/2026 16:13:58 PAGE 1   
+C51 COMPILER V9.57.0.0   MAIN                                                              06/25/2026 14:57:18 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
                   SPI_Init();
                   Set_DBG_DMA(&HARD_SPIDATA);
                   #elif (DBG_MODE ==  DBG_SPI_SW)   // 软件调试模式
-C51 COMPILER V9.57.0.0   MAIN                                                              06/22/2026 16:13:58 PAGE 2   
+C51 COMPILER V9.57.0.0   MAIN                                                              06/25/2026 14:57:18 PAGE 2   
 
                   SPI_Init();
                   Set_DBG_DMA(spidebug);
@@ -123,17 +123,17 @@ line level    source
  107           */
  108          static void SoftwareInit(void)
  109          {
- 110   1          memset(&MotorControl, 0, sizeof(MotorControlTypeDef));
- 111   1          memset(&Memorytic_Data, 0, sizeof(Memorytic));
- 112   1          FlashTest.FlashWriteAddr = USERCODEADDRESS;
-C51 COMPILER V9.57.0.0   MAIN                                                              06/22/2026 16:13:58 PAGE 3   
+ 110   1          memset(&MotorControl, 0, sizeof(MotorControlTypeDef));  // 初始化电机控制结构体
+ 111   1          memset(&Memorytic_Data, 0, sizeof(Memorytic));   // 初始化记忆数据结构体
+ 112   1          FlashTest.FlashWriteAddr = USERCODEADDRESS; // Flash写入地址
+C51 COMPILER V9.57.0.0   MAIN                                                              06/25/2026 14:57:18 PAGE 3   
 
  113   1          FlashTest.FlashRead2Byte = *(uint16 code *)(FlashTest.FlashWriteAddr);  //读取目标地址中数值�
              -��否为0
  114   1          
  115   1          MotorcontrolInit();
- 116   1          mcState         = mcReady;
- 117   1          mcFaultSource   = FaultNoSource;
+ 116   1          mcState         = mcReady;   //电机状态
+ 117   1          mcFaultSource   = FaultNoSource;  //电机故障源
  118   1      
  119   1          // 速度环PID参数初始化
  120   1          PID_cfg_Speed.KP = SKP;
@@ -190,7 +190,7 @@ line level    source
                       SetBit(VREF_VHALF_CR, VHALFSEL1);
                       ClrBit(VREF_VHALF_CR, VHALFSEL0);
                   }
-C51 COMPILER V9.57.0.0   MAIN                                                              06/22/2026 16:13:58 PAGE 4   
+C51 COMPILER V9.57.0.0   MAIN                                                              06/25/2026 14:57:18 PAGE 4   
 
                   #elif (HW_VHALF_SEL == VHALF1_2)
  175   1          {
@@ -254,7 +254,7 @@ line level    source
  231   1          uint8 Run_Flag = 0;
  232   1          
  233   1          /* ----- 上电空指令延时 等待系统稳定 ----- */
-C51 COMPILER V9.57.0.0   MAIN                                                              06/22/2026 16:13:58 PAGE 5   
+C51 COMPILER V9.57.0.0   MAIN                                                              06/25/2026 14:57:18 PAGE 5   
 
  234   1          for (PowerUpCnt = 0; PowerUpCnt < SystemPowerUpTime; PowerUpCnt++);
  235   1          
@@ -318,7 +318,7 @@ line level    source
  292   3              }
  293   2      
  294   2              if (g_100mTick == 0)
-C51 COMPILER V9.57.0.0   MAIN                                                              06/22/2026 16:13:58 PAGE 6   
+C51 COMPILER V9.57.0.0   MAIN                                                              06/25/2026 14:57:18 PAGE 6   
 
  295   2              {
  296   3                  SetBit(WDT_CR, WDTRF); /* 喂狗 */
@@ -382,7 +382,7 @@ line level    source
                               Motor_force_stop();
               
                           break;
-C51 COMPILER V9.57.0.0   MAIN                                                              06/22/2026 16:13:58 PAGE 7   
+C51 COMPILER V9.57.0.0   MAIN                                                              06/25/2026 14:57:18 PAGE 7   
 
                       }
                   }
@@ -446,7 +446,7 @@ line level    source
                   }
                   else
                   {
-C51 COMPILER V9.57.0.0   MAIN                                                              06/22/2026 16:13:58 PAGE 8   
+C51 COMPILER V9.57.0.0   MAIN                                                              06/25/2026 14:57:18 PAGE 8   
 
                       SW_cnt_A2 = 0;
                   }

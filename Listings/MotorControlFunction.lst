@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/22/2026 16:13:59 PAGE 1   
+C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/25/2026 14:57:18 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE MOTORCONTROLFUNCTION
@@ -62,7 +62,7 @@ line level    source
   49   1          FOC_DMIN        = DOUTMIN;
   50   1          FOC_QMAX        = QOUTMAX;
   51   1          FOC_QMIN        = QOUTMIN;
-C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/22/2026 16:13:59 PAGE 2   
+C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/25/2026 14:57:18 PAGE 2   
 
   52   1          FOC_IQ_LPFK = 0x80;
   53   1          /* 位置估算参数配置 */
@@ -126,7 +126,7 @@ line level    source
                       #elif (SVPMW_Mode == SVPWM_5_Segment)
                       {
                           SetBit(FOC_CR2, F5SEG);                         // 5段式
-C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/22/2026 16:13:59 PAGE 3   
+C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/25/2026 14:57:18 PAGE 3   
 
                       }
                       #endif
@@ -190,7 +190,7 @@ line level    source
                               FOC_CSO  = mcCurOffset.IuOffset;            // 写入IA的偏置
                           
                               SetReg(FOC_CR2, CSOC0 | CSOC1, CSOC1);
-C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/22/2026 16:13:59 PAGE 4   
+C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/25/2026 14:57:18 PAGE 4   
 
                               FOC_CSO  = mcCurOffset.IvOffset;            // 写入IB的偏置
                           }
@@ -254,7 +254,7 @@ line level    source
  223   1          
  224   1          if ((mcFocCtrl.State_Count < CHARGE_TIME) && (mcFocCtrl.ChargeStep == 0))
  225   1          {
-C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/22/2026 16:13:59 PAGE 5   
+C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/25/2026 14:57:18 PAGE 5   
 
  226   2              mcFocCtrl.ChargeStep = 1;
  227   2              DRV_CMR |= 0x01;                          // U相下桥臂通
@@ -318,7 +318,7 @@ line level    source
  285   3              }
  286   2              #endif //end    EstimateAlgorithm
  287   2              /*使能输出*/
-C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/22/2026 16:13:59 PAGE 6   
+C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/25/2026 14:57:18 PAGE 6   
 
  288   2              //        DRV_CMR |= 0x3F;                         // U、V、W相输出
  289   2              MOE = 1;
@@ -382,7 +382,7 @@ line level    source
  347   2              MotorControl.StopSet = 1;
  348   2              
  349   2              if (mcFocCtrl.FR)
-C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/22/2026 16:13:59 PAGE 7   
+C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/25/2026 14:57:18 PAGE 7   
 
  350   2              {
  351   3                  PI1_KP          = _Q12(1.0);//QPI比较大，外环PI可以小一点。
@@ -446,7 +446,7 @@ line level    source
  408          /**
  409              @brief     三下桥刹车
  410              @date      2022-07-14
-C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/22/2026 16:13:59 PAGE 8   
+C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/25/2026 14:57:18 PAGE 8   
 
  411          */
  412          void MC_Break(void)
@@ -486,9 +486,9 @@ line level    source
  446   1          mcCurOffset.Iw_busOffsetSum        = 16383;
  447   1          mcPwmInput.TimerARR                = 65535;
  448   1          /* -----过欠压值----- */
- 449   1          Fault.Voltage.OverVoltageVal        = OVER_VOLTAGE_PROTECT;
- 450   1          Fault.Voltage.UnderVoltageVal       = UNDER_VOLTAGE_PROTECT;
- 451   1          SeatCtl.MoveMode_Last = 0;
+ 449   1          Fault.Voltage.OverVoltageVal        = OVER_VOLTAGE_PROTECT;// 过压保护值
+ 450   1          Fault.Voltage.UnderVoltageVal       = UNDER_VOLTAGE_PROTECT;// 欠压保护值
+ 451   1          SeatCtl.MoveMode_Last = 0;//上电时，默认上次的模式为0
  452   1          SeatLinData.MoveModeCtrl = 0xff; //初始值为0的话，自学习完成后，直接会进入自动模
              -式，到位置为0的地方。
  453   1      }
@@ -510,7 +510,7 @@ line level    source
  469   1          Fault.PhaseLoss.mcLossPHRecCount    = 0;
  470   1          Fault.PhaseLoss.DectDealyCnt        = 0;
  471   1          // 电压保护
-C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/22/2026 16:13:59 PAGE 9   
+C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/25/2026 14:57:18 PAGE 9   
 
  472   1          Fault.Voltage.OverVoltDetecCnt      = 0;
  473   1          Fault.Voltage.UnderVoltDetecCnt     = 0;
@@ -574,18 +574,19 @@ line level    source
  530   1          
  531   1          while (ReadBit(ADC_CR, ADCBSY));
  532   1          
-C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/22/2026 16:13:59 PAGE 10  
+C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/25/2026 14:57:18 PAGE 10  
 
  533   1          #if ((Shunt_Resistor_Mode == Single_Resistor)||(Shunt_Resistor_Mode == New_Single_Resistor))//单电�
              -�模式
  534   1          {
- 535   2              mcCurOffset.Iw_busOffsetSum += ((ADC4_DR & 0x7ff8));
+ 535   2              mcCurOffset.Iw_busOffsetSum += ((ADC4_DR & 0x7ff8));   //0b0111_1111_1111_1000:取中间12位数�
+             -�
  536   2              mcCurOffset.Iw_busOffset     = mcCurOffset.Iw_busOffsetSum >> 4;
  537   2              mcCurOffset.Iw_busOffsetSum -= mcCurOffset.Iw_busOffset;
  538   2          }
  539   1          #elif (Shunt_Resistor_Mode == Double_Resistor)                 //双电阻模式
                   {
-                      mcCurOffset.IuOffsetSum     += ((ADC0_DR & 0x7ff8));
+                       += ((ADC0_DR & 0x7ff8));
                       mcCurOffset.IuOffset         = mcCurOffset.IuOffsetSum >> 4;
                       mcCurOffset.IuOffsetSum     -= mcCurOffset.IuOffset;
                       mcCurOffset.IvOffsetSum     += ((ADC1_DR & 0x7ff8));
@@ -637,9 +638,9 @@ line level    source
  589              @note      关闭FOC所需要使用到的ADC，FOC模块会自动调用相应ADC 无需外部使能
  590              @date      2022-07-14
  591          */
- 592          
-C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/22/2026 16:13:59 PAGE 11  
+C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/25/2026 14:57:18 PAGE 11  
 
+ 592          
  593          void Motor_Init(void)
  594          {
  595   1          VariablesPreInit();                           // 电机相关变量初始化
