@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/25/2026 14:57:18 PAGE 1   
+C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/27/2026 16:09:30 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE MOTORCONTROLFUNCTION
@@ -62,7 +62,7 @@ line level    source
   49   1          FOC_DMIN        = DOUTMIN;
   50   1          FOC_QMAX        = QOUTMAX;
   51   1          FOC_QMIN        = QOUTMIN;
-C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/25/2026 14:57:18 PAGE 2   
+C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/27/2026 16:09:30 PAGE 2   
 
   52   1          FOC_IQ_LPFK = 0x80;
   53   1          /* 位置估算参数配置 */
@@ -126,7 +126,7 @@ line level    source
                       #elif (SVPMW_Mode == SVPWM_5_Segment)
                       {
                           SetBit(FOC_CR2, F5SEG);                         // 5段式
-C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/25/2026 14:57:18 PAGE 3   
+C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/27/2026 16:09:30 PAGE 3   
 
                       }
                       #endif
@@ -190,7 +190,7 @@ line level    source
                               FOC_CSO  = mcCurOffset.IuOffset;            // 写入IA的偏置
                           
                               SetReg(FOC_CR2, CSOC0 | CSOC1, CSOC1);
-C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/25/2026 14:57:18 PAGE 4   
+C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/27/2026 16:09:30 PAGE 4   
 
                               FOC_CSO  = mcCurOffset.IvOffset;            // 写入IB的偏置
                           }
@@ -239,7 +239,7 @@ line level    source
  210   1          {
  211   2              McStaSet.SetFlag.ChargeSetFlag = 1;
  212   2              SetBit(DRV_CR, DRVEN);  // 计数器使能      0-->Disable 1-->Enable
- 213   2              DRV_DR = CHARGE_DUTY * DRV_ARR;              //下桥臂10% duty
+ 213   2              DRV_DR = CHARGE_DUTY * DRV_ARR;                  //下桥臂10% duty
  214   2               DRV_CMR &= 0x0000;                              //预充电配置与FOC正常配置不一致
  215   2              /*  ----------------------------------------------------------------------------------------------
              ----
@@ -254,7 +254,7 @@ line level    source
  223   1          
  224   1          if ((mcFocCtrl.State_Count < CHARGE_TIME) && (mcFocCtrl.ChargeStep == 0))
  225   1          {
-C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/25/2026 14:57:18 PAGE 5   
+C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/27/2026 16:09:30 PAGE 5   
 
  226   2              mcFocCtrl.ChargeStep = 1;
  227   2              DRV_CMR |= 0x01;                          // U相下桥臂通
@@ -318,7 +318,7 @@ line level    source
  285   3              }
  286   2              #endif //end    EstimateAlgorithm
  287   2              /*使能输出*/
-C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/25/2026 14:57:18 PAGE 6   
+C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/27/2026 16:09:30 PAGE 6   
 
  288   2              //        DRV_CMR |= 0x3F;                         // U、V、W相输出
  289   2              MOE = 1;
@@ -382,7 +382,7 @@ line level    source
  347   2              MotorControl.StopSet = 1;
  348   2              
  349   2              if (mcFocCtrl.FR)
-C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/25/2026 14:57:18 PAGE 7   
+C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/27/2026 16:09:30 PAGE 7   
 
  350   2              {
  351   3                  PI1_KP          = _Q12(1.0);//QPI比较大，外环PI可以小一点。
@@ -446,7 +446,7 @@ line level    source
  408          /**
  409              @brief     三下桥刹车
  410              @date      2022-07-14
-C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/25/2026 14:57:18 PAGE 8   
+C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/27/2026 16:09:30 PAGE 8   
 
  411          */
  412          void MC_Break(void)
@@ -510,13 +510,13 @@ line level    source
  469   1          Fault.PhaseLoss.mcLossPHRecCount    = 0;
  470   1          Fault.PhaseLoss.DectDealyCnt        = 0;
  471   1          // 电压保护
-C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/25/2026 14:57:18 PAGE 9   
+C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/27/2026 16:09:30 PAGE 9   
 
  472   1          Fault.Voltage.OverVoltDetecCnt      = 0;
  473   1          Fault.Voltage.UnderVoltDetecCnt     = 0;
  474   1          Fault.Voltage.VoltRecoverCnt        = 0;
  475   1          Fault.Voltage.BusVoltDetecCnt       = 0;
- 476   1          //    Fault.Voltage.DectDealyCnt          = 0;
+ 476   1          // Fault.Voltage.DectDealyCnt          = 0;
  477   1          Fault.Voltage.OverVoltageVal        = OVER_VOLTAGE_PROTECT;
  478   1          Fault.Voltage.UnderVoltageVal       = UNDER_VOLTAGE_PROTECT;
  479   1          // 堵转保护
@@ -574,7 +574,7 @@ line level    source
  530   1          
  531   1          while (ReadBit(ADC_CR, ADCBSY));
  532   1          
-C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/25/2026 14:57:18 PAGE 10  
+C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/27/2026 16:09:30 PAGE 10  
 
  533   1          #if ((Shunt_Resistor_Mode == Single_Resistor)||(Shunt_Resistor_Mode == New_Single_Resistor))//单电�
              -�模式
@@ -638,7 +638,7 @@ line level    source
  589              @note      关闭FOC所需要使用到的ADC，FOC模块会自动调用相应ADC 无需外部使能
  590              @date      2022-07-14
  591          */
-C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/25/2026 14:57:18 PAGE 11  
+C51 COMPILER V9.57.0.0   MOTORCONTROLFUNCTION                                              06/27/2026 16:09:30 PAGE 11  
 
  592          
  593          void Motor_Init(void)

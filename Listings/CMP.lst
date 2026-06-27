@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   CMP                                                               06/25/2026 14:57:19 PAGE 1   
+C51 COMPILER V9.57.0.0   CMP                                                               06/27/2026 16:09:31 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE CMP
@@ -42,7 +42,7 @@ line level    source
   31          
   32          void CMP3_Init(void)
   33          {
-  34   1         
+  34   1      
   35   1          /******CMP3 端口模拟功能设置*******/    
   36   1          #if ((Shunt_Resistor_Mode == Single_Resistor)||(Shunt_Resistor_Mode == New_Single_Resistor))//单电�
              -�模式
@@ -62,7 +62,7 @@ line level    source
                       SetBit(P2_AN , P27 | P23 | P20);// CMP3 Pin设置为模拟模式  + 
                       SetBit(CMP_CR1 , CMP3MOD1);     // 00-->P27-单比较器模式    01-->P20/P23-双比较器模式
                       SetBit(CMP_CR1 , CMP3MOD0);     // 1X-->P20/P23/P27-三比较器模式
-C51 COMPILER V9.57.0.0   CMP                                                               06/25/2026 14:57:19 PAGE 2   
+C51 COMPILER V9.57.0.0   CMP                                                               06/27/2026 16:09:31 PAGE 2   
 
                   }
                   #endif  //end Shunt_Resistor_Mode
@@ -89,7 +89,7 @@ line level    source
   75   2              /**********设置DAC过流值,舍弃低位精度*****************/
   76   2              
   77   2              //  DAC0_DR 是DAC0的高8位,DAC0 的最低位忽略
-  78   2              DAC0_DR     =   DAC_OverCurrentValue;
+  78   2              DAC0_DR     =   DAC_OverCurrentValue; // 写入软件设定的过流阈值j
   79   2          }
   80   1          #endif  //end Compare_Mode
   81   1          
@@ -126,7 +126,7 @@ line level    source
  112          /*****************************************************************************
  113           * Function      : CMP3_Interrupt_Init
  114           * Description   : CMP3中断配置
-C51 COMPILER V9.57.0.0   CMP                                                               06/25/2026 14:57:19 PAGE 3   
+C51 COMPILER V9.57.0.0   CMP                                                               06/27/2026 16:09:31 PAGE 3   
 
  115           * Input         : void  
  116           * Output        : None

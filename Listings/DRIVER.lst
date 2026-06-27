@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   DRIVER                                                            06/22/2026 16:14:00 PAGE 1   
+C51 COMPILER V9.57.0.0   DRIVER                                                            06/27/2026 16:09:31 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE DRIVER
@@ -62,7 +62,7 @@ line level    source
                 #endif //end PWM_Level_Mode   
   52   1              
   53   1          ClrBit(DRV_SR , FGIE);  //FG中断使能      0-->Disable   1-->Enable
-C51 COMPILER V9.57.0.0   DRIVER                                                            06/22/2026 16:14:00 PAGE 2   
+C51 COMPILER V9.57.0.0   DRIVER                                                            06/27/2026 16:09:31 PAGE 2   
 
   54   1      
   55   1          /*清中断标志位，使能中断，配置比较值，设置中断优先级*/
@@ -93,8 +93,8 @@ line level    source
   79   1          ClrBit(DRV_CR , DRPE);  // 计数器比较值预装载使能 0-->Disable            1-->Enable
   80   1          SetBit(DRV_CR , DRVOE); // Driver输出使能0-->Disable    1-->Enable
   81   1      
-  82   1        SetBit(CCFG2, VBB_VSEL);  //VBB_LDO设置 0：10V 1：12V
-  83   1        ClrBit(CCFG1, VBB_DIS);  //VBB_LDO使能输出后需要延时等待1ms以上
+  82   1              SetBit(CCFG2, VBB_VSEL);  //VBB_LDO设置 0：10V 1：12V
+  83   1              ClrBit(CCFG1, VBB_DIS);  //VBB_LDO使能输出后需要延时等待1ms以上
   84   1      }
 
 
