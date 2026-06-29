@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   SLEEP                                                             06/27/2026 16:09:30 PAGE 1   
+C51 COMPILER V9.57.0.0   SLEEP                                                             06/29/2026 21:31:45 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE SLEEP
@@ -62,7 +62,7 @@ line level    source
   50   2              ClrBit(CCFG1, WDT_EN);  //关闭WDT
   51   2              //关闭运放
   52   2              ClrBit(AMP_CR0, AMP0EN);         //AMP0 Enable
-C51 COMPILER V9.57.0.0   SLEEP                                                             06/27/2026 16:09:30 PAGE 2   
+C51 COMPILER V9.57.0.0   SLEEP                                                             06/29/2026 21:31:45 PAGE 2   
 
   53   2              ClrBit(AMP_CR0, AMP1EN);         //AMP1 Enable
   54   2              ClrBit(AMP_CR0, AMP2EN);         //AMP2 Enable

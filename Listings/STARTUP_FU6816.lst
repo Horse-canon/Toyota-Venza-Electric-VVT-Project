@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  STARTUP_FU6816                                                       06/22/2026 16:14:00 PAGE     1
+A51 MACRO ASSEMBLER  STARTUP_FU6816                                                       06/27/2026 16:25:54 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
@@ -65,7 +65,7 @@ LOC  OBJ            LINE     SOURCE
 0010 DFFC             54                     DJNZ    R7,XDATALOOP
 0012 DEFA             55                     DJNZ    R6,XDATALOOP
                       56     ENDIF
-A51 MACRO ASSEMBLER  STARTUP_FU6816                                                       06/22/2026 16:14:00 PAGE     2
+A51 MACRO ASSEMBLER  STARTUP_FU6816                                                       06/27/2026 16:25:54 PAGE     2
 
                       57     
                       58     IF IBPSTACK <> 0
@@ -82,7 +82,7 @@ LOC  OBJ            LINE     SOURCE
 0017 020000   F       69                     LJMP    ?C_START
                       70     
                       71                     END
-A51 MACRO ASSEMBLER  STARTUP_FU6816                                                       06/22/2026 16:14:00 PAGE     3
+A51 MACRO ASSEMBLER  STARTUP_FU6816                                                       06/27/2026 16:25:54 PAGE     3
 
 SYMBOL TABLE LISTING
 ------ ----- -------

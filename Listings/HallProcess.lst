@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   HALLPROCESS                                                       06/27/2026 16:09:31 PAGE 1   
+C51 COMPILER V9.57.0.0   HALLPROCESS                                                       06/29/2026 21:31:45 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE HALLPROCESS
@@ -62,7 +62,7 @@ line level    source
   49   3                  {
   50   4                      FOC__THETA = hallPara.ThetaReal; /* 重新赋值角度值 */
   51   4                  }
-C51 COMPILER V9.57.0.0   HALLPROCESS                                                       06/27/2026 16:09:31 PAGE 2   
+C51 COMPILER V9.57.0.0   HALLPROCESS                                                       06/29/2026 21:31:45 PAGE 2   
 
   52   3                  
   53   3                  hallPara.UpdateStatus &= (~0x01);
@@ -126,7 +126,7 @@ line level    source
  111   2              {
  112   3                  MotorControl.HallTimesForISDN ++;    
  113   3              }
-C51 COMPILER V9.57.0.0   HALLPROCESS                                                       06/27/2026 16:09:31 PAGE 3   
+C51 COMPILER V9.57.0.0   HALLPROCESS                                                       06/29/2026 21:31:45 PAGE 3   
 
  114   2              else
  115   2              {
@@ -160,18 +160,18 @@ line level    source
  143   1          int16 data CNTRTemp = HALLTIME;
  144   1          /* 当前角度值 */
  145   1          int16 data Theta = FOC__THETA;
- 146   1          HallTimerUpdate(CNTRTemp, FOC__THETA);
+ 146   1          HallTimerUpdate(CNTRTemp, FOC__THETA);//计算和校正角度
  147   1          
  148   1          if (hallPara.UpdateStatus & 0x01)
  149   1          {
- 150   2              FOC__THETA = hallPara.ThetaReal;
+ 150   2              FOC__THETA = hallPara.ThetaReal; //将校正后的真实角度强制写回 FOC 核心
  151   2              hallPara.UpdateStatus &= (~0x01);
  152   2          }
  153   1          
  154   1          if (hallPara.UpdateStatus & 0x02)
  155   1          {
  156   2              /* 角速度更新 */
- 157   2              FOC__RTHESTEP = hallPara.RTheStepReal;
+ 157   2              FOC__RTHESTEP = hallPara.RTheStepReal; //将校正后的步进角速度写回 FOC 核心
  158   2              hallPara.UpdateStatus &= (~0x02);
  159   2          }
  160   1      }
@@ -191,7 +191,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    FAR CONST SIZE   =   ----    ----
 END OF MODULE INFORMATION.
 
-C51 COMPILER V9.57.0.0   HALLPROCESS                                                       06/27/2026 16:09:31 PAGE 4   
+C51 COMPILER V9.57.0.0   HALLPROCESS                                                       06/29/2026 21:31:45 PAGE 4   
 
 
 C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

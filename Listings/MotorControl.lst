@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   MOTORCONTROL                                                      06/27/2026 16:09:30 PAGE 1   
+C51 COMPILER V9.57.0.0   MOTORCONTROL                                                      06/29/2026 21:31:45 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE MOTORCONTROL
@@ -52,152 +52,153 @@ line level    source
   40   3                  }
   41   2                  else
   42   2                  {
-  43   3                  }
-  44   2                  
-  45   2                  break;
-  46   2                  
-  47   2              case mcInit:
-  48   2                  if (mcFaultSource != FaultNoSource)
-  49   2                  {
-  50   3                      mcState = mcFault;
-  51   3                  }
-  52   2                  else if (isCtrlPowOn == false)
-C51 COMPILER V9.57.0.0   MOTORCONTROL                                                      06/27/2026 16:09:30 PAGE 2   
+  43   3      
+  44   3                  }
+  45   2                  
+  46   2                  break;
+  47   2                  
+  48   2              case mcInit:
+  49   2                  if (mcFaultSource != FaultNoSource)
+  50   2                  {
+  51   3                      mcState = mcFault;
+  52   3                  }
+C51 COMPILER V9.57.0.0   MOTORCONTROL                                                      06/29/2026 21:31:45 PAGE 2   
 
-  53   2                  {
-  54   3                      mcState = mcStop;
-  55   3                  }
-  56   2                 else if (mcCurOffset.OffsetFlag == 1)
-  57   2                  {
-  58   3                      Motor_Init();
-  59   3                      #if (CHARGE_EN == Enable)
-  60   3                      mcFocCtrl.State_Count   = CHARGE_TIME;
-  61   3                      mcState                 = mcCharge;             // 跳入mcCharge状态
-  62   3                      #else
+  53   2                  else if (isCtrlPowOn == false)
+  54   2                  {
+  55   3                      mcState = mcStop;
+  56   3                  }
+  57   2                 else if (mcCurOffset.OffsetFlag == 1)
+  58   2                  {
+  59   3                      Motor_Init();
+  60   3                      #if (CHARGE_EN == Enable)
+  61   3                      mcFocCtrl.State_Count   = CHARGE_TIME;
+  62   3                      mcState                 = mcCharge;             // 跳入mcCharge状态
+  63   3                      #else
                               mcFocCtrl.State_Count   = 10;
                               mcState = mcStart;
                               #endif
-  66   3                  }
-  67   2                  
-  68   2                  break;
-  69   2      
-  70   2              #if (CHARGE_EN == Enable)   
-  71   2              case mcCharge:
-  72   2                  if (mcFaultSource != FaultNoSource)
-  73   2                  {
-  74   3                      mcState = mcFault;
-  75   3                  }
-  76   2                  else if (isCtrlPowOn == false)
-  77   2                  {
-  78   3                      mcState = mcStop;
-  79   3                  }
-  80   2                  else
-  81   2                  {
-  82   3                      Motor_Charge();
-  83   3                      #if(IPMTEST ==Enable)
+  67   3                  }
+  68   2                  
+  69   2                  break;
+  70   2      
+  71   2              #if (CHARGE_EN == Enable)   
+  72   2              case mcCharge:
+  73   2                  if (mcFaultSource != FaultNoSource)
+  74   2                  {
+  75   3                      mcState = mcFault;
+  76   3                  }
+  77   2                  else if (isCtrlPowOn == false)
+  78   2                  {
+  79   3                      mcState = mcStop;
+  80   3                  }
+  81   2                  else
+  82   2                  {
+  83   3                      Motor_Charge();
+  84   3                      #if(IPMTEST ==Enable)
                               {;}
                               #else
-  86   3                      if (mcFocCtrl.State_Count == 0)
-  87   3                      {
-  88   4                          MOE = 0;                              // 关闭输出
-  89   4                          DRV_CMR &= 0xFFC0;                    // 配置关闭
-  90   4                          mcState = mcStart;
-  91   4                      }
-  92   3                      #endif
-  93   3                  }
-  94   2                  
-  95   2                  break;
-  96   2              #endif
-  97   2                  
-  98   2              case mcStart:
-  99   2              
- 100   2                  // 静止启动
- 101   2                  if (mcFocCtrl.State_Count == 0)
- 102   2                  {
- 103   3                      Motor_Static_Open();
- 104   3                      mcState                     = mcRun;
- 105   3                  }
- 106   2                  
- 107   2                  break;
- 108   2                  
- 109   2              case mcRun:
- 110   2                  if (mcFaultSource != FaultNoSource)
- 111   2                  {
- 112   3                      mcState                 = mcFault;
- 113   3                  }
- 114   2                  else if (isCtrlPowOn == false)
-C51 COMPILER V9.57.0.0   MOTORCONTROL                                                      06/27/2026 16:09:30 PAGE 3   
+  87   3                      if (mcFocCtrl.State_Count == 0)
+  88   3                      {
+  89   4                          MOE = 0;                              // 关闭输出
+  90   4                          DRV_CMR &= 0xFFC0;                    // 配置关闭
+  91   4                          mcState = mcStart;
+  92   4                      }
+  93   3                      #endif
+  94   3                  }
+  95   2                  
+  96   2                  break;
+  97   2              #endif
+  98   2                  
+  99   2              case mcStart:
+ 100   2              
+ 101   2                  // 静止启动
+ 102   2                  if (mcFocCtrl.State_Count == 0)
+ 103   2                  {
+ 104   3                      Motor_Static_Open();
+ 105   3                      mcState                     = mcRun;
+ 106   3                  }
+ 107   2                  
+ 108   2                  break;
+ 109   2                  
+ 110   2              case mcRun:
+ 111   2                  if (mcFaultSource != FaultNoSource)
+ 112   2                  {
+ 113   3                      mcState                 = mcFault;
+ 114   3                  }
+C51 COMPILER V9.57.0.0   MOTORCONTROL                                                      06/29/2026 21:31:45 PAGE 3   
 
- 115   2                  {
- 116   3                      mcState                 = mcStop;
- 117   3                      MotorControl.StopSet = 0;
- 118   3                  }
- 119   2                  else
- 120   2                  {
- 121   3                  }
- 122   2                  
- 123   2                  break;
- 124   2                  
- 125   2              case mcStop:
- 126   2                  if (mcFaultSource != FaultNoSource)
- 127   2                  {
- 128   3                      mcState                 = mcFault;
- 129   3                  }
- 130   2                  else
- 131   2                  {
- 132   3                    
- 133   3                      Motor_Stop();
- 134   3                     
- 135   3                  }
- 136   2                  
- 137   2                  break;
- 138   2                  
- 139   2              case mcBrake:
- 140   2                  if (mcFaultSource != FaultNoSource)
- 141   2                  {
- 142   3                      mcState  = mcFault;
- 143   3                  }
- 144   2                  else if (mcFocCtrl.State_Count == 0)
- 145   2                  {
- 146   3                      MOE = 0;
- 147   3                      ClrBit(DRV_CR, FOCEN);
- 148   3                      mcState         = mcReady;
- 149   3                  }
- 150   2                  
- 151   2                  break;
- 152   2                  
- 153   2              case mcFault:
- 154   2                  if (mcFaultSource == FaultNoSource)   //保护清零后关闭输出，软件重新运行
- 155   2                  {
- 156   3                      mcState   = mcReady;
- 157   3                      MotorControl.FaultSet = 0;
- 158   3                  }
- 159   2                  else
- 160   2                  {
- 161   3                      ClrBit(DRV_CR, FOCEN);  //FOC Disable
- 162   3                      MOE     = 0;
- 163   3                      
- 164   3                      if (MotorControl.FaultSet == 0)
- 165   3                      {
- 166   4                          if (MotorControl.StudyFinish)
- 167   4                          {
- 168   5                              MotorControl.Save_Flag  = 1;
- 169   5                          }
- 170   4                          
- 171   4                          MotorControl.FaultSet = 1;
- 172   4                      }
- 173   3                  }
- 174   2                  
- 175   2                  break;
- 176   2                  
-C51 COMPILER V9.57.0.0   MOTORCONTROL                                                      06/27/2026 16:09:30 PAGE 4   
+ 115   2                  else if (isCtrlPowOn == false)
+ 116   2                  {
+ 117   3                      mcState                 = mcStop;
+ 118   3                      MotorControl.StopSet = 0;
+ 119   3                  }
+ 120   2                  else
+ 121   2                  {
+ 122   3                  }
+ 123   2                  
+ 124   2                  break;
+ 125   2                  
+ 126   2              case mcStop:
+ 127   2                  if (mcFaultSource != FaultNoSource)
+ 128   2                  {
+ 129   3                      mcState                 = mcFault;
+ 130   3                  }
+ 131   2                  else
+ 132   2                  {
+ 133   3                    
+ 134   3                      Motor_Stop();
+ 135   3                     
+ 136   3                  }
+ 137   2                  
+ 138   2                  break;
+ 139   2                  
+ 140   2              case mcBrake:
+ 141   2                  if (mcFaultSource != FaultNoSource)
+ 142   2                  {
+ 143   3                      mcState  = mcFault;
+ 144   3                  }
+ 145   2                  else if (mcFocCtrl.State_Count == 0)
+ 146   2                  {
+ 147   3                      MOE = 0;
+ 148   3                      ClrBit(DRV_CR, FOCEN);
+ 149   3                      mcState         = mcReady;
+ 150   3                  }
+ 151   2                  
+ 152   2                  break;
+ 153   2                  
+ 154   2              case mcFault:
+ 155   2                  if (mcFaultSource == FaultNoSource)   //保护清零后关闭输出，软件重新运行
+ 156   2                  {
+ 157   3                      mcState   = mcReady;
+ 158   3                      MotorControl.FaultSet = 0;
+ 159   3                  }
+ 160   2                  else
+ 161   2                  {
+ 162   3                      ClrBit(DRV_CR, FOCEN);  //FOC Disable
+ 163   3                      MOE     = 0;
+ 164   3                      
+ 165   3                      if (MotorControl.FaultSet == 0)
+ 166   3                      {
+ 167   4                          if (MotorControl.StudyFinish)
+ 168   4                          {
+ 169   5                              MotorControl.Save_Flag  = 1;
+ 170   5                          }
+ 171   4                          
+ 172   4                          MotorControl.FaultSet = 1;
+ 173   4                      }
+ 174   3                  }
+ 175   2                  
+ 176   2                  break;
+C51 COMPILER V9.57.0.0   MOTORCONTROL                                                      06/29/2026 21:31:45 PAGE 4   
 
- 177   2              default:
- 178   2                  mcState   = mcReady;
- 179   2                  break;
- 180   2          }
- 181   1      }
- 182          
+ 177   2                  
+ 178   2              default:
+ 179   2                  mcState   = mcReady;
+ 180   2                  break;
+ 181   2          }
+ 182   1      }
+ 183          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

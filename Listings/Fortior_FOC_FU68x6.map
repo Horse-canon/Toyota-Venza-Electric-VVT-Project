@@ -1,4 +1,4 @@
-LX51 LINKER/LOCATER V4.66.87.0                                                          06/27/2026  16:09:32  PAGE 1
+LX51 LINKER/LOCATER V4.66.87.0                                                          06/29/2026  21:31:46  PAGE 1
 
 
 LX51 LINKER/LOCATER V4.66.87.0, INVOKED BY:
@@ -67,7 +67,7 @@ INPUT MODULES INCLUDED:
   .\Output\SMDU.obj (SMDU)
          COMMENT TYPE 0: C51 V9.57.0.0
   .\Output\Lin.obj (LIN)
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 2
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 2
 
 
          COMMENT TYPE 0: C51 V9.57.0.0
@@ -135,7 +135,7 @@ INPUT MODULES INCLUDED:
          COMMENT TYPE 1: A51 / ASM51 Assembler
   E:\05KEILC51\C51\LIB\C51L.LIB (?C?LLDPTR)
          COMMENT TYPE 1: A51 / ASM51 Assembler
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 3
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 3
 
 
   E:\05KEILC51\C51\LIB\C51L.LIB (?C?LLDOPTR)
@@ -203,7 +203,7 @@ START     STOP      LENGTH    ALIGN  RELOC    MEMORY CLASS   SEGMENT NAME
 * * * * * * * * * * *   D A T A   M E M O R Y   * * * * * * * * * * * * *
 000000H   000007H   000008H   ---    AT..     DATA           "REG BANK 0"
 000008H   000015H   00000EH   BYTE   UNIT     DATA           _DATA_GROUP_
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 4
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 4
 
 
 000016H   000019H   000004H   BYTE   UNIT     DATA           ?DT?MAIN
@@ -271,7 +271,7 @@ START     STOP      LENGTH    ALIGN  RELOC    MEMORY CLASS   SEGMENT NAME
 002350H   0023CAH   00007BH   BYTE   UNIT     CODE           ?PR?CAN_VIDSTATEMACHINE?CAN
 0023CBH   002440H   000076H   BYTE   UNIT     CODE           ?PR?THETACALCULATION?HALL_V0
 002441H   0024B5H   000075H   BYTE   UNIT     CODE           ?PR?MOTORCONTROLFUNCTION
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 5
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 5
 
 
 0024B6H   002529H   000074H   BYTE   UNIT     CODE           ?PR?DRIVER_INIT?DRIVER
@@ -339,7 +339,7 @@ START     STOP      LENGTH    ALIGN  RELOC    MEMORY CLASS   SEGMENT NAME
 
 * * * * * * * * *   R E M O V E D     S E G M E N T S   * * * * * * * *
    *DEL*:           000001H   BYTE   UNIT     CODE           ?PR?DEBUGSET?MAIN
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 6
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 6
 
 
    *DEL*:           000019H   BYTE   UNIT     CODE           ?PR?MOTOR_FORCE_STOP?MAIN
@@ -407,7 +407,7 @@ START     STOP      LENGTH    ALIGN  RELOC    MEMORY CLASS   SEGMENT NAME
    *DEL*:           000016H   BYTE   UNIT     CODE           ?PR?_PUT_CHAR?UART
    *DEL*:           000013H   BYTE   UNIT     CODE           ?PR?_PUT_STRING?UART
    *DEL*:           000024H   BYTE   UNIT     CODE           ?PR?TSD_INIT?TSD
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 7
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 7
 
 
    *DEL*:           000008H   BYTE   UNIT     CODE           ?PR?TSD_GAIN?TSD
@@ -475,7 +475,7 @@ FUNCTION/MODULE                                BIT_GROUP   DATA_GROUP   XDATA_GR
 ===================================================================================
 LVW_TSD_INT/INTERRUPT                         ----- -----  ----- -----  ----- -----
 
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 8
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 8
 
 
 *** NEW ROOT ********************************
@@ -543,7 +543,7 @@ _HALLCALCULATION/HALL_V0                      ----- -----  ----- -----  ----- --
 
 TIM2_INT/INTERRUPT                            ----- -----  ----- -----  ----- -----
 
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 9
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 9
 
 
 *** NEW ROOT ********************************
@@ -611,7 +611,7 @@ HARDWAREINIT/MAIN                             ----- -----  ----- -----  ----- --
   +--> CMP3_INIT/CMP
   +--> GPIO_INIT/GPIO
   +--> ADC_INIT/ADC
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 10
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 10
 
 
   +--> AMP_INIT/AMP
@@ -679,7 +679,7 @@ PI_INIT/PIINIT                                ----- -----  ----- -----  ----- --
 PIINIT                                        ----- -----  ----- -----  ----- -----
 
 MOTOR_CHARGE/MOTORCONTROLFUNCTION             ----- -----  ----- -----  ----- -----
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 11
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 11
 
 
   +--> MOTORCONTROLFUNCTION
@@ -747,7 +747,7 @@ CANIF_VIDCOMLOSTDIAG/CANIF                    ----- -----  ----- -----  ----- --
 PUBLIC SYMBOLS OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
 
 
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 12
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 12
 
 
       VALUE       CLASS    TYPE      PUBLIC SYMBOL NAME
@@ -815,7 +815,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       010006D8H   CODE     ---       ?C?ULSHR
       00000000H   NUMBER   ---       ?C?XDATASEG
       01001E35H   CODE     ---       ?C_START
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 13
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 13
 
 
       01000000H   CODE     ---       ?C_STARTUP
@@ -883,7 +883,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
 *SFR* 000000B1H   DATA     BYTE      CAN_CR0
 *SFR* 000000B2H   DATA     BYTE      CAN_CR1
 *SFR* 000000B5H   DATA     BYTE      CAN_CR2
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 14
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 14
 
 
       020002BBH   XDATA    ---       CAN_data_RX_1
@@ -951,7 +951,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       010021D5H   CODE     ---       DRV_ISR
 *SFR* 000000F8H   DATA     BYTE      DRV_OUT
 *SFR* 000000A8H.7 DATA     BIT       EA
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 15
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 15
 
 
 *DEL*:00000000H   CODE     ---       EnableRun_DMA0
@@ -1019,7 +1019,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
 *SFR* 000000B0H.4 DATA     BIT       GP34
 *SFR* 000000B0H.5 DATA     BIT       GP35
 *SFR* 000000B0H.6 DATA     BIT       GP36
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 16
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 16
 
 
 *SFR* 000000B0H.7 DATA     BIT       GP37
@@ -1087,7 +1087,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       020001B6H   XDATA    ---       mcPwmInput
       02000149H   XDATA    ---       mcRefRamp
       020003E4H   XDATA    ---       McStaSet
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 17
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 17
 
 
       0000001AH   DATA     BYTE      mcState
@@ -1155,7 +1155,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
 *SFR* 00000098H.0 DATA     BIT       RI
 *SFR* 000000D0H.3 DATA     BIT       RS0
 *SFR* 000000D0H.4 DATA     BIT       RS1
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 18
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 18
 
 
 *SFR* 000000C9H   DATA     BYTE      RST_SR
@@ -1223,7 +1223,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
 *SFR* 00000088H.5 DATA     BIT       TSDIF
 *DEL*:00000000H   CODE     ---       UART1_Init
 *DEL*:00000000H   CODE     ---       UART2_Init
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 19
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 19
 
 
       020003B9H   XDATA    ---       ucaLinBuff
@@ -1291,7 +1291,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000B0H.6 SFRSYM    DATA     BIT       GP36
       000000A0H.7 SFRSYM    DATA     BIT       GP27
       00000090H   SFRSYM    DATA     BYTE      P1
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 20
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 20
 
 
       000000BDH   SFRSYM    DATA     BYTE      LIN_SIZE
@@ -1359,7 +1359,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       0000009FH   SFRSYM    DATA     BYTE      TIM4_CR1
       000000C5H   SFRSYM    DATA     BYTE      CAN_FIR1
       000000C6H   SFRSYM    DATA     BYTE      CAN_FIR2
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 21
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 21
 
 
       000000E0H   SFRSYM    DATA     BYTE      ACC
@@ -1427,7 +1427,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000B2H   SFRSYM    DATA     BYTE      CAN_CR1
       000000D8H.1 SFRSYM    DATA     BIT       UT2TI
       000000B0H.0 SFRSYM    DATA     BIT       GP30
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 22
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 22
 
 
       000000A0H.1 SFRSYM    DATA     BIT       GP21
@@ -1495,7 +1495,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       0100257AH   LINE      CODE     ---       #122
       01002584H   LINE      CODE     ---       #123
       0100258EH   LINE      CODE     ---       #124
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 23
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 23
 
 
       01002598H   LINE      CODE     ---       #132
@@ -1563,7 +1563,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       01001D12H   LINE      CODE     ---       #265
       01001D16H   LINE      CODE     ---       #266
       01001D16H   LINE      CODE     ---       #270
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 24
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 24
 
 
       01001D19H   LINE      CODE     ---       #272
@@ -1631,7 +1631,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000C9H   SFRSYM    DATA     BYTE      RST_SR
       000000D9H   SFRSYM    DATA     BYTE      EVT_FILT
       000000B8H.5 SFRSYM    DATA     BIT       GP45
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 25
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 25
 
 
       000000B0H.6 SFRSYM    DATA     BIT       GP36
@@ -1699,7 +1699,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       0000009DH   SFRSYM    DATA     BYTE      TIM3_CR1
       000000C4H   SFRSYM    DATA     BYTE      CAN_FIR0
       000000F8H   SFRSYM    DATA     BYTE      DRV_OUT
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 26
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 26
 
 
       0000009FH   SFRSYM    DATA     BYTE      TIM4_CR1
@@ -1767,7 +1767,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000A0H.0 SFRSYM    DATA     BIT       GP20
       00000090H.1 SFRSYM    DATA     BIT       GP11
       00000080H.2 SFRSYM    DATA     BIT       GP02
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 27
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 27
 
 
       000000B2H   SFRSYM    DATA     BYTE      CAN_CR1
@@ -1835,7 +1835,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       01000B64H   BLOCK     CODE     ---       LVL=0
       01000B64H   BLOCK     CODE     NEAR LAB  LVL=1
       0200033FH   SYMBOL    XDATA    FLOAT     Mspeed_rpm
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 28
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 28
 
 
       02000343H   SYMBOL    XDATA    FLOAT     S_target_rpm
@@ -1903,7 +1903,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       01000DCAH   LINE      CODE     ---       #445
       01000DDFH   LINE      CODE     ---       #446
       01000DF4H   LINE      CODE     ---       #447
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 29
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 29
 
 
       01000E09H   LINE      CODE     ---       #448
@@ -1971,7 +1971,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000B0H.7 SFRSYM    DATA     BIT       GP37
       000000A0H   SFRSYM    DATA     BYTE      P2
       000000B0H   SFRSYM    DATA     BYTE      P3
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 30
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 30
 
 
       000000B8H   SFRSYM    DATA     BYTE      P4
@@ -2039,7 +2039,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000C7H   SFRSYM    DATA     BYTE      CAN_FIR3
       000000A8H.4 SFRSYM    DATA     BIT       ES0
       00000085H   SFRSYM    DATA     BYTE      FLA_CR
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 31
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 31
 
 
       000000CAH   SFRSYM    DATA     BYTE      CAN_FMR0
@@ -2107,7 +2107,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       00000080H.3 SFRSYM    DATA     BIT       GP03
       000000B5H   SFRSYM    DATA     BYTE      CAN_CR2
       000000A8H.1 SFRSYM    DATA     BIT       TSDIE
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 32
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 32
 
 
       000000D0H   SFRSYM    DATA     BYTE      PSW
@@ -2169,171 +2169,171 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       010021FDH   LINE      CODE     ---       #97
       010021FDH   LINE      CODE     ---       #99
       01002204H   LINE      CODE     ---       #100
-      01002204H   LINE      CODE     ---       #103
-      01002207H   LINE      CODE     ---       #106
-      01002213H   LINE      CODE     ---       #107
-      0100221BH   LINE      CODE     ---       #108
-      0100222AH   LINE      CODE     ---       #109
-      01002232H   LINE      CODE     ---       #114
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 33
+      01002204H   LINE      CODE     ---       #101
+      01002207H   LINE      CODE     ---       #104
+      01002213H   LINE      CODE     ---       #105
+      0100221BH   LINE      CODE     ---       #106
+      0100222AH   LINE      CODE     ---       #107
+      01002232H   LINE      CODE     ---       #112
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 33
 
 
-      0100223BH   LINE      CODE     ---       #116
-      0100223BH   LINE      CODE     ---       #117
+      0100223BH   LINE      CODE     ---       #114
+      0100223BH   LINE      CODE     ---       #115
       ---         BLOCKEND  ---      ---       LVL=0
 
       010022D5H   BLOCK     CODE     ---       LVL=0
-      010022D5H   LINE      CODE     ---       #124
-      010022F2H   LINE      CODE     ---       #126
-      010022F9H   LINE      CODE     ---       #127
-      010022F9H   LINE      CODE     ---       #128
-      010022FCH   LINE      CODE     ---       #129
+      010022D5H   LINE      CODE     ---       #122
+      010022F2H   LINE      CODE     ---       #124
+      010022F9H   LINE      CODE     ---       #125
+      010022F9H   LINE      CODE     ---       #126
+      010022FCH   LINE      CODE     ---       #127
+      01002303H   LINE      CODE     ---       #128
       01002303H   LINE      CODE     ---       #130
-      01002303H   LINE      CODE     ---       #132
-      0100230AH   LINE      CODE     ---       #133
-      0100230AH   LINE      CODE     ---       #134
+      0100230AH   LINE      CODE     ---       #131
+      0100230AH   LINE      CODE     ---       #132
+      0100230EH   LINE      CODE     ---       #133
       0100230EH   LINE      CODE     ---       #135
-      0100230EH   LINE      CODE     ---       #137
-      01002315H   LINE      CODE     ---       #138
-      01002315H   LINE      CODE     ---       #139
+      01002315H   LINE      CODE     ---       #136
+      01002315H   LINE      CODE     ---       #137
+      01002319H   LINE      CODE     ---       #138
       01002319H   LINE      CODE     ---       #140
-      01002319H   LINE      CODE     ---       #142
-      01002320H   LINE      CODE     ---       #143
-      01002320H   LINE      CODE     ---       #144
-      01002323H   LINE      CODE     ---       #145
+      01002320H   LINE      CODE     ---       #141
+      01002320H   LINE      CODE     ---       #142
+      01002323H   LINE      CODE     ---       #143
+      0100232AH   LINE      CODE     ---       #144
       0100232AH   LINE      CODE     ---       #146
-      0100232AH   LINE      CODE     ---       #148
-      01002331H   LINE      CODE     ---       #149
-      01002331H   LINE      CODE     ---       #150
-      01002335H   LINE      CODE     ---       #151
-      01002335H   LINE      CODE     ---       #152
+      01002331H   LINE      CODE     ---       #147
+      01002331H   LINE      CODE     ---       #148
+      01002335H   LINE      CODE     ---       #149
+      01002335H   LINE      CODE     ---       #150
       ---         BLOCKEND  ---      ---       LVL=0
 
       01002BBDH   BLOCK     CODE     ---       LVL=0
-      01002BBDH   LINE      CODE     ---       #159
-      01002BBFH   LINE      CODE     ---       #161
-      01002BC4H   LINE      CODE     ---       #162
-      01002BC4H   LINE      CODE     ---       #165
+      01002BBDH   LINE      CODE     ---       #157
+      01002BBFH   LINE      CODE     ---       #159
+      01002BC4H   LINE      CODE     ---       #160
+      01002BC4H   LINE      CODE     ---       #163
+      01002BC7H   LINE      CODE     ---       #164
       01002BC7H   LINE      CODE     ---       #166
-      01002BC7H   LINE      CODE     ---       #168
-      01002BCCH   LINE      CODE     ---       #169
-      01002BCCH   LINE      CODE     ---       #172
-      01002BCFH   LINE      CODE     ---       #173
-      01002BCFH   LINE      CODE     ---       #174
-      01002BD4H   LINE      CODE     ---       #175
-      01002BD4H   LINE      CODE     ---       #176
-      01002BD7H   LINE      CODE     ---       #177
-      01002BD7H   LINE      CODE     ---       #178
+      01002BCCH   LINE      CODE     ---       #167
+      01002BCCH   LINE      CODE     ---       #170
+      01002BCFH   LINE      CODE     ---       #171
+      01002BCFH   LINE      CODE     ---       #172
+      01002BD4H   LINE      CODE     ---       #173
+      01002BD4H   LINE      CODE     ---       #174
+      01002BD7H   LINE      CODE     ---       #175
+      01002BD7H   LINE      CODE     ---       #176
       ---         BLOCKEND  ---      ---       LVL=0
 
       01002599H   BLOCK     CODE     ---       LVL=0
-      01002599H   LINE      CODE     ---       #208
-      0100259FH   LINE      CODE     ---       #210
-      010025A4H   LINE      CODE     ---       #211
-      010025A4H   LINE      CODE     ---       #212
+      01002599H   LINE      CODE     ---       #206
+      0100259FH   LINE      CODE     ---       #208
+      010025A4H   LINE      CODE     ---       #209
+      010025A4H   LINE      CODE     ---       #210
+      010025A7H   LINE      CODE     ---       #211
       010025A7H   LINE      CODE     ---       #213
-      010025A7H   LINE      CODE     ---       #215
-      010025ACH   LINE      CODE     ---       #216
-      010025ACH   LINE      CODE     ---       #217
-      010025B2H   LINE      CODE     ---       #218
-      010025B2H   LINE      CODE     ---       #219
-      010025BCH   LINE      CODE     ---       #220
-      010025C6H   LINE      CODE     ---       #221
+      010025ACH   LINE      CODE     ---       #214
+      010025ACH   LINE      CODE     ---       #215
+      010025B2H   LINE      CODE     ---       #216
+      010025B2H   LINE      CODE     ---       #217
+      010025BCH   LINE      CODE     ---       #218
+      010025C6H   LINE      CODE     ---       #219
+      010025CCH   LINE      CODE     ---       #220
       010025CCH   LINE      CODE     ---       #222
-      010025CCH   LINE      CODE     ---       #224
+      010025CFH   LINE      CODE     ---       #223
       010025CFH   LINE      CODE     ---       #225
-      010025CFH   LINE      CODE     ---       #227
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 34
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 34
 
 
-      010025D4H   LINE      CODE     ---       #228
-      010025D4H   LINE      CODE     ---       #229
-      010025DAH   LINE      CODE     ---       #230
-      010025DAH   LINE      CODE     ---       #231
-      010025E2H   LINE      CODE     ---       #232
-      010025E2H   LINE      CODE     ---       #233
-      010025E8H   LINE      CODE     ---       #234
-      010025E8H   LINE      CODE     ---       #235
-      010025EAH   LINE      CODE     ---       #237
-      010025EAH   LINE      CODE     ---       #238
-      010025EEH   LINE      CODE     ---       #239
+      010025D4H   LINE      CODE     ---       #226
+      010025D4H   LINE      CODE     ---       #227
+      010025DAH   LINE      CODE     ---       #228
+      010025DAH   LINE      CODE     ---       #229
+      010025E2H   LINE      CODE     ---       #230
+      010025E2H   LINE      CODE     ---       #231
+      010025E8H   LINE      CODE     ---       #232
+      010025E8H   LINE      CODE     ---       #233
+      010025EAH   LINE      CODE     ---       #235
+      010025EAH   LINE      CODE     ---       #236
+      010025EEH   LINE      CODE     ---       #237
+      010025F8H   LINE      CODE     ---       #238
       010025F8H   LINE      CODE     ---       #240
-      010025F8H   LINE      CODE     ---       #242
+      010025FEH   LINE      CODE     ---       #241
       010025FEH   LINE      CODE     ---       #243
-      010025FEH   LINE      CODE     ---       #245
-      01002601H   LINE      CODE     ---       #246
-      01002601H   LINE      CODE     ---       #247
+      01002601H   LINE      CODE     ---       #244
+      01002601H   LINE      CODE     ---       #245
       ---         BLOCKEND  ---      ---       LVL=0
 
       010029E2H   BLOCK     CODE     ---       LVL=0
-      010029E2H   LINE      CODE     ---       #255
-      010029E8H   LINE      CODE     ---       #257
+      010029E2H   LINE      CODE     ---       #253
+      010029E8H   LINE      CODE     ---       #255
+      010029EFH   LINE      CODE     ---       #256
       010029EFH   LINE      CODE     ---       #258
-      010029EFH   LINE      CODE     ---       #260
-      010029F2H   LINE      CODE     ---       #262
-      010029F6H   LINE      CODE     ---       #263
-      010029F6H   LINE      CODE     ---       #264
+      010029F2H   LINE      CODE     ---       #260
+      010029F6H   LINE      CODE     ---       #261
+      010029F6H   LINE      CODE     ---       #262
+      010029F8H   LINE      CODE     ---       #263
       010029F8H   LINE      CODE     ---       #265
-      010029F8H   LINE      CODE     ---       #267
-      010029FCH   LINE      CODE     ---       #268
-      010029FCH   LINE      CODE     ---       #269
+      010029FCH   LINE      CODE     ---       #266
+      010029FCH   LINE      CODE     ---       #267
+      010029FEH   LINE      CODE     ---       #268
       010029FEH   LINE      CODE     ---       #270
-      010029FEH   LINE      CODE     ---       #272
-      01002A02H   LINE      CODE     ---       #273
-      01002A02H   LINE      CODE     ---       #274
+      01002A02H   LINE      CODE     ---       #271
+      01002A02H   LINE      CODE     ---       #272
+      01002A04H   LINE      CODE     ---       #273
       01002A04H   LINE      CODE     ---       #275
-      01002A04H   LINE      CODE     ---       #277
-      01002A0DH   LINE      CODE     ---       #279
-      01002A0DH   LINE      CODE     ---       #280
+      01002A0DH   LINE      CODE     ---       #277
+      01002A0DH   LINE      CODE     ---       #278
       ---         BLOCKEND  ---      ---       LVL=0
 
       01002C3DH   BLOCK     CODE     ---       LVL=0
-      01002C3DH   LINE      CODE     ---       #290
-      01002C3FH   LINE      CODE     ---       #292
-      01002C44H   LINE      CODE     ---       #293
-      01002C44H   LINE      CODE     ---       #294
-      01002C4AH   LINE      CODE     ---       #295
-      01002C4AH   LINE      CODE     ---       #296
+      01002C3DH   LINE      CODE     ---       #288
+      01002C3FH   LINE      CODE     ---       #290
+      01002C44H   LINE      CODE     ---       #291
+      01002C44H   LINE      CODE     ---       #292
+      01002C4AH   LINE      CODE     ---       #293
+      01002C4AH   LINE      CODE     ---       #294
+      01002C4DH   LINE      CODE     ---       #295
       01002C4DH   LINE      CODE     ---       #297
-      01002C4DH   LINE      CODE     ---       #299
-      01002C50H   LINE      CODE     ---       #300
-      01002C50H   LINE      CODE     ---       #301
+      01002C50H   LINE      CODE     ---       #298
+      01002C50H   LINE      CODE     ---       #299
       ---         BLOCKEND  ---      ---       LVL=0
 
       01002256H   BLOCK     CODE     ---       LVL=0
-      01002256H   LINE      CODE     ---       #314
-      01002273H   LINE      CODE     ---       #317
-      01002279H   LINE      CODE     ---       #319
-      0100227EH   LINE      CODE     ---       #320
-      0100227EH   LINE      CODE     ---       #321
-      01002281H   LINE      CODE     ---       #322
+      01002256H   LINE      CODE     ---       #312
+      01002273H   LINE      CODE     ---       #315
+      01002279H   LINE      CODE     ---       #317
+      0100227EH   LINE      CODE     ---       #318
+      0100227EH   LINE      CODE     ---       #319
+      01002281H   LINE      CODE     ---       #320
+      01002284H   LINE      CODE     ---       #321
       01002284H   LINE      CODE     ---       #323
-      01002284H   LINE      CODE     ---       #325
-      01002289H   LINE      CODE     ---       #326
-      01002289H   LINE      CODE     ---       #327
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 35
+      01002289H   LINE      CODE     ---       #324
+      01002289H   LINE      CODE     ---       #325
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 35
 
 
-      0100228CH   LINE      CODE     ---       #328
-      0100228CH   LINE      CODE     ---       #329
-      01002291H   LINE      CODE     ---       #330
-      01002291H   LINE      CODE     ---       #331
-      01002294H   LINE      CODE     ---       #332
-      01002294H   LINE      CODE     ---       #333
-      01002299H   LINE      CODE     ---       #334
-      01002299H   LINE      CODE     ---       #335
-      0100229CH   LINE      CODE     ---       #336
-      0100229CH   LINE      CODE     ---       #337
-      010022A1H   LINE      CODE     ---       #338
-      010022A1H   LINE      CODE     ---       #339
-      010022A8H   LINE      CODE     ---       #340
-      010022A8H   LINE      CODE     ---       #341
-      010022AEH   LINE      CODE     ---       #342
-      010022B2H   LINE      CODE     ---       #343
-      010022B7H   LINE      CODE     ---       #349
-      010022B7H   LINE      CODE     ---       #350
-      010022BAH   LINE      CODE     ---       #351
-      010022BAH   LINE      CODE     ---       #352
+      0100228CH   LINE      CODE     ---       #326
+      0100228CH   LINE      CODE     ---       #327
+      01002291H   LINE      CODE     ---       #328
+      01002291H   LINE      CODE     ---       #329
+      01002294H   LINE      CODE     ---       #330
+      01002294H   LINE      CODE     ---       #331
+      01002299H   LINE      CODE     ---       #332
+      01002299H   LINE      CODE     ---       #333
+      0100229CH   LINE      CODE     ---       #334
+      0100229CH   LINE      CODE     ---       #335
+      010022A1H   LINE      CODE     ---       #336
+      010022A1H   LINE      CODE     ---       #337
+      010022A8H   LINE      CODE     ---       #338
+      010022A8H   LINE      CODE     ---       #339
+      010022AEH   LINE      CODE     ---       #340
+      010022B2H   LINE      CODE     ---       #341
+      010022B7H   LINE      CODE     ---       #347
+      010022B7H   LINE      CODE     ---       #348
+      010022BAH   LINE      CODE     ---       #349
+      010022BAH   LINE      CODE     ---       #350
       ---         BLOCKEND  ---      ---       LVL=0
 
       ---         MODULE    ---      ---       MOTORCONTROL
@@ -2379,7 +2379,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000F8H.1 SFRSYM    DATA     BIT       OISUL
       000000DFH   SFRSYM    DATA     BYTE      CAN_REC
       000000A8H   SFRSYM    DATA     BYTE      IE
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 36
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 36
 
 
       000000F8H.3 SFRSYM    DATA     BIT       OISVL
@@ -2447,7 +2447,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000C3H   SFRSYM    DATA     BYTE      CAN_BTR2
       00000098H.3 SFRSYM    DATA     BIT       TB8
       000000A8H.2 SFRSYM    DATA     BIT       EX1
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 37
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 37
 
 
       000000D0H.0 SFRSYM    DATA     BIT       P
@@ -2515,7 +2515,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000B8H.2 SFRSYM    DATA     BIT       GP42
       000000B0H.3 SFRSYM    DATA     BIT       GP33
       000000A0H.4 SFRSYM    DATA     BIT       GP24
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 38
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 38
 
 
       00000090H.5 SFRSYM    DATA     BIT       GP15
@@ -2540,118 +2540,118 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       01001170H   LINE      CODE     ---       #39
       01001176H   LINE      CODE     ---       #40
       01001177H   LINE      CODE     ---       #42
-      01001177H   LINE      CODE     ---       #43
-      01001177H   LINE      CODE     ---       #45
-      01001177H   LINE      CODE     ---       #47
+      01001177H   LINE      CODE     ---       #44
+      01001177H   LINE      CODE     ---       #46
       01001177H   LINE      CODE     ---       #48
-      0100117BH   LINE      CODE     ---       #49
+      01001177H   LINE      CODE     ---       #49
       0100117BH   LINE      CODE     ---       #50
       0100117BH   LINE      CODE     ---       #51
-      0100117EH   LINE      CODE     ---       #52
-      01001181H   LINE      CODE     ---       #53
+      0100117BH   LINE      CODE     ---       #52
+      0100117EH   LINE      CODE     ---       #53
       01001181H   LINE      CODE     ---       #54
       01001181H   LINE      CODE     ---       #55
-      01001183H   LINE      CODE     ---       #56
-      0100118EH   LINE      CODE     ---       #57
+      01001181H   LINE      CODE     ---       #56
+      01001183H   LINE      CODE     ---       #57
       0100118EH   LINE      CODE     ---       #58
-      01001191H   LINE      CODE     ---       #60
-      0100119AH   LINE      CODE     ---       #61
-      0100119DH   LINE      CODE     ---       #66
-      0100119DH   LINE      CODE     ---       #68
-      0100119EH   LINE      CODE     ---       #71
+      0100118EH   LINE      CODE     ---       #59
+      01001191H   LINE      CODE     ---       #61
+      0100119AH   LINE      CODE     ---       #62
+      0100119DH   LINE      CODE     ---       #67
+      0100119DH   LINE      CODE     ---       #69
       0100119EH   LINE      CODE     ---       #72
-      010011A2H   LINE      CODE     ---       #73
+      0100119EH   LINE      CODE     ---       #73
       010011A2H   LINE      CODE     ---       #74
       010011A2H   LINE      CODE     ---       #75
-      010011A4H   LINE      CODE     ---       #76
-      010011A7H   LINE      CODE     ---       #77
+      010011A2H   LINE      CODE     ---       #76
+      010011A4H   LINE      CODE     ---       #77
       010011A7H   LINE      CODE     ---       #78
-      010011AAH   LINE      CODE     ---       #79
-      010011ABH   LINE      CODE     ---       #81
+      010011A7H   LINE      CODE     ---       #79
+      010011AAH   LINE      CODE     ---       #80
       010011ABH   LINE      CODE     ---       #82
-      010011AEH   LINE      CODE     ---       #86
-      010011BBH   LINE      CODE     ---       #87
+      010011ABH   LINE      CODE     ---       #83
+      010011AEH   LINE      CODE     ---       #87
       010011BBH   LINE      CODE     ---       #88
-      010011BDH   LINE      CODE     ---       #89
-      010011D3H   LINE      CODE     ---       #90
-      010011D6H   LINE      CODE     ---       #91
-      010011D6H   LINE      CODE     ---       #93
-      010011D6H   LINE      CODE     ---       #95
-      010011D7H   LINE      CODE     ---       #98
-      010011D7H   LINE      CODE     ---       #101
-      010011E1H   LINE      CODE     ---       #102
+      010011BBH   LINE      CODE     ---       #89
+      010011BDH   LINE      CODE     ---       #90
+      010011D3H   LINE      CODE     ---       #91
+      010011D6H   LINE      CODE     ---       #92
+      010011D6H   LINE      CODE     ---       #94
+      010011D6H   LINE      CODE     ---       #96
+      010011D7H   LINE      CODE     ---       #99
+      010011D7H   LINE      CODE     ---       #102
       010011E1H   LINE      CODE     ---       #103
-      010011E4H   LINE      CODE     ---       #104
-      010011E7H   LINE      CODE     ---       #105
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 39
+      010011E1H   LINE      CODE     ---       #104
+      010011E4H   LINE      CODE     ---       #105
+      010011E7H   LINE      CODE     ---       #106
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 39
 
 
-      010011E7H   LINE      CODE     ---       #107
-      010011E8H   LINE      CODE     ---       #109
+      010011E7H   LINE      CODE     ---       #108
       010011E8H   LINE      CODE     ---       #110
-      010011ECH   LINE      CODE     ---       #111
+      010011E8H   LINE      CODE     ---       #111
       010011ECH   LINE      CODE     ---       #112
       010011ECH   LINE      CODE     ---       #113
-      010011EEH   LINE      CODE     ---       #114
-      010011F1H   LINE      CODE     ---       #115
+      010011ECH   LINE      CODE     ---       #114
+      010011EEH   LINE      CODE     ---       #115
       010011F1H   LINE      CODE     ---       #116
-      010011F4H   LINE      CODE     ---       #117
-      010011F9H   LINE      CODE     ---       #118
-      010011FAH   LINE      CODE     ---       #120
+      010011F1H   LINE      CODE     ---       #117
+      010011F4H   LINE      CODE     ---       #118
+      010011F9H   LINE      CODE     ---       #119
       010011FAH   LINE      CODE     ---       #121
-      010011FAH   LINE      CODE     ---       #123
-      010011FAH   LINE      CODE     ---       #125
+      010011FAH   LINE      CODE     ---       #122
+      010011FAH   LINE      CODE     ---       #124
       010011FAH   LINE      CODE     ---       #126
-      010011FEH   LINE      CODE     ---       #127
+      010011FAH   LINE      CODE     ---       #127
       010011FEH   LINE      CODE     ---       #128
       010011FEH   LINE      CODE     ---       #129
-      01001200H   LINE      CODE     ---       #131
-      01001200H   LINE      CODE     ---       #133
-      01001203H   LINE      CODE     ---       #135
-      01001203H   LINE      CODE     ---       #137
-      01001203H   LINE      CODE     ---       #139
+      010011FEH   LINE      CODE     ---       #130
+      01001200H   LINE      CODE     ---       #132
+      01001200H   LINE      CODE     ---       #134
+      01001203H   LINE      CODE     ---       #136
+      01001203H   LINE      CODE     ---       #138
       01001203H   LINE      CODE     ---       #140
-      01001207H   LINE      CODE     ---       #141
+      01001203H   LINE      CODE     ---       #141
       01001207H   LINE      CODE     ---       #142
-      0100120AH   LINE      CODE     ---       #143
-      0100120BH   LINE      CODE     ---       #144
-      01001215H   LINE      CODE     ---       #145
+      01001207H   LINE      CODE     ---       #143
+      0100120AH   LINE      CODE     ---       #144
+      0100120BH   LINE      CODE     ---       #145
       01001215H   LINE      CODE     ---       #146
-      01001217H   LINE      CODE     ---       #147
-      0100121EH   LINE      CODE     ---       #148
+      01001215H   LINE      CODE     ---       #147
+      01001217H   LINE      CODE     ---       #148
       0100121EH   LINE      CODE     ---       #149
-      0100121EH   LINE      CODE     ---       #151
-      01001220H   LINE      CODE     ---       #153
+      0100121EH   LINE      CODE     ---       #150
+      0100121EH   LINE      CODE     ---       #152
       01001220H   LINE      CODE     ---       #154
-      01001224H   LINE      CODE     ---       #155
+      01001220H   LINE      CODE     ---       #155
       01001224H   LINE      CODE     ---       #156
-      01001226H   LINE      CODE     ---       #157
-      0100122AH   LINE      CODE     ---       #158
-      0100122BH   LINE      CODE     ---       #160
+      01001224H   LINE      CODE     ---       #157
+      01001226H   LINE      CODE     ---       #158
+      0100122AH   LINE      CODE     ---       #159
       0100122BH   LINE      CODE     ---       #161
-      01001232H   LINE      CODE     ---       #162
-      01001234H   LINE      CODE     ---       #164
-      0100123AH   LINE      CODE     ---       #165
+      0100122BH   LINE      CODE     ---       #162
+      01001232H   LINE      CODE     ---       #163
+      01001234H   LINE      CODE     ---       #165
       0100123AH   LINE      CODE     ---       #166
-      01001240H   LINE      CODE     ---       #167
+      0100123AH   LINE      CODE     ---       #167
       01001240H   LINE      CODE     ---       #168
-      01001246H   LINE      CODE     ---       #169
-      01001246H   LINE      CODE     ---       #171
-      0100124CH   LINE      CODE     ---       #172
+      01001240H   LINE      CODE     ---       #169
+      01001246H   LINE      CODE     ---       #170
+      01001246H   LINE      CODE     ---       #172
       0100124CH   LINE      CODE     ---       #173
-      0100124CH   LINE      CODE     ---       #175
-      0100124DH   LINE      CODE     ---       #177
+      0100124CH   LINE      CODE     ---       #174
+      0100124CH   LINE      CODE     ---       #176
       0100124DH   LINE      CODE     ---       #178
-      01001250H   LINE      CODE     ---       #179
+      0100124DH   LINE      CODE     ---       #179
       01001250H   LINE      CODE     ---       #180
       01001250H   LINE      CODE     ---       #181
+      01001250H   LINE      CODE     ---       #182
       ---         BLOCKEND  ---      ---       LVL=0
 
       ---         MODULE    ---      ---       MOTORCONTROLFUNCTION
       0200038AH   PUBLIC    XDATA    ---       mcCurOffset
       01002C0DH   PUBLIC    CODE     ---       Motor_Init
       0100002EH   PUBLIC    CODE     ---       Motor_Ready
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 40
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 40
 
 
       01002151H   PUBLIC    CODE     ---       GetCurrentOffset
@@ -2719,7 +2719,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       00000098H.1 SFRSYM    DATA     BIT       TI
       00000084H   SFRSYM    DATA     BYTE      FLA_KEY
       000000CFH   SFRSYM    DATA     BYTE      CAN_ESR
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 41
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 41
 
 
       00000098H   SFRSYM    DATA     BYTE      UT_CR
@@ -2787,7 +2787,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000BAH   SFRSYM    DATA     BYTE      LIN_SR
       000000D8H.6 SFRSYM    DATA     BIT       UT2MOD0
       000000D8H.7 SFRSYM    DATA     BIT       UT2MOD1
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 42
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 42
 
 
       000000D1H   SFRSYM    DATA     BYTE      P1_IE
@@ -2855,7 +2855,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       010018D1H   LINE      CODE     ---       #31
       010018D1H   LINE      CODE     ---       #32
       010018D5H   LINE      CODE     ---       #33
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 43
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 43
 
 
       010018D5H   LINE      CODE     ---       #35
@@ -2923,7 +2923,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       01001AF4H   LINE      CODE     ---       #233
       01001AF7H   LINE      CODE     ---       #234
       01001B0DH   LINE      CODE     ---       #235
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 44
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 44
 
 
       01001B0DH   LINE      CODE     ---       #237
@@ -2954,180 +2954,180 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       ---         BLOCKEND  ---      ---       LVL=0
 
       010017BDH   BLOCK     CODE     ---       LVL=0
-      010017BDH   LINE      CODE     ---       #342
       010017BDH   LINE      CODE     ---       #343
       010017BDH   LINE      CODE     ---       #344
-      010017C4H   LINE      CODE     ---       #345
-      010017C4H   LINE      CODE     ---       #347
-      010017C6H   LINE      CODE     ---       #349
-      010017CAH   LINE      CODE     ---       #350
+      010017BDH   LINE      CODE     ---       #345
+      010017C4H   LINE      CODE     ---       #346
+      010017C4H   LINE      CODE     ---       #348
+      010017C6H   LINE      CODE     ---       #350
       010017CAH   LINE      CODE     ---       #351
       010017CAH   LINE      CODE     ---       #352
       010017CAH   LINE      CODE     ---       #353
-      010017CAH   LINE      CODE     ---       #355
+      010017CAH   LINE      CODE     ---       #354
       010017CAH   LINE      CODE     ---       #356
-      010017D4H   LINE      CODE     ---       #357
-      010017DEH   LINE      CODE     ---       #358
-      010017DEH   LINE      CODE     ---       #360
-      010017EBH   LINE      CODE     ---       #361
+      010017CAH   LINE      CODE     ---       #357
+      010017D4H   LINE      CODE     ---       #358
+      010017DEH   LINE      CODE     ---       #359
+      010017DEH   LINE      CODE     ---       #361
       010017EBH   LINE      CODE     ---       #362
-      010017F5H   LINE      CODE     ---       #363
-      010017F6H   LINE      CODE     ---       #365
+      010017EBH   LINE      CODE     ---       #363
+      010017F5H   LINE      CODE     ---       #364
       010017F6H   LINE      CODE     ---       #366
-      010017FCH   LINE      CODE     ---       #367
+      010017F6H   LINE      CODE     ---       #367
       010017FCH   LINE      CODE     ---       #368
-      010017FDH   LINE      CODE     ---       #370
-      01001802H   LINE      CODE     ---       #371
+      010017FCH   LINE      CODE     ---       #369
+      010017FDH   LINE      CODE     ---       #371
       01001802H   LINE      CODE     ---       #372
-      01001860H   LINE      CODE     ---       #375
+      01001802H   LINE      CODE     ---       #373
       01001860H   LINE      CODE     ---       #376
-      01001862H   LINE      CODE     ---       #377
-      01001867H   LINE      CODE     ---       #378
-      0100186AH   LINE      CODE     ---       #379
-      0100186CH   LINE      CODE     ---       #380
-      01001872H   LINE      CODE     ---       #381
+      01001860H   LINE      CODE     ---       #377
+      01001862H   LINE      CODE     ---       #378
+      01001867H   LINE      CODE     ---       #379
+      0100186AH   LINE      CODE     ---       #380
+      0100186CH   LINE      CODE     ---       #381
       01001872H   LINE      CODE     ---       #382
-      01001873H   LINE      CODE     ---       #383
-      0100187BH   LINE      CODE     ---       #384
+      01001872H   LINE      CODE     ---       #383
+      01001873H   LINE      CODE     ---       #384
       0100187BH   LINE      CODE     ---       #385
-      01001880H   LINE      CODE     ---       #386
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 45
+      0100187BH   LINE      CODE     ---       #386
+      01001880H   LINE      CODE     ---       #387
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 45
 
 
-      01001882H   LINE      CODE     ---       #387
-      01001888H   LINE      CODE     ---       #389
-      0100188EH   LINE      CODE     ---       #390
+      01001882H   LINE      CODE     ---       #388
+      01001888H   LINE      CODE     ---       #390
       0100188EH   LINE      CODE     ---       #391
-      01001894H   LINE      CODE     ---       #392
+      0100188EH   LINE      CODE     ---       #392
       01001894H   LINE      CODE     ---       #393
-      01001895H   LINE      CODE     ---       #394
-      01001899H   LINE      CODE     ---       #395
-      01001899H   LINE      CODE     ---       #397
-      010018A3H   LINE      CODE     ---       #398
+      01001894H   LINE      CODE     ---       #394
+      01001895H   LINE      CODE     ---       #395
+      01001899H   LINE      CODE     ---       #396
+      01001899H   LINE      CODE     ---       #398
       010018A3H   LINE      CODE     ---       #399
-      010018AAH   LINE      CODE     ---       #400
+      010018A3H   LINE      CODE     ---       #400
       010018AAH   LINE      CODE     ---       #401
-      010018ACH   LINE      CODE     ---       #402
+      010018AAH   LINE      CODE     ---       #402
       010018ACH   LINE      CODE     ---       #403
       010018ACH   LINE      CODE     ---       #404
       010018ACH   LINE      CODE     ---       #405
+      010018ACH   LINE      CODE     ---       #406
       ---         BLOCKEND  ---      ---       LVL=0
 
       010028CBH   BLOCK     CODE     ---       LVL=0
-      010028CBH   LINE      CODE     ---       #429
       010028CBH   LINE      CODE     ---       #430
-      010028CBH   LINE      CODE     ---       #432
-      010028D0H   LINE      CODE     ---       #444
-      010028DAH   LINE      CODE     ---       #445
-      010028E4H   LINE      CODE     ---       #446
-      010028EEH   LINE      CODE     ---       #447
-      010028F6H   LINE      CODE     ---       #449
+      010028CBH   LINE      CODE     ---       #431
+      010028CBH   LINE      CODE     ---       #433
+      010028D0H   LINE      CODE     ---       #445
+      010028DAH   LINE      CODE     ---       #446
+      010028E4H   LINE      CODE     ---       #447
+      010028EEH   LINE      CODE     ---       #448
       010028F6H   LINE      CODE     ---       #450
-      010028F9H   LINE      CODE     ---       #451
-      010028FEH   LINE      CODE     ---       #452
-      01002904H   LINE      CODE     ---       #453
+      010028F6H   LINE      CODE     ---       #451
+      010028F9H   LINE      CODE     ---       #452
+      010028FEH   LINE      CODE     ---       #453
+      01002904H   LINE      CODE     ---       #454
       ---         BLOCKEND  ---      ---       LVL=0
 
       01001F13H   BLOCK     CODE     ---       LVL=0
-      01001F13H   LINE      CODE     ---       #461
       01001F13H   LINE      CODE     ---       #462
-      01001F13H   LINE      CODE     ---       #464
-      01001F17H   LINE      CODE     ---       #465
+      01001F13H   LINE      CODE     ---       #463
+      01001F13H   LINE      CODE     ---       #465
       01001F17H   LINE      CODE     ---       #466
       01001F17H   LINE      CODE     ---       #467
       01001F17H   LINE      CODE     ---       #468
       01001F17H   LINE      CODE     ---       #469
-      01001F1AH   LINE      CODE     ---       #470
-      01001F1AH   LINE      CODE     ---       #472
+      01001F17H   LINE      CODE     ---       #470
+      01001F1AH   LINE      CODE     ---       #471
       01001F1AH   LINE      CODE     ---       #473
       01001F1AH   LINE      CODE     ---       #474
       01001F1AH   LINE      CODE     ---       #475
-      01001F1DH   LINE      CODE     ---       #477
+      01001F1AH   LINE      CODE     ---       #476
       01001F1DH   LINE      CODE     ---       #478
-      01001F20H   LINE      CODE     ---       #480
-      01001F2AH   LINE      CODE     ---       #481
-      01001F32H   LINE      CODE     ---       #482
-      01001F39H   LINE      CODE     ---       #483
-      01001F3CH   LINE      CODE     ---       #484
+      01001F1DH   LINE      CODE     ---       #479
+      01001F20H   LINE      CODE     ---       #481
+      01001F2AH   LINE      CODE     ---       #482
+      01001F32H   LINE      CODE     ---       #483
+      01001F39H   LINE      CODE     ---       #484
       01001F3CH   LINE      CODE     ---       #485
       01001F3CH   LINE      CODE     ---       #486
       01001F3CH   LINE      CODE     ---       #487
       01001F3CH   LINE      CODE     ---       #488
-      01001F3FH   LINE      CODE     ---       #489
-      01001F45H   LINE      CODE     ---       #490
-      01001F47H   LINE      CODE     ---       #491
-      01001F4BH   LINE      CODE     ---       #492
-      01001F4FH   LINE      CODE     ---       #493
-      01001F53H   LINE      CODE     ---       #494
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 46
+      01001F3CH   LINE      CODE     ---       #489
+      01001F3FH   LINE      CODE     ---       #490
+      01001F45H   LINE      CODE     ---       #491
+      01001F47H   LINE      CODE     ---       #492
+      01001F4BH   LINE      CODE     ---       #493
+      01001F4FH   LINE      CODE     ---       #494
+      01001F53H   LINE      CODE     ---       #495
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 46
 
 
-      01001F57H   LINE      CODE     ---       #495
-      01001F5AH   LINE      CODE     ---       #496
-      01001F5CH   LINE      CODE     ---       #497
-      01001F5EH   LINE      CODE     ---       #498
-      01001F62H   LINE      CODE     ---       #499
-      01001F66H   LINE      CODE     ---       #500
-      01001F6AH   LINE      CODE     ---       #501
-      01001F6EH   LINE      CODE     ---       #502
-      01001F72H   LINE      CODE     ---       #503
-      01001F76H   LINE      CODE     ---       #504
-      01001F78H   LINE      CODE     ---       #505
-      01001F7CH   LINE      CODE     ---       #506
-      01001F80H   LINE      CODE     ---       #507
-      01001F84H   LINE      CODE     ---       #508
-      01001F86H   LINE      CODE     ---       #509
-      01001F88H   LINE      CODE     ---       #510
-      01001F8EH   LINE      CODE     ---       #511
-      01001F94H   LINE      CODE     ---       #512
-      01001F98H   LINE      CODE     ---       #513
-      01001F9EH   LINE      CODE     ---       #514
-      01001FA6H   LINE      CODE     ---       #517
+      01001F57H   LINE      CODE     ---       #496
+      01001F5AH   LINE      CODE     ---       #497
+      01001F5CH   LINE      CODE     ---       #498
+      01001F5EH   LINE      CODE     ---       #499
+      01001F62H   LINE      CODE     ---       #500
+      01001F66H   LINE      CODE     ---       #501
+      01001F6AH   LINE      CODE     ---       #502
+      01001F6EH   LINE      CODE     ---       #503
+      01001F72H   LINE      CODE     ---       #504
+      01001F76H   LINE      CODE     ---       #505
+      01001F78H   LINE      CODE     ---       #506
+      01001F7CH   LINE      CODE     ---       #507
+      01001F80H   LINE      CODE     ---       #508
+      01001F84H   LINE      CODE     ---       #509
+      01001F86H   LINE      CODE     ---       #510
+      01001F88H   LINE      CODE     ---       #511
+      01001F8EH   LINE      CODE     ---       #512
+      01001F94H   LINE      CODE     ---       #513
+      01001F98H   LINE      CODE     ---       #514
+      01001F9EH   LINE      CODE     ---       #515
+      01001FA6H   LINE      CODE     ---       #518
       ---         BLOCKEND  ---      ---       LVL=0
 
       01002151H   BLOCK     CODE     ---       LVL=0
-      01002151H   LINE      CODE     ---       #527
       01002151H   LINE      CODE     ---       #528
       01002151H   LINE      CODE     ---       #529
-      01002158H   LINE      CODE     ---       #531
-      0100215FH   LINE      CODE     ---       #534
+      01002151H   LINE      CODE     ---       #530
+      01002158H   LINE      CODE     ---       #532
       0100215FH   LINE      CODE     ---       #535
-      0100217DH   LINE      CODE     ---       #536
-      01002190H   LINE      CODE     ---       #537
-      010021B3H   LINE      CODE     ---       #538
-      010021B3H   LINE      CODE     ---       #561
-      010021BDH   LINE      CODE     ---       #563
-      010021CEH   LINE      CODE     ---       #564
+      0100215FH   LINE      CODE     ---       #536
+      0100217DH   LINE      CODE     ---       #537
+      01002190H   LINE      CODE     ---       #538
+      010021B3H   LINE      CODE     ---       #539
+      010021B3H   LINE      CODE     ---       #562
+      010021BDH   LINE      CODE     ---       #564
       010021CEH   LINE      CODE     ---       #565
-      010021D4H   LINE      CODE     ---       #566
+      010021CEH   LINE      CODE     ---       #566
       010021D4H   LINE      CODE     ---       #567
+      010021D4H   LINE      CODE     ---       #568
       ---         BLOCKEND  ---      ---       LVL=0
 
       0100002EH   BLOCK     CODE     ---       LVL=0
-      0100002EH   LINE      CODE     ---       #575
       0100002EH   LINE      CODE     ---       #576
       0100002EH   LINE      CODE     ---       #577
-      01000035H   LINE      CODE     ---       #578
+      0100002EH   LINE      CODE     ---       #578
       01000035H   LINE      CODE     ---       #579
-      01000039H   LINE      CODE     ---       #580
-      0100003BH   LINE      CODE     ---       #581
-      0100003EH   LINE      CODE     ---       #582
-      01000042H   LINE      CODE     ---       #583
+      01000035H   LINE      CODE     ---       #580
+      01000039H   LINE      CODE     ---       #581
+      0100003BH   LINE      CODE     ---       #582
+      0100003EH   LINE      CODE     ---       #583
       01000042H   LINE      CODE     ---       #584
+      01000042H   LINE      CODE     ---       #585
       ---         BLOCKEND  ---      ---       LVL=0
 
       01002C0DH   BLOCK     CODE     ---       LVL=0
-      01002C0DH   LINE      CODE     ---       #593
       01002C0DH   LINE      CODE     ---       #594
       01002C0DH   LINE      CODE     ---       #595
-      01002C10H   LINE      CODE     ---       #596
-      01002C13H   LINE      CODE     ---       #597
+      01002C0DH   LINE      CODE     ---       #596
+      01002C10H   LINE      CODE     ---       #597
+      01002C13H   LINE      CODE     ---       #598
       ---         BLOCKEND  ---      ---       LVL=0
 
       ---         MODULE    ---      ---       MOTORPROTECT
       0200028BH   PUBLIC    XDATA    ---       Restart
       0000007DH   PUBLIC    IDATA    ---       mcCurVarible
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 47
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 47
 
 
       0000001BH   PUBLIC    DATA     BYTE      mcFaultSource
@@ -3195,7 +3195,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000CFH   SFRSYM    DATA     BYTE      CAN_ESR
       00000098H   SFRSYM    DATA     BYTE      UT_CR
       00000099H   SFRSYM    DATA     BYTE      UT_DR
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 48
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 48
 
 
       000000D0H.2 SFRSYM    DATA     BIT       OV
@@ -3263,7 +3263,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000D8H.7 SFRSYM    DATA     BIT       UT2MOD1
       000000D1H   SFRSYM    DATA     BYTE      P1_IE
       000000D2H   SFRSYM    DATA     BYTE      P1_IF
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 49
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 49
 
 
       000000D3H   SFRSYM    DATA     BYTE      P4_IE
@@ -3331,7 +3331,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       01000FFCH   LINE      CODE     ---       #343
       0100101CH   LINE      CODE     ---       #345
       0100101CH   LINE      CODE     ---       #346
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 50
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 50
 
 
       0100102BH   LINE      CODE     ---       #347
@@ -3399,7 +3399,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       010010F2H   LINE      CODE     ---       #427
       010010F2H   LINE      CODE     ---       #429
       010010F2H   LINE      CODE     ---       #430
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 51
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 51
 
 
       010010F2H   LINE      CODE     ---       #433
@@ -3467,7 +3467,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000A8H   SFRSYM    DATA     BYTE      IE
       000000F8H.3 SFRSYM    DATA     BIT       OISVL
       000000F9H   SFRSYM    DATA     BYTE      PI_CR
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 52
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 52
 
 
       000000F8H.5 SFRSYM    DATA     BIT       OISWL
@@ -3535,7 +3535,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000A8H.2 SFRSYM    DATA     BIT       EX1
       000000D0H.0 SFRSYM    DATA     BIT       P
       000000BCH   SFRSYM    DATA     BYTE      LIN_ID
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 53
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 53
 
 
       000000D8H   SFRSYM    DATA     BYTE      UT2_CR
@@ -3603,7 +3603,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000A0H.4 SFRSYM    DATA     BIT       GP24
       00000090H.5 SFRSYM    DATA     BIT       GP15
       00000080H.6 SFRSYM    DATA     BIT       GP06
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 54
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 54
 
 
       00000088H.0 SFRSYM    DATA     BIT       IT00
@@ -3671,7 +3671,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000F8H.2 SFRSYM    DATA     BIT       OISVH
       000000F8H.4 SFRSYM    DATA     BIT       OISWH
       000000F8H.1 SFRSYM    DATA     BIT       OISUL
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 55
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 55
 
 
       000000DFH   SFRSYM    DATA     BYTE      CAN_REC
@@ -3739,7 +3739,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000C2H   SFRSYM    DATA     BYTE      CAN_BTR1
       000000A8H.0 SFRSYM    DATA     BIT       EX0
       000000C3H   SFRSYM    DATA     BYTE      CAN_BTR2
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 56
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 56
 
 
       00000098H.3 SFRSYM    DATA     BIT       TB8
@@ -3807,7 +3807,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       00000090H.4 SFRSYM    DATA     BIT       GP14
       00000080H.5 SFRSYM    DATA     BIT       GP05
       000000B8H.2 SFRSYM    DATA     BIT       GP42
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 57
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 57
 
 
       000000B0H.3 SFRSYM    DATA     BIT       GP33
@@ -3875,7 +3875,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       00000003H   SYMBOL    DATA     BYTE      hc
       0100260AH   BLOCK     CODE     NEAR LAB  LVL=1
       00000007H   SYMBOL    DATA     BYTE      HallStatus
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 58
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 58
 
 
       ---         BLOCKEND  ---      ---       LVL=1
@@ -3943,7 +3943,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       01001C02H   LINE      CODE     ---       #228
       01001C0EH   LINE      CODE     ---       #229
       01001C1AH   LINE      CODE     ---       #230
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 59
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 59
 
 
       01001C26H   LINE      CODE     ---       #232
@@ -4011,7 +4011,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       010023CBH   LINE      CODE     ---       #330
       010023D0H   LINE      CODE     ---       #331
       010023D0H   LINE      CODE     ---       #334
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 60
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 60
 
 
       010023DCH   LINE      CODE     ---       #336
@@ -4079,7 +4079,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       01001653H   LINE      CODE     ---       #460
       01001653H   LINE      CODE     ---       #462
       01001658H   LINE      CODE     ---       #464
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 61
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 61
 
 
       0100165BH   LINE      CODE     ---       #465
@@ -4147,7 +4147,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
 
       01001251H   BLOCK     CODE     ---       LVL=0
       00000006H   SYMBOL    DATA     WORD      pTime
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 62
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 62
 
 
       00000004H   SYMBOL    DATA     INT       theta
@@ -4165,78 +4165,78 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       01001266H   LINE      CODE     ---       #586
       0100126CH   LINE      CODE     ---       #588
       0100127DH   LINE      CODE     ---       #589
-      0100127DH   LINE      CODE     ---       #591
-      01001296H   LINE      CODE     ---       #592
-      0100129FH   LINE      CODE     ---       #593
-      0100129FH   LINE      CODE     ---       #595
-      010012ABH   LINE      CODE     ---       #596
-      010012ADH   LINE      CODE     ---       #597
-      010012B6H   LINE      CODE     ---       #598
-      010012B6H   LINE      CODE     ---       #600
+      0100127DH   LINE      CODE     ---       #590
+      01001296H   LINE      CODE     ---       #591
+      0100129FH   LINE      CODE     ---       #592
+      0100129FH   LINE      CODE     ---       #594
+      010012ABH   LINE      CODE     ---       #595
+      010012ADH   LINE      CODE     ---       #596
+      010012B6H   LINE      CODE     ---       #597
+      010012B6H   LINE      CODE     ---       #599
+      010012C2H   LINE      CODE     ---       #600
       010012C2H   LINE      CODE     ---       #601
-      010012C2H   LINE      CODE     ---       #602
+      010012C4H   LINE      CODE     ---       #603
       010012C4H   LINE      CODE     ---       #604
-      010012C4H   LINE      CODE     ---       #605
+      010012CAH   LINE      CODE     ---       #605
       010012CAH   LINE      CODE     ---       #606
-      010012CAH   LINE      CODE     ---       #607
-      010012DBH   LINE      CODE     ---       #610
+      010012DBH   LINE      CODE     ---       #609
+      010012E5H   LINE      CODE     ---       #610
       010012E5H   LINE      CODE     ---       #611
-      010012E5H   LINE      CODE     ---       #612
-      010012EDH   LINE      CODE     ---       #613
-      010012EFH   LINE      CODE     ---       #614
+      010012EDH   LINE      CODE     ---       #612
+      010012EFH   LINE      CODE     ---       #613
+      010012FDH   LINE      CODE     ---       #614
       010012FDH   LINE      CODE     ---       #615
-      010012FDH   LINE      CODE     ---       #616
-      01001308H   LINE      CODE     ---       #617
+      01001308H   LINE      CODE     ---       #616
+      0100130AH   LINE      CODE     ---       #618
       0100130AH   LINE      CODE     ---       #619
-      0100130AH   LINE      CODE     ---       #620
-      01001310H   LINE      CODE     ---       #621
-      01001310H   LINE      CODE     ---       #624
-      01001316H   LINE      CODE     ---       #626
-      0100131BH   LINE      CODE     ---       #627
-      0100131EH   LINE      CODE     ---       #628
+      01001310H   LINE      CODE     ---       #620
+      01001310H   LINE      CODE     ---       #623
+      01001316H   LINE      CODE     ---       #625
+      0100131BH   LINE      CODE     ---       #626
+      0100131EH   LINE      CODE     ---       #627
+      0100131FH   LINE      CODE     ---       #629
       0100131FH   LINE      CODE     ---       #630
-      0100131FH   LINE      CODE     ---       #631
-      01001329H   LINE      CODE     ---       #632
-      01001330H   LINE      CODE     ---       #635
-      0100133EH   LINE      CODE     ---       #637
+      01001329H   LINE      CODE     ---       #631
+      01001330H   LINE      CODE     ---       #634
+      0100133EH   LINE      CODE     ---       #636
+      0100135FH   LINE      CODE     ---       #638
       0100135FH   LINE      CODE     ---       #639
-      0100135FH   LINE      CODE     ---       #640
-      01001365H   LINE      CODE     ---       #641
-      0100136AH   LINE      CODE     ---       #642
-      0100136DH   LINE      CODE     ---       #643
+      01001365H   LINE      CODE     ---       #640
+      0100136AH   LINE      CODE     ---       #641
+      0100136DH   LINE      CODE     ---       #642
+      01001371H   LINE      CODE     ---       #643
       01001371H   LINE      CODE     ---       #644
       01001371H   LINE      CODE     ---       #645
-      01001371H   LINE      CODE     ---       #646
       ---         BLOCKEND  ---      ---       LVL=0
 
       01002810H   BLOCK     CODE     ---       LVL=0
+      01002810H   LINE      CODE     ---       #648
       01002810H   LINE      CODE     ---       #649
       01002810H   LINE      CODE     ---       #650
-      01002810H   LINE      CODE     ---       #651
-      01002817H   LINE      CODE     ---       #652
-      01002817H   LINE      CODE     ---       #654
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 63
+      01002817H   LINE      CODE     ---       #651
+      01002817H   LINE      CODE     ---       #653
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 63
 
 
-      01002820H   LINE      CODE     ---       #657
+      01002820H   LINE      CODE     ---       #656
+      0100282EH   LINE      CODE     ---       #657
       0100282EH   LINE      CODE     ---       #658
       0100282EH   LINE      CODE     ---       #659
-      0100282EH   LINE      CODE     ---       #660
-      01002833H   LINE      CODE     ---       #661
+      01002833H   LINE      CODE     ---       #660
+      01002835H   LINE      CODE     ---       #662
       01002835H   LINE      CODE     ---       #663
-      01002835H   LINE      CODE     ---       #664
-      0100283BH   LINE      CODE     ---       #665
+      0100283BH   LINE      CODE     ---       #664
+      0100283DH   LINE      CODE     ---       #666
       0100283DH   LINE      CODE     ---       #667
-      0100283DH   LINE      CODE     ---       #668
+      01002843H   LINE      CODE     ---       #668
       01002843H   LINE      CODE     ---       #669
-      01002843H   LINE      CODE     ---       #670
-      01002843H   LINE      CODE     ---       #673
-      0100284FH   LINE      CODE     ---       #675
-      01002851H   LINE      CODE     ---       #676
+      01002843H   LINE      CODE     ---       #672
+      0100284FH   LINE      CODE     ---       #674
+      01002851H   LINE      CODE     ---       #675
+      01002851H   LINE      CODE     ---       #677
       01002851H   LINE      CODE     ---       #678
-      01002851H   LINE      CODE     ---       #679
+      01002852H   LINE      CODE     ---       #679
       01002852H   LINE      CODE     ---       #680
-      01002852H   LINE      CODE     ---       #681
       ---         BLOCKEND  ---      ---       LVL=0
 
       ---         MODULE    ---      ---       HALLPROCESS
@@ -4283,7 +4283,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000DFH   SFRSYM    DATA     BYTE      CAN_REC
       000000A8H   SFRSYM    DATA     BYTE      IE
       000000F8H.3 SFRSYM    DATA     BIT       OISVL
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 64
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 64
 
 
       000000F9H   SFRSYM    DATA     BYTE      PI_CR
@@ -4351,7 +4351,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       00000098H.3 SFRSYM    DATA     BIT       TB8
       000000A8H.2 SFRSYM    DATA     BIT       EX1
       000000D0H.0 SFRSYM    DATA     BIT       P
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 65
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 65
 
 
       000000BCH   SFRSYM    DATA     BYTE      LIN_ID
@@ -4419,7 +4419,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000B0H.3 SFRSYM    DATA     BIT       GP33
       000000A0H.4 SFRSYM    DATA     BIT       GP24
       00000090H.5 SFRSYM    DATA     BIT       GP15
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 66
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 66
 
 
       00000080H.6 SFRSYM    DATA     BIT       GP06
@@ -4487,7 +4487,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       01001528H   LINE      CODE     ---       #84
       0100152BH   LINE      CODE     ---       #86
       01001531H   LINE      CODE     ---       #87
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 67
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 67
 
 
       01001531H   LINE      CODE     ---       #88
@@ -4555,7 +4555,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       ---         BLOCKEND  ---      ---       LVL=0
 
       ---         MODULE    ---      ---       SEATFUN
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 68
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 68
 
 
       020001F2H   PUBLIC    XDATA    ---       MotorControl
@@ -4623,7 +4623,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000D0H.7 SFRSYM    DATA     BIT       CY
       00000098H.1 SFRSYM    DATA     BIT       TI
       00000084H   SFRSYM    DATA     BYTE      FLA_KEY
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 69
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 69
 
 
       000000CFH   SFRSYM    DATA     BYTE      CAN_ESR
@@ -4691,7 +4691,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000D7H   SFRSYM    DATA     BYTE      CMP_SR
       000000BAH   SFRSYM    DATA     BYTE      LIN_SR
       000000D8H.6 SFRSYM    DATA     BIT       UT2MOD0
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 70
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 70
 
 
       000000D8H.7 SFRSYM    DATA     BIT       UT2MOD1
@@ -4759,7 +4759,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       02000051H   PUBLIC    XDATA    ---       HistoryIQ
       02000050H   PUBLIC    XDATA    BYTE      AntiFlag
       02000000H   PUBLIC    XDATA    ---       HistoryTime
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 71
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 71
 
 
       000000B8H.3 SFRSYM    DATA     BIT       GP43
@@ -4827,7 +4827,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000D8H.2 SFRSYM    DATA     BIT       UT2RB8
       000000D8H.3 SFRSYM    DATA     BIT       UT2TB8
       000000BBH   SFRSYM    DATA     BYTE      LIN_CSR
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 72
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 72
 
 
       000000D8H.5 SFRSYM    DATA     BIT       UT2SM2
@@ -4895,7 +4895,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000ACH   SFRSYM    DATA     WORD      TIM2__DR
       000000FCH   SFRSYM    DATA     BYTE      P0_OE
       000000A4H   SFRSYM    DATA     WORD      TIM3__DR
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 73
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 73
 
 
       000000FDH   SFRSYM    DATA     BYTE      P1_OE
@@ -4963,7 +4963,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000A0H.7 SFRSYM    DATA     BIT       GP27
       00000090H   SFRSYM    DATA     BYTE      P1
       000000BDH   SFRSYM    DATA     BYTE      LIN_SIZE
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 74
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 74
 
 
       000000B8H.6 SFRSYM    DATA     BIT       GP46
@@ -5031,7 +5031,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000C5H   SFRSYM    DATA     BYTE      CAN_FIR1
       000000C6H   SFRSYM    DATA     BYTE      CAN_FIR2
       000000E0H   SFRSYM    DATA     BYTE      ACC
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 75
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 75
 
 
       000000DBH   SFRSYM    DATA     BYTE      LVSR
@@ -5099,7 +5099,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000D8H.1 SFRSYM    DATA     BIT       UT2TI
       000000B0H.0 SFRSYM    DATA     BIT       GP30
       000000A0H.1 SFRSYM    DATA     BIT       GP21
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 76
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 76
 
 
       00000090H.2 SFRSYM    DATA     BIT       GP12
@@ -5167,7 +5167,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000B0H.7 SFRSYM    DATA     BIT       GP37
       000000A0H   SFRSYM    DATA     BYTE      P2
       000000B0H   SFRSYM    DATA     BYTE      P3
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 77
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 77
 
 
       000000B8H   SFRSYM    DATA     BYTE      P4
@@ -5235,7 +5235,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000C7H   SFRSYM    DATA     BYTE      CAN_FIR3
       000000A8H.4 SFRSYM    DATA     BIT       ES0
       00000085H   SFRSYM    DATA     BYTE      FLA_CR
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 78
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 78
 
 
       000000CAH   SFRSYM    DATA     BYTE      CAN_FMR0
@@ -5303,7 +5303,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       00000080H.3 SFRSYM    DATA     BIT       GP03
       000000B5H   SFRSYM    DATA     BYTE      CAN_CR2
       000000A8H.1 SFRSYM    DATA     BIT       TSDIE
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 79
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 79
 
 
       000000D0H   SFRSYM    DATA     BYTE      PSW
@@ -5371,7 +5371,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000B8H.6 SFRSYM    DATA     BIT       GP46
       000000B0H.7 SFRSYM    DATA     BIT       GP37
       000000A0H   SFRSYM    DATA     BYTE      P2
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 80
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 80
 
 
       000000B0H   SFRSYM    DATA     BYTE      P3
@@ -5439,7 +5439,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000DBH   SFRSYM    DATA     BYTE      LVSR
       000000C7H   SFRSYM    DATA     BYTE      CAN_FIR3
       000000A8H.4 SFRSYM    DATA     BIT       ES0
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 81
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 81
 
 
       00000085H   SFRSYM    DATA     BYTE      FLA_CR
@@ -5507,7 +5507,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       00000090H.2 SFRSYM    DATA     BIT       GP12
       00000080H.3 SFRSYM    DATA     BIT       GP03
       000000B5H   SFRSYM    DATA     BYTE      CAN_CR2
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 82
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 82
 
 
       000000A8H.1 SFRSYM    DATA     BIT       TSDIE
@@ -5575,7 +5575,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000B8H.4 SFRSYM    DATA     BIT       GP44
       000000B0H.5 SFRSYM    DATA     BIT       GP35
       000000A0H.6 SFRSYM    DATA     BIT       GP26
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 83
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 83
 
 
       00000090H.7 SFRSYM    DATA     BIT       GP17
@@ -5643,7 +5643,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000A1H   SFRSYM    DATA     BYTE      TIM2_CR0
       000000A6H   SFRSYM    DATA     WORD      TIM3__ARR
       0000009CH   SFRSYM    DATA     BYTE      TIM3_CR0
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 84
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 84
 
 
       000000A9H   SFRSYM    DATA     BYTE      TIM2_CR1
@@ -5711,7 +5711,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000D8H.0 SFRSYM    DATA     BIT       UT2RI
       000000E9H   SFRSYM    DATA     BYTE      P4_OE
       00000090H.0 SFRSYM    DATA     BIT       GP10
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 85
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 85
 
 
       00000080H.1 SFRSYM    DATA     BIT       GP01
@@ -5779,7 +5779,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000B8H   SFRSYM    DATA     BYTE      P4
       000000CEH   SFRSYM    DATA     BYTE      CAN_ALC
       000000D0H.6 SFRSYM    DATA     BIT       AC
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 86
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 86
 
 
       000000A8H.7 SFRSYM    DATA     BIT       EA
@@ -5847,7 +5847,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000CAH   SFRSYM    DATA     BYTE      CAN_FMR0
       0000008AH   SFRSYM    DATA     BYTE      IP0
       000000CBH   SFRSYM    DATA     BYTE      CAN_FMR1
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 87
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 87
 
 
       0000008BH   SFRSYM    DATA     BYTE      IP1
@@ -5915,7 +5915,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000D0H   SFRSYM    DATA     BYTE      PSW
       000000B0H.1 SFRSYM    DATA     BIT       GP31
       000000A0H.2 SFRSYM    DATA     BIT       GP22
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 88
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 88
 
 
       00000090H.3 SFRSYM    DATA     BIT       GP13
@@ -5983,7 +5983,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000DCH   SFRSYM    DATA     BYTE      CMP_CR3
       000000F8H.0 SFRSYM    DATA     BIT       OISUH
       000000E1H   SFRSYM    DATA     BYTE      CMP_CR4
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 89
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 89
 
 
       000000F8H.2 SFRSYM    DATA     BIT       OISVH
@@ -6051,7 +6051,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000B7H   SFRSYM    DATA     BYTE      CAN_BTR0
       00000098H.2 SFRSYM    DATA     BIT       RB8
       0000008DH   SFRSYM    DATA     BYTE      IP3
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 90
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 90
 
 
       000000C2H   SFRSYM    DATA     BYTE      CAN_BTR1
@@ -6119,7 +6119,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000B8H.1 SFRSYM    DATA     BIT       GP41
       000000B0H.2 SFRSYM    DATA     BIT       GP32
       000000A0H.3 SFRSYM    DATA     BIT       GP23
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 91
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 91
 
 
       00000090H.4 SFRSYM    DATA     BIT       GP14
@@ -6187,7 +6187,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000B0H.7 SFRSYM    DATA     BIT       GP37
       000000A0H   SFRSYM    DATA     BYTE      P2
       000000B0H   SFRSYM    DATA     BYTE      P3
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 92
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 92
 
 
       000000B8H   SFRSYM    DATA     BYTE      P4
@@ -6255,7 +6255,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000C7H   SFRSYM    DATA     BYTE      CAN_FIR3
       000000A8H.4 SFRSYM    DATA     BIT       ES0
       00000085H   SFRSYM    DATA     BYTE      FLA_CR
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 93
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 93
 
 
       000000CAH   SFRSYM    DATA     BYTE      CAN_FMR0
@@ -6323,7 +6323,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       00000080H.3 SFRSYM    DATA     BIT       GP03
       000000B5H   SFRSYM    DATA     BYTE      CAN_CR2
       000000A8H.1 SFRSYM    DATA     BIT       TSDIE
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 94
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 94
 
 
       000000D0H   SFRSYM    DATA     BYTE      PSW
@@ -6391,7 +6391,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000DAH   SFRSYM    DATA     BYTE      CMP_CR2
       000000DCH   SFRSYM    DATA     BYTE      CMP_CR3
       000000F8H.0 SFRSYM    DATA     BIT       OISUH
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 95
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 95
 
 
       000000E1H   SFRSYM    DATA     BYTE      CMP_CR4
@@ -6459,7 +6459,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000CDH   SFRSYM    DATA     BYTE      CAN_FMR3
       000000B7H   SFRSYM    DATA     BYTE      CAN_BTR0
       00000098H.2 SFRSYM    DATA     BIT       RB8
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 96
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 96
 
 
       0000008DH   SFRSYM    DATA     BYTE      IP3
@@ -6527,7 +6527,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       00000088H.5 SFRSYM    DATA     BIT       TSDIF
       000000B8H.1 SFRSYM    DATA     BIT       GP41
       000000B0H.2 SFRSYM    DATA     BIT       GP32
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 97
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 97
 
 
       000000A0H.3 SFRSYM    DATA     BIT       GP23
@@ -6595,7 +6595,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       00000092H   SFRSYM    DATA     WORD      TIM4__CNTR
       00000098H.0 SFRSYM    DATA     BIT       RI
       00000098H.6 SFRSYM    DATA     BIT       UT_MOD0
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 98
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 98
 
 
       00000098H.7 SFRSYM    DATA     BIT       UT_MOD1
@@ -6663,7 +6663,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000BEH   SFRSYM    DATA     WORD      LIN_BAUD
       000000A8H.5 SFRSYM    DATA     BIT       MCDIE
       00000088H.6 SFRSYM    DATA     BIT       MCDIF
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 99
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 99
 
 
       00000098H.4 SFRSYM    DATA     BIT       REN
@@ -6731,7 +6731,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       01002AFFH   LINE      CODE     ---       #24
       01002B05H   LINE      CODE     ---       #25
       01002B08H   LINE      CODE     ---       #26
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 100
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 100
 
 
       01002B0CH   LINE      CODE     ---       #27
@@ -6799,7 +6799,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000D0H.7 SFRSYM    DATA     BIT       CY
       00000098H.1 SFRSYM    DATA     BIT       TI
       00000084H   SFRSYM    DATA     BYTE      FLA_KEY
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 101
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 101
 
 
       000000CFH   SFRSYM    DATA     BYTE      CAN_ESR
@@ -6867,7 +6867,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000D7H   SFRSYM    DATA     BYTE      CMP_SR
       000000BAH   SFRSYM    DATA     BYTE      LIN_SR
       000000D8H.6 SFRSYM    DATA     BIT       UT2MOD0
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 102
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 102
 
 
       000000D8H.7 SFRSYM    DATA     BIT       UT2MOD1
@@ -6935,7 +6935,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000A0H.6 SFRSYM    DATA     BIT       GP26
       00000090H.7 SFRSYM    DATA     BIT       GP17
       00000080H   SFRSYM    DATA     BYTE      P0
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 103
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 103
 
 
       00000088H.4 SFRSYM    DATA     BIT       IT11
@@ -7003,7 +7003,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       0000009CH   SFRSYM    DATA     BYTE      TIM3_CR0
       000000A9H   SFRSYM    DATA     BYTE      TIM2_CR1
       00000096H   SFRSYM    DATA     WORD      TIM4__ARR
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 104
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 104
 
 
       0000009EH   SFRSYM    DATA     BYTE      TIM4_CR0
@@ -7071,7 +7071,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       00000090H.0 SFRSYM    DATA     BIT       GP10
       00000080H.1 SFRSYM    DATA     BIT       GP01
       000000B1H   SFRSYM    DATA     BYTE      CAN_CR0
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 105
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 105
 
 
       000000A8H.6 SFRSYM    DATA     BIT       RTCIE
@@ -7139,7 +7139,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000A0H.5 SFRSYM    DATA     BIT       GP25
       00000090H.6 SFRSYM    DATA     BIT       GP16
       00000080H.7 SFRSYM    DATA     BIT       GP07
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 106
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 106
 
 
       00000088H.1 SFRSYM    DATA     BIT       IT01
@@ -7207,7 +7207,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       00000088H   SFRSYM    DATA     BYTE      TCON
       00000082H   SFRSYM    DATA     WORD      DPTR
       00000088H.2 SFRSYM    DATA     BIT       IF0
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 107
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 107
 
 
       000000D8H.4 SFRSYM    DATA     BIT       UT2REN
@@ -7275,7 +7275,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000D0H.5 SFRSYM    DATA     BIT       F0
       000000FEH   SFRSYM    DATA     BYTE      P2_OE
       000000D0H.1 SFRSYM    DATA     BIT       F1
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 108
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 108
 
 
       000000FFH   SFRSYM    DATA     BYTE      P3_OE
@@ -7343,7 +7343,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000B0H.7 SFRSYM    DATA     BIT       GP37
       000000A0H   SFRSYM    DATA     BYTE      P2
       000000B0H   SFRSYM    DATA     BYTE      P3
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 109
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 109
 
 
       000000B8H   SFRSYM    DATA     BYTE      P4
@@ -7411,7 +7411,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000C7H   SFRSYM    DATA     BYTE      CAN_FIR3
       000000A8H.4 SFRSYM    DATA     BIT       ES0
       00000085H   SFRSYM    DATA     BYTE      FLA_CR
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 110
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 110
 
 
       000000CAH   SFRSYM    DATA     BYTE      CAN_FMR0
@@ -7479,7 +7479,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       00000080H.3 SFRSYM    DATA     BIT       GP03
       000000B5H   SFRSYM    DATA     BYTE      CAN_CR2
       000000A8H.1 SFRSYM    DATA     BIT       TSDIE
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 111
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 111
 
 
       000000D0H   SFRSYM    DATA     BYTE      PSW
@@ -7547,7 +7547,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000F8H.1 SFRSYM    DATA     BIT       OISUL
       000000DFH   SFRSYM    DATA     BYTE      CAN_REC
       000000A8H   SFRSYM    DATA     BYTE      IE
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 112
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 112
 
 
       000000F8H.3 SFRSYM    DATA     BIT       OISVL
@@ -7615,7 +7615,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000C3H   SFRSYM    DATA     BYTE      CAN_BTR2
       00000098H.3 SFRSYM    DATA     BIT       TB8
       000000A8H.2 SFRSYM    DATA     BIT       EX1
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 113
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 113
 
 
       000000D0H.0 SFRSYM    DATA     BIT       P
@@ -7683,7 +7683,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000B8H.2 SFRSYM    DATA     BIT       GP42
       000000B0H.3 SFRSYM    DATA     BIT       GP33
       000000A0H.4 SFRSYM    DATA     BIT       GP24
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 114
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 114
 
 
       00000090H.5 SFRSYM    DATA     BIT       GP15
@@ -7751,7 +7751,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       01001F12H   LINE      CODE     ---       #168
       ---         BLOCKEND  ---      ---       LVL=0
 
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 115
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 115
 
 
       ---         MODULE    ---      ---       LIN
@@ -7819,7 +7819,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       00000084H   SFRSYM    DATA     BYTE      FLA_KEY
       000000CFH   SFRSYM    DATA     BYTE      CAN_ESR
       00000098H   SFRSYM    DATA     BYTE      UT_CR
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 116
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 116
 
 
       00000099H   SFRSYM    DATA     BYTE      UT_DR
@@ -7887,7 +7887,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000D8H.6 SFRSYM    DATA     BIT       UT2MOD0
       000000D8H.7 SFRSYM    DATA     BIT       UT2MOD1
       000000D1H   SFRSYM    DATA     BYTE      P1_IE
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 117
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 117
 
 
       000000D2H   SFRSYM    DATA     BYTE      P1_IF
@@ -7955,7 +7955,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000B0H.5 SFRSYM    DATA     BIT       GP35
       000000A0H.6 SFRSYM    DATA     BIT       GP26
       00000090H.7 SFRSYM    DATA     BIT       GP17
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 118
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 118
 
 
       00000080H   SFRSYM    DATA     BYTE      P0
@@ -8023,7 +8023,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000A6H   SFRSYM    DATA     WORD      TIM3__ARR
       0000009CH   SFRSYM    DATA     BYTE      TIM3_CR0
       000000A9H   SFRSYM    DATA     BYTE      TIM2_CR1
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 119
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 119
 
 
       00000096H   SFRSYM    DATA     WORD      TIM4__ARR
@@ -8091,7 +8091,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000E9H   SFRSYM    DATA     BYTE      P4_OE
       00000090H.0 SFRSYM    DATA     BIT       GP10
       00000080H.1 SFRSYM    DATA     BIT       GP01
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 120
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 120
 
 
       000000B1H   SFRSYM    DATA     BYTE      CAN_CR0
@@ -8159,7 +8159,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       00001000H   SYMBOL    NUMBER   ---       XDATALEN
       01001DEEH   SYMBOL    CODE     ---       XDATALOOP
       00000000H   SYMBOL    NUMBER   ---       XDATASTART
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 121
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 121
 
 
       01000000H   LINE      CODE     ---       #31
@@ -8227,7 +8227,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000AAH   SFRSYM    DATA     WORD      TIM2__CNTR
       000000DDH   SFRSYM    DATA     BYTE      CAN_LIM
       000000A2H   SFRSYM    DATA     WORD      TIM3__CNTR
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 122
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 122
 
 
       000000F1H   SFRSYM    DATA     BYTE      OSC_CFG
@@ -8295,7 +8295,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000D0H.4 SFRSYM    DATA     BIT       RS1
       000000B3H   SFRSYM    DATA     BYTE      CAN_SR
       000000B9H   SFRSYM    DATA     BYTE      LIN_CR
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 123
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 123
 
 
       000000C1H   SFRSYM    DATA     BYTE      MDU_CR
@@ -8363,7 +8363,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       00000006H   SYMBOL    DATA     ---       BlockStartAddr
       00000004H   SYMBOL    DATA     WORD      NewData2Flash
       00000004H   SYMBOL    DATA     BYTE      i
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 124
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 124
 
 
       00000006H   SYMBOL    DATA     ---       BlockStartAddr
@@ -8431,7 +8431,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000DDH   SFRSYM    DATA     BYTE      CAN_LIM
       000000A2H   SFRSYM    DATA     WORD      TIM3__CNTR
       000000F1H   SFRSYM    DATA     BYTE      OSC_CFG
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 125
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 125
 
 
       000000E2H   SFRSYM    DATA     BYTE      HALL_CR
@@ -8499,7 +8499,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000B3H   SFRSYM    DATA     BYTE      CAN_SR
       000000B9H   SFRSYM    DATA     BYTE      LIN_CR
       000000C1H   SFRSYM    DATA     BYTE      MDU_CR
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 126
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 126
 
 
       000000F8H.7 SFRSYM    DATA     BIT       MOE
@@ -8567,7 +8567,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       010016B7H   BLOCK     CODE     ---       LVL=0
       010016B7H   BLOCK     CODE     NEAR LAB  LVL=1
       0200033FH   SYMBOL    XDATA    BYTE      IDE_FIL
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 127
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 127
 
 
       02000340H   SYMBOL    XDATA    WORD      BRP
@@ -8635,7 +8635,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       010017B9H   LINE      CODE     ---       #194
       010017BCH   LINE      CODE     ---       #195
       ---         BLOCKEND  ---      ---       LVL=0
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 128
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 128
 
 
 
@@ -8703,7 +8703,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       01000A82H   LINE      CODE     ---       #274
       01000A85H   LINE      CODE     ---       #275
       01000A88H   LINE      CODE     ---       #277
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 129
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 129
 
 
       01000A88H   LINE      CODE     ---       #278
@@ -8771,7 +8771,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       01001A13H   LINE      CODE     ---       #355
       01001A13H   LINE      CODE     ---       #357
       01001A20H   LINE      CODE     ---       #358
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 130
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 130
 
 
       01001A2AH   LINE      CODE     ---       #359
@@ -8839,7 +8839,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       010023BEH   LINE      CODE     ---       #447
       010023C2H   LINE      CODE     ---       #449
       010023C5H   LINE      CODE     ---       #450
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 131
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 131
 
 
       010023CAH   LINE      CODE     ---       #451
@@ -8907,7 +8907,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000DAH   SFRSYM    DATA     BYTE      CMP_CR2
       000000DCH   SFRSYM    DATA     BYTE      CMP_CR3
       000000F8H.0 SFRSYM    DATA     BIT       OISUH
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 132
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 132
 
 
       000000E1H   SFRSYM    DATA     BYTE      CMP_CR4
@@ -8975,7 +8975,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       000000CDH   SFRSYM    DATA     BYTE      CAN_FMR3
       000000B7H   SFRSYM    DATA     BYTE      CAN_BTR0
       00000098H.2 SFRSYM    DATA     BIT       RB8
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 133
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 133
 
 
       0000008DH   SFRSYM    DATA     BYTE      IP3
@@ -9043,7 +9043,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       00000088H.5 SFRSYM    DATA     BIT       TSDIF
       000000B8H.1 SFRSYM    DATA     BIT       GP41
       000000B0H.2 SFRSYM    DATA     BIT       GP32
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 134
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 134
 
 
       000000A0H.3 SFRSYM    DATA     BIT       GP23
@@ -9111,7 +9111,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       01002779H   LINE      CODE     ---       #127
       0100277FH   LINE      CODE     ---       #128
       0100277FH   LINE      CODE     ---       #129
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 135
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 135
 
 
       0100277FH   LINE      CODE     ---       #145
@@ -9179,7 +9179,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       01002108H   LINE      CODE     ---       #239
       01002117H   LINE      CODE     ---       #240
       01002117H   LINE      CODE     ---       #241
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 136
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 136
 
 
       0100211EH   LINE      CODE     ---       #242
@@ -9247,7 +9247,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
       ---         MODULE    ---      ---       ?C_INIT
       01001E35H   PUBLIC    CODE     ---       ?C_START
 
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 137
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 137
 
 
       ---         MODULE    ---      ---       ?C?COPY
@@ -9315,7 +9315,7 @@ SYMBOL TABLE OF MODULE:  .\Output\Fortior_FOC_FU68x6 (MAIN)
 
       ---         MODULE    ---      ---       ?C?LLDXDATA0
       01000792H   PUBLIC    CODE     ---       ?C?LLDXDATA0
-LX51 LINKER/LOCATER V4.66.87.0                                                        06/27/2026  16:09:32  PAGE 138
+LX51 LINKER/LOCATER V4.66.87.0                                                        06/29/2026  21:31:46  PAGE 138
 
 
 

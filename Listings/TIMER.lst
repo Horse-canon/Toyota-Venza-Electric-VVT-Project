@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   TIMER                                                             06/27/2026 16:09:31 PAGE 1   
+C51 COMPILER V9.57.0.0   TIMER                                                             06/29/2026 21:31:46 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE TIMER
@@ -62,14 +62,14 @@ line level    source
   51   1          /* 触发极性 */
   52   1          SetBit(TIM1_DBR7, T1CPE2 | T1CPE1 | T1CPE0); // 三相双跳变沿
   53   1          
-C51 COMPILER V9.57.0.0   TIMER                                                             06/27/2026 16:09:31 PAGE 2   
+C51 COMPILER V9.57.0.0   TIMER                                                             06/29/2026 21:31:46 PAGE 2   
 
   54   1          TIM1_CR4 = 7;
   55   1            
   56   1          /* 设置事件复位源 */
   57   1          SetBit(TIM1_CR2, T1BRS);  // 位置检测复位
   58   1          TIM1_SR &= 0x00;
-  59   1          ClrBit(TIM1_IER, T1ADIE);   // 禁止TIM1 AD检测中断   
+  59   1        ClrBit(TIM1_IER, T1ADIE);   // 禁止TIM1 AD检测中断   
   60   1          ClrBit(TIM1_IER, T1ROIE);       // 禁止TIM1重载定时器上溢中断
   61   1          ClrBit(TIM1_IER, T1WTIE);       // 禁止写入时序中断
   62   1              
@@ -79,11 +79,11 @@ line level    source
   66   1          /*  开定时器上溢中断 */
   67   1          SetBit(TIM1_IER, T1BOIE);
   68   1          
-  69   1          SetReg(IP1, PTIM10 | PTIM11, PTIM11|PTIM10);
+  69   1        SetReg(IP1, PTIM10 | PTIM11, PTIM11|PTIM10);
   70   1          
   71   1          /* 使能定时器 */
   72   1          SetBit(TIM1_CR0, T1BCEN);
-  73   1          ClrBit(IP1, PTIM11); /*中断优先级*/
+  73   1        ClrBit(IP1, PTIM11); /*中断优先级*/
   74   1          SetBit(IP1, PTIM10); /*中断优先级*/    
   75   1        
   76   1          /* 清除中断标志位 - 初始化 */
@@ -126,7 +126,7 @@ line level    source
  113              Date           : 2022-06-03
  114              Parameter      : None
  115              ------------------------------------------------------------------------------------------------- */
-C51 COMPILER V9.57.0.0   TIMER                                                             06/27/2026 16:09:31 PAGE 3   
+C51 COMPILER V9.57.0.0   TIMER                                                             06/29/2026 21:31:46 PAGE 3   
 
  116          void Time2_Hall_Init(void)
  117          {
@@ -190,7 +190,7 @@ line level    source
  175   1        ClrBit(TIM3_CR0 , T3OPM); //0-->计数器不停止    1-->单次模式  
  176   1        
  177   1        SetBit(TIM3_CR1 , T3IPE); //输入Timer PWM周期检测中断使能 0-->Disable  1-->Enable
-C51 COMPILER V9.57.0.0   TIMER                                                             06/27/2026 16:09:31 PAGE 4   
+C51 COMPILER V9.57.0.0   TIMER                                                             06/29/2026 21:31:46 PAGE 4   
 
  178   1        SetBit(TIM3_CR1 , T3IFE); //计数器上溢中断使能 0-->Disable  1-->Enable
  179   1        ClrBit(TIM3_CR1 , T3NM1); //输入噪声脉宽选择
